@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-05-22-dataviz-makeover-1/",
+    "title": "DataViz Makeover 1",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "DONG Fang (Regina)",
+        "url": "www.linkedin.com/in/reginadongf/"
+      }
+    ],
+    "date": "2021-05-22",
+    "categories": [],
+    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-05-22T16:31:24+08:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/welcome/",
     "title": "Welcome to DataViz Blog",
     "description": "Welcome to our new blog, DataViz Blog. We hope you enjoy \nreading what we have to say!",
