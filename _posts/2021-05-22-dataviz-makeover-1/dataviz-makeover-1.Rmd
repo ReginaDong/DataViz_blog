@@ -16,15 +16,18 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# 1.0 Critiques for Original Visualization
+# 1. Critiques for Original Visualization
 
-Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of data.
+Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of import and export trade data provided by Department of Statistics, Singapore (DOS).
+
 ![](img/img01_origin.png)
 _Fig.1 Original Visualization_
 
-However, this graph is not a good visualization sample for this topic. I will criticize above graph from two asepects, clarity and aesthetics, and explain the reason why it's not good enough.
+However, this graph is not a good visualization sample for this topic. I criticized above graph from two aspects, clarity and aesthetics, and explained the reason why it's not good enough.
 
-## 1.1 Clarity
+### 1.1 Clarity
+
+Clarity is to describe how quickly and effectively it imparts to the audience an accurate understanding of some fundamental truth about the real world. For the original graph, there are several points that I think is not meet the requirement of clarity.
 
 **No** | **Critiques**
 -------|--------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +38,10 @@ However, this graph is not a good visualization sample for this topic. I will cr
 5      |**No lead-in statement for the chart.** A proper lead-in that provide proper background or further elucidation can give audiences clearer recognition of data, which is not included in the graph. Thus the audiences won't know which currency the data are, how the data are selected for visualization, or the purpose of the graph.
 6      |**Improper graph title. **According to my calculation, Indonesia has the 5th highest total number of import and export trade with Singapore during 2019-2022, that is higher then Japan. Thus the graph title should not be the "Merchandise Trade of Top Six Trading Countries".
 
-## 1.2 Aesthetic
+### 1.2 Aesthetic
+
+The point of Aesthetic is to make the graph looks beautiful. Although the standard of "beauty" is different for everyone, at least we can think the visualization is more beautiful when the graph looks neat and clear, then audiences would like to pay more attention to the graph. In that case, some subtle adjustment is always matter, for example, font and color choices for the graph.  Thus, I have came up with several points on why the original graph is not beautiful enough.
+
 **No** | **Critiques**
 -------|------------------------------------------------------------------------------------------------------------
 1      |**The chart horizontal axes are not in the same size.** The length of horizontal axes are different for each country/region which makes the graph looks not neat enough.
@@ -43,24 +49,16 @@ However, this graph is not a good visualization sample for this topic. I will cr
 3      |**The font size of the graph title is smaller then the country/region titles.** In this case audiences would notice the country/region titles instead of the graph title at the first glance, which is a bit distracting.
 4      |**The plot area overlaps too much.** The color of overlapped area looks not good. And overlapped trend edges looks messy.
 
+# 2. Alternative Design
 
+### 2.1 Sketch
 
+The following picture shows the initial design sketch for the visualization of above topic:
 
+![](to be updated) 
+_Fig.2 Sketch of alternative design_
 
-
-
-
-
-
-In this article, we will show you how to plot a figure with multiple histograms by using [**ggplot2**](https://ggplot2.tidyverse.org/) and **ggpubr** packages. 
-
-
-# 2.0 Alternative Design
-
-## 2.1 Sketch
-
-
-## 2.2 Advantages of proposed design
+### 2.2 Advantages of proposed design
 
 Before you get started, you are required:
 
@@ -84,15 +82,15 @@ for(p in packages){library
 }
 
 
-# 3.0 Step-by-step Guide
+# 3. Step-by-step Guide
 
 In this hands-on exercise, the [Wine Quality Data Set](https://archive.ics.uci.edu/ml/datasets/wine+quality) of UCI Machine Learning Repository will be used.  The data set consists of 13 variables and 6497 observations.  For the purpose of this exercise, we have combined the red wine and white wine data into one data file.  It is called wine_quality and is in csv file format.  
 
-## 3.1 Data preparation steps
+### 3.1 Data preparation steps
 
 First, let us import the data into R by using read_csv() of readr package.  
 
-## 3.2 Data Visualization steps
+### 3.2 Data Visualization steps
 
 # R code
 wine <- read_csv("data/wine_quality.csv")
@@ -101,10 +99,10 @@ wine <- read_csv("data/wine_quality.csv")
 Notice that beside quality and type, the rest of the variables are numerical and continuous data type. 
 
 
-# 4.0 Final Visualization
+# 4. Final Visualization
 
 
-# 5.0 Major Observations
+# 5. Major Observations
 
 In the figure below, multiple histograms are plottted by using ggplot() and geom_histogram() of ggplot2 package.  Then, ggarrange() of ggpubr package is used to patch these histogram into a single figure to reveal the distribution of the selected variables in the wine quality data sets.  
 

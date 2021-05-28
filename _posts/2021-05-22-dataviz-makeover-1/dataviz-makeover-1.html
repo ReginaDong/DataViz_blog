@@ -1477,10 +1477,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h1 id="critiques-for-original-visualization">1.0 Critiques for Original Visualization</h1>
-<p>Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of data. <img src="img/img01_origin.png" /> <em>Fig.1 Original Visualization</em></p>
-<p>However, this graph is not a good visualization sample for this topic. I will criticize above graph from two asepects, clarity and aesthetics, and explain the reason why it’s not good enough.</p>
-<h2 id="clarity">1.1 Clarity</h2>
+<h1 id="critiques-for-original-visualization">1. Critiques for Original Visualization</h1>
+<p>Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of import and export trade data provided by Department of Statistics, Singapore (DOS).</p>
+<p><img src="img/img01_origin.png" /> <em>Fig.1 Original Visualization</em></p>
+<p>However, this graph is not a good visualization sample for this topic. I criticized above graph from two aspects, clarity and aesthetics, and explained the reason why it’s not good enough.</p>
+<h3 id="clarity">1.1 Clarity</h3>
+<p>Clarity is to describe how quickly and effectively it imparts to the audience an accurate understanding of some fundamental truth about the real world. For the original graph, there are several points that I think is not meet the requirement of clarity.</p>
 <table>
 <colgroup>
 <col style="width: 5%" />
@@ -1519,7 +1521,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tr>
 </tbody>
 </table>
-<h2 id="aesthetic">1.2 Aesthetic</h2>
+<h3 id="aesthetic">1.2 Aesthetic</h3>
+<p>The point of Aesthetic is to make the graph looks beautiful. Although the standard of “beauty” is different for everyone, at least we can think the visualization is more beautiful when the graph looks neat and clear, then audiences would like to pay more attention to the graph. In that case, some subtle adjustment is always matter, for example, font and color choices for the graph. Thus, I have came up with several points on why the original graph is not beautiful enough.</p>
 <table>
 <colgroup>
 <col style="width: 6%" />
@@ -1550,10 +1553,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tr>
 </tbody>
 </table>
-<p>In this article, we will show you how to plot a figure with multiple histograms by using <a href="https://ggplot2.tidyverse.org/"><strong>ggplot2</strong></a> and <strong>ggpubr</strong> packages.</p>
-<h1 id="alternative-design">2.0 Alternative Design</h1>
-<h2 id="sketch">2.1 Sketch</h2>
-<h2 id="advantages-of-proposed-design">2.2 Advantages of proposed design</h2>
+<h1 id="alternative-design">2. Alternative Design</h1>
+<h3 id="sketch">2.1 Sketch</h3>
+<p>The following picture shows the initial design sketch for the visualization of above topic:</p>
+<p><img src="to%20be%20updated" /> <em>Fig.2 Sketch of alternative design</em></p>
+<h3 id="advantages-of-proposed-design">2.2 Advantages of proposed design</h3>
 <p>Before you get started, you are required:</p>
 <ul>
 <li>to start a new R project, and
@@ -1566,16 +1570,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1 id="r-code">R code</h1>
 <p>packages = c(‘ggpubr’, ‘tidyverse’)</p>
 <p>for(p in packages){library if(!require(p, character.only = T)){ install.packages(p) } library(p, character.only = T) }</p>
-<h1 id="step-by-step-guide">3.0 Step-by-step Guide</h1>
+<h1 id="step-by-step-guide">3. Step-by-step Guide</h1>
 <p>In this hands-on exercise, the <a href="https://archive.ics.uci.edu/ml/datasets/wine+quality">Wine Quality Data Set</a> of UCI Machine Learning Repository will be used. The data set consists of 13 variables and 6497 observations. For the purpose of this exercise, we have combined the red wine and white wine data into one data file. It is called wine_quality and is in csv file format.</p>
-<h2 id="data-preparation-steps">3.1 Data preparation steps</h2>
+<h3 id="data-preparation-steps">3.1 Data preparation steps</h3>
 <p>First, let us import the data into R by using read_csv() of readr package.</p>
-<h2 id="data-visualization-steps">3.2 Data Visualization steps</h2>
+<h3 id="data-visualization-steps">3.2 Data Visualization steps</h3>
 <h1 id="r-code-1">R code</h1>
 <p>wine &lt;- read_csv(“data/wine_quality.csv”)</p>
 <p>Notice that beside quality and type, the rest of the variables are numerical and continuous data type.</p>
-<h1 id="final-visualization">4.0 Final Visualization</h1>
-<h1 id="major-observations">5.0 Major Observations</h1>
+<h1 id="final-visualization">4. Final Visualization</h1>
+<h1 id="major-observations">5. Major Observations</h1>
 <p>In the figure below, multiple histograms are plottted by using ggplot() and geom_histogram() of ggplot2 package. Then, ggarrange() of ggpubr package is used to patch these histogram into a single figure to reveal the distribution of the selected variables in the wine quality data sets.</p>
 <h1 id="rcode">Rcode</h1>
 <p>fa &lt;- ggplot(data=wine, aes(x= <code>fixed acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) va &lt;- ggplot(data=wine, aes(x= <code>volatile acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ca &lt;- ggplot(data=wine, aes(x= <code>citric acid</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) rs &lt;- ggplot(data=wine, aes(x= <code>residual sugar</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ch &lt;- ggplot(data=wine, aes(x= <code>chlorides</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) fSO2 &lt;- ggplot(data=wine, aes(x= <code>free sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) tSO2 &lt;- ggplot(data=wine, aes(x= <code>total sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) density &lt;- ggplot(data=wine, aes(x= density)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) pH &lt;- ggplot(data=wine, aes(x= pH)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) sulphates &lt;- ggplot(data=wine, aes(x= sulphates)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) alcohol &lt;- ggplot(data=wine, aes(x= alcohol)) + geom_histogram(bins=20, color=“black”, fill=“light blue”)</p>
