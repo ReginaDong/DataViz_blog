@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/image01.jpg","img/image02.jpg"]}
+  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/Dashboard 1.jpg","img/image01.jpg","img/image02.jpg","img/img01_origin.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2097,9 +2097,83 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <div class="d-article">
-<h1 id="overview">1.0 Overview</h1>
+<h1 id="critiques-for-original-visualization">1.0 Critiques for Original Visualization</h1>
+<p>Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of data. <img src="img/img01_origin.png" /> <em>Fig.1 Original Visualization</em></p>
+<p>However, this graph is not a good visualization sample for this topic. I will criticize above graph from two asepects, clarity and aesthetics, and explain the reason why it’s not good enough.</p>
+<h2 id="clarity">1.1 Clarity</h2>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 94%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>No</strong></th>
+<th><strong>Critiques</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>Inconsistent range of vertical axis scale.</strong> The range of vertical axis scales for each country/region and export/import do not remain the same, thus users can neither compare trading trends between countries nor trade gaps between export and import within one country/region.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>Rough scale division of horizontal axis without tick marks.</strong> The label of horizontal axis only shows the year, and the scale division of horizontal axis is not detailed enough, though the horizontal axis title is called “Month of Period”, so it’s hard to see exactly which month or quarter the data belongs to.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Misleading data label of horizontal axis.</strong> The last label of horizontal axis is 2021 for countries/regions except for Japan, whereas the only data in 2019-2020 is used for visualization, which will confuse audience exactly which periods of data are intended to show.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Wrong chart type is used in this graph.</strong> The figures of export data are covered by the colored area of importing figures, which makes it hard to see the single trend of export or import trade for countries/ regions, especially when export trade trend and import trade trend of a country/region are quite similar.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>No lead-in statement for the chart.</strong> A proper lead-in that provide proper background or further elucidation can give audiences clearer recognition of data, which is not included in the graph. Thus the audiences won’t know which currency the data are, how the data are selected for visualization, or the purpose of the graph.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>Improper graph title. </strong>According to my calculation, Indonesia has the 5th highest total number of import and export trade with Singapore during 2019-2022, that is higher then Japan. Thus the graph title should not be the “Merchandise Trade of Top Six Trading Countries”.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="aesthetic">1.2 Aesthetic</h2>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>No</strong></th>
+<th><strong>Critiques</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>The chart horizontal axes are not in the same size.</strong> The length of horizontal axes are different for each country/region which makes the graph looks not neat enough.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>The number of axis label is not the same between each country/region and data labels are not aligned.</strong> For instance, Mainland China’s chart has 4 or 5 ladles for vertical axis and 3 for horizontal axis, whereas Japan’s chart has 3 labels for vertical axis and 1 for horizontal axis. And labels for both vertical and horizontal axis are not aligned. Thus the charts looks untidy.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>The font size of the graph title is smaller then the country/region titles.</strong> In this case audiences would notice the country/region titles instead of the graph title at the first glance, which is a bit distracting.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>The plot area overlaps too much.</strong> The color of overlapped area looks not good. And overlapped trend edges looks messy.</td>
+</tr>
+</tbody>
+</table>
 <p>In this article, we will show you how to plot a figure with multiple histograms by using <a href="https://ggplot2.tidyverse.org/"><strong>ggplot2</strong></a> and <strong>ggpubr</strong> packages.</p>
-<h1 id="installing-and-launching-r-packages">2.0 Installing and Launching R Packages</h1>
+<h1 id="alternative-design">2.0 Alternative Design</h1>
+<h2 id="sketch">2.1 Sketch</h2>
+<h2 id="advantages-of-proposed-design">2.2 Advantages of proposed design</h2>
 <p>Before you get started, you are required:</p>
 <ul>
 <li>to start a new R project, and
@@ -2108,19 +2182,20 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul></li>
 </ul>
 <p>Figure below shows the quadrant plot of Tableau. <img src="img/image01.jpg" /></p>
-<p>The screenshot: <img src="img/image02.jpg" /></p>
 <p>Next, you will use the code chunk below to install and launch ggpubr and tidyverse in RStudio.</p>
 <h1 id="r-code">R code</h1>
 <p>packages = c(‘ggpubr’, ‘tidyverse’)</p>
 <p>for(p in packages){library if(!require(p, character.only = T)){ install.packages(p) } library(p, character.only = T) }</p>
-<h1 id="importing-and-preparing-the-data-set">3.0 Importing and Preparing The Data Set</h1>
+<h1 id="step-by-step-guide">3.0 Step-by-step Guide</h1>
 <p>In this hands-on exercise, the <a href="https://archive.ics.uci.edu/ml/datasets/wine+quality">Wine Quality Data Set</a> of UCI Machine Learning Repository will be used. The data set consists of 13 variables and 6497 observations. For the purpose of this exercise, we have combined the red wine and white wine data into one data file. It is called wine_quality and is in csv file format.</p>
-<h2 id="importing-data">3.1 Importing Data</h2>
+<h2 id="data-preparation-steps">3.1 Data preparation steps</h2>
 <p>First, let us import the data into R by using read_csv() of readr package.</p>
+<h2 id="data-visualization-steps">3.2 Data Visualization steps</h2>
 <h1 id="r-code-1">R code</h1>
 <p>wine &lt;- read_csv(“data/wine_quality.csv”)</p>
 <p>Notice that beside quality and type, the rest of the variables are numerical and continuous data type.</p>
-<h1 id="univariate-eda-with-histogram">4.0 Univariate EDA with Histogram</h1>
+<h1 id="final-visualization">4.0 Final Visualization</h1>
+<h1 id="major-observations">5.0 Major Observations</h1>
 <p>In the figure below, multiple histograms are plottted by using ggplot() and geom_histogram() of ggplot2 package. Then, ggarrange() of ggpubr package is used to patch these histogram into a single figure to reveal the distribution of the selected variables in the wine quality data sets.</p>
 <h1 id="rcode">Rcode</h1>
 <p>fa &lt;- ggplot(data=wine, aes(x= <code>fixed acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) va &lt;- ggplot(data=wine, aes(x= <code>volatile acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ca &lt;- ggplot(data=wine, aes(x= <code>citric acid</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) rs &lt;- ggplot(data=wine, aes(x= <code>residual sugar</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ch &lt;- ggplot(data=wine, aes(x= <code>chlorides</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) fSO2 &lt;- ggplot(data=wine, aes(x= <code>free sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) tSO2 &lt;- ggplot(data=wine, aes(x= <code>total sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) density &lt;- ggplot(data=wine, aes(x= density)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) pH &lt;- ggplot(data=wine, aes(x= pH)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) sulphates &lt;- ggplot(data=wine, aes(x= sulphates)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) alcohol &lt;- ggplot(data=wine, aes(x= alcohol)) + geom_histogram(bins=20, color=“black”, fill=“light blue”)</p>
