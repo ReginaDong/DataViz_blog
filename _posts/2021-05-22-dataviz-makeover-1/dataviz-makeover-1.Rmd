@@ -36,7 +36,7 @@ Clarity is to describe how quickly and effectively it imparts to the audience an
 3      | **Misleading data label of horizontal axis.** The last label of horizontal axis is 2021 for countries/regions except for Japan, whereas the only data in 2019-2020 is used for visualization, which will confuse audience exactly which periods of data are intended to show.
 4      |**Wrong chart type is used in this graph.** The figures of export data are covered by the colored area of importing figures, which makes it hard to see the single trend of export or import trade for countries/ regions, especially when export trade trend and import trade trend of a country/region are quite similar.
 5      |**No lead-in statement for the chart.** A proper lead-in that provide proper background or further elucidation can give audiences clearer recognition of data, which is not included in the graph. Thus the audiences won't know which currency the data are, how the data are selected for visualization, or the purpose of the graph.
-6      |**Improper graph title. **According to my calculation, Indonesia has the 5th highest total number of import and export trade with Singapore during 2019-2022, that is higher then Japan. Thus the graph title should not be the "Merchandise Trade of Top Six Trading Countries".
+6      |**Improper graph title. **According to my calculation, Indonesia has the 6th highest total number of import and export trade with Singapore during 2019-2022, that is higher then Japan. Thus the graph title "Merchandise Trade of Top Six Trading Countries" is not quite proper.
 
 ### 1.2 Aesthetic
 
