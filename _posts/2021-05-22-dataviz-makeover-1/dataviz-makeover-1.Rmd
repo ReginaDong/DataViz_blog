@@ -75,9 +75,15 @@ The advantages and issues the proposed design try to overcome are listed below:
 
 # 3. Step-by-step Guide
 
-
-
 ### 3.1 Data preparation steps
+
+**NO.**|**Step**          |**Action**
+-------|------------------|----------------------------------------------------------------------------------
+1      |Prepare the data to be imported in Tableau. |The raw file downloaded contains export and import data since 1976 Jan, so the first step is select all countries/regions data between 2019 Jan and 2020 December, copy the selection and paste with transposing into a new workbook called "data_cleaned". <br> ![Fig.3 Paste with transposin](img/step1.jpg) <br> _Fig.3 Paste with transposing_ <br> The export and import data are pasted in different sheets, named "Export" and "Import" respectively. Then change the "Variables" column header as "Period".
+2      |
+
+
+
 
 First, let us import the data into R by using read_csv() of readr package.  
 

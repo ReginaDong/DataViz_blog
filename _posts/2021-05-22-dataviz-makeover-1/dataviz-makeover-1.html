@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/Dashboard 1.jpg","img/image01.jpg","img/image02.jpg","img/img01_origin.png"]}
+  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/Dashboard 1.jpg","img/image01.jpg","img/image02.jpg","img/img01_origin.png","img/step1.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1631,6 +1631,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 <h1 id="step-by-step-guide">3. Step-by-step Guide</h1>
 <h3 id="data-preparation-steps">3.1 Data preparation steps</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 16%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>NO.</strong></th>
+<th><strong>Step</strong></th>
+<th><strong>Action</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Prepare the data to be imported in Tableau.</td>
+<td>The raw file downloaded contains export and import data since 1976 Jan, so the first step is select all countries/regions data between 2019 Jan and 2020 December, copy the selection and paste with transposing into a new workbook called “data_cleaned”. <br> <img src="img/step1.jpg" alt="Fig.3 Paste with transposin" /> <br> <em>Fig.3 Paste with transposing</em> <br> The export and import data are pasted in different sheets, named “Export” and “Import” respectively. Then change the “Variables” column header as “Period”.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>First, let us import the data into R by using read_csv() of readr package.</p>
 <h3 id="data-visualization-steps">3.2 Data Visualization steps</h3>
 <h1 id="final-visualization">4. Final Visualization</h1>
