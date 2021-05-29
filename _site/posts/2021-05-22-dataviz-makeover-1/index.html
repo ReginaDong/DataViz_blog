@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["DataViz Makeover 1"]},{"type":"character","attributes":{},"value":["Visual Analytics and Applications - Assignment1"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["DONG Fang (Regina)"]},{"type":"character","attributes":{},"value":["www.linkedin.com/in/reginadongf/"]}]}]},{"type":"character","attributes":{},"value":["05-22-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["DataViz Makeover 1"]},{"type":"character","attributes":{},"value":["Visual Analytics and Applications - Assignment1"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["DONG Fang (Regina)"]},{"type":"character","attributes":{},"value":["www.linkedin.com/in/reginadongf/"]}]}]},{"type":"character","attributes":{},"value":["05-22-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2097,16 +2097,40 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#critiques-for-original-visualization">1. Critiques for Original Visualization</a><ul>
+<li><a href="#clarity">1.1 Clarity</a></li>
+<li><a href="#aesthetic">1.2 Aesthetic</a></li>
+</ul></li>
+<li><a href="#alternative-design">2. Alternative Design</a><ul>
+<li><a href="#sketch">2.1 Sketch</a></li>
+<li><a href="#advantages-of-proposed-design">2.2 Advantages of proposed design</a></li>
+</ul></li>
+<li><a href="#step-by-step-guide">3. Step-by-step Guide</a><ul>
+<li><a href="#data-preparation-steps">3.1 Data preparation steps</a></li>
+<li><a href="#data-visualization-steps">3.2 Data Visualization steps</a></li>
+</ul></li>
+<li><a href="#final-visualization">4. Final Visualization</a></li>
+<li><a href="#major-observations">5. Major Observations</a></li>
+<li><a href="#r-code">R code</a></li>
+<li><a href="#r-code-1">R code</a></li>
+<li><a href="#rcode">Rcode</a></li>
+</ul>
+</nav>
+</div>
 <h1 id="critiques-for-original-visualization">1. Critiques for Original Visualization</h1>
-<p>Singapore is a country with large volumes of import and export transactions with various countries. In order to show the merchandise trade of six major trading countries, below graph was originally designed as the visualization of import and export trade data provided by Department of Statistics, Singapore (DOS).</p>
+<p>Singapore is a country with large volumes of import and export transactions with various countries/regions. In order to show the merchandise trade of six major trading countries/regions, below graph was originally designed as the visualization of import and export trade data provided by Department of Statistics, Singapore (DOS).</p>
 <p><img src="img/img01_origin.png" /> <em>Fig.1 Original Visualization</em></p>
 <p>However, this graph is not a good visualization sample for this topic. I criticized above graph from two aspects, clarity and aesthetics, and explained the reason why it’s not good enough.</p>
 <h3 id="clarity">1.1 Clarity</h3>
 <p>Clarity is to describe how quickly and effectively it imparts to the audience an accurate understanding of some fundamental truth about the real world. For the original graph, there are several points that I think is not meet the requirement of clarity.</p>
 <table>
 <colgroup>
-<col style="width: 5%" />
-<col style="width: 94%" />
+<col style="width: 6%" />
+<col style="width: 93%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2117,7 +2141,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><strong>Inconsistent range of vertical axis scale.</strong> The range of vertical axis scales for each country/region and export/import do not remain the same, thus users can neither compare trading trends between countries nor trade gaps between export and import within one country/region.</td>
+<td><strong>Inconsistent range of vertical axis scale.</strong> The range of vertical axis scales for each country/region and export/import do not remain the same, thus users can neither compare trading trends between countries/regions nor trade gaps between export and import within one country/region.</td>
 </tr>
 <tr class="even">
 <td>2</td>
@@ -2125,11 +2149,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 <tr class="odd">
 <td>3</td>
-<td><strong>Misleading data label of horizontal axis.</strong> The last label of horizontal axis is 2021 for countries/regions except for Japan, whereas the only data in 2019-2020 is used for visualization, which will confuse audience exactly which periods of data are intended to show.</td>
+<td><strong>Misleading label of horizontal axis.</strong> The last label of horizontal axis is 2021 for countries/regions except for Japan, whereas the only data in 2019-2020 is used for visualization, which will confuse audience exactly which periods of data are intended to show.</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td><strong>Wrong chart type is used in this graph.</strong> The figures of export data are covered by the colored area of importing figures, which makes it hard to see the single trend of export or import trade for countries/ regions, especially when export trade trend and import trade trend of a country/region are quite similar.</td>
+<td><strong>Wrong chart type is used in this graph.</strong> The figures of export data are covered by the colored area of importing figures, which makes it hard to see the single trend of export or import trade for countries/regions, especially when export trade trend and import trade trend of a country/region are quite similar.</td>
 </tr>
 <tr class="odd">
 <td>5</td>
@@ -2150,7 +2174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>No</strong></th>
+<th><strong>No.</strong></th>
 <th><strong>Critiques</strong></th>
 </tr>
 </thead>
@@ -2169,7 +2193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 <tr class="even">
 <td>4</td>
-<td><strong>The plot area overlaps too much.</strong> The color of overlapped area looks not good. And overlapped trend edges looks messy.</td>
+<td><strong>The plot area overlaps too much.</strong> The colors of overlapped area look not good, and overlapped trend edges look messy.</td>
 </tr>
 </tbody>
 </table>
@@ -2178,6 +2202,59 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>The following picture shows the initial design sketch for the visualization of above topic:</p>
 <p><img src="to%20be%20updated" /> <em>Fig.2 Sketch of alternative design</em></p>
 <h3 id="advantages-of-proposed-design">2.2 Advantages of proposed design</h3>
+<p>The advantages and issues the proposed design try to overcome are listed below:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 15%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>NO.</strong></th>
+<th><strong>Aspect</strong></th>
+<th><strong>Advantages</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Clarity</td>
+<td><strong>Consistent range scale of vertical axis for import and export trade, and clear division of quarter and year in horizontal axis.</strong> Audiences can easily compare either the trading trade between different countries/regions, or the gap of import and export trade within a country/region, in particular quarters.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Clarity</td>
+<td><strong>Correct and exact labels of horizontal axis.</strong> Now the horizontal axis labels show the correct period to be analyzed. And audiences can easily distinguish which quarter the values are belong to.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Clarity</td>
+<td><strong>Display the quarterly trade data point with different shapes and colors, and draw the bridge between export and import trade.</strong> Using different colors to show the country/region, and shapes to differentiate the trade type. Quarterly bridges are drawn between import and export data points, which makes it clearer to show and compare the gap of the two types of trade in each quarter.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Clarity</td>
+<td><strong>Proper graph title, lead-in verbiage and annotations.</strong> This proposed design includes a proper title and description of the background, purpose and currency of visualization. It will give audiences a clearer recognition of information passed by the graph. Besides, some annotations could make audiences focus on special points.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Aesthetic</td>
+<td><strong>Neat and tidy layout of graph.</strong> All countries/regions are evenly assigned to separate paralleled panes. And the axis labels are all in the same numbers for each country/region.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Aesthetic</td>
+<td><strong>Good color matching and shape assortment without too much overlapped area.</strong> The selected colors and shapes for plot area look comfortable, and grid lines are in light gray which won’t distract the audience attention. Without too much overlapped area, the entire graph also looks cleaner.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="step-by-step-guide">3. Step-by-step Guide</h1>
+<h3 id="data-preparation-steps">3.1 Data preparation steps</h3>
+<p>First, let us import the data into R by using read_csv() of readr package.</p>
+<h3 id="data-visualization-steps">3.2 Data Visualization steps</h3>
+<h1 id="final-visualization">4. Final Visualization</h1>
+<h1 id="major-observations">5. Major Observations</h1>
 <p>Before you get started, you are required:</p>
 <ul>
 <li>to start a new R project, and
@@ -2190,16 +2267,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1 id="r-code">R code</h1>
 <p>packages = c(‘ggpubr’, ‘tidyverse’)</p>
 <p>for(p in packages){library if(!require(p, character.only = T)){ install.packages(p) } library(p, character.only = T) }</p>
-<h1 id="step-by-step-guide">3. Step-by-step Guide</h1>
 <p>In this hands-on exercise, the <a href="https://archive.ics.uci.edu/ml/datasets/wine+quality">Wine Quality Data Set</a> of UCI Machine Learning Repository will be used. The data set consists of 13 variables and 6497 observations. For the purpose of this exercise, we have combined the red wine and white wine data into one data file. It is called wine_quality and is in csv file format.</p>
-<h3 id="data-preparation-steps">3.1 Data preparation steps</h3>
-<p>First, let us import the data into R by using read_csv() of readr package.</p>
-<h3 id="data-visualization-steps">3.2 Data Visualization steps</h3>
 <h1 id="r-code-1">R code</h1>
 <p>wine &lt;- read_csv(“data/wine_quality.csv”)</p>
 <p>Notice that beside quality and type, the rest of the variables are numerical and continuous data type.</p>
-<h1 id="final-visualization">4. Final Visualization</h1>
-<h1 id="major-observations">5. Major Observations</h1>
 <p>In the figure below, multiple histograms are plottted by using ggplot() and geom_histogram() of ggplot2 package. Then, ggarrange() of ggpubr package is used to patch these histogram into a single figure to reveal the distribution of the selected variables in the wine quality data sets.</p>
 <h1 id="rcode">Rcode</h1>
 <p>fa &lt;- ggplot(data=wine, aes(x= <code>fixed acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) va &lt;- ggplot(data=wine, aes(x= <code>volatile acidity</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ca &lt;- ggplot(data=wine, aes(x= <code>citric acid</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) rs &lt;- ggplot(data=wine, aes(x= <code>residual sugar</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) ch &lt;- ggplot(data=wine, aes(x= <code>chlorides</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) fSO2 &lt;- ggplot(data=wine, aes(x= <code>free sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) tSO2 &lt;- ggplot(data=wine, aes(x= <code>total sulfur dioxide</code>)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) density &lt;- ggplot(data=wine, aes(x= density)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) pH &lt;- ggplot(data=wine, aes(x= pH)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) sulphates &lt;- ggplot(data=wine, aes(x= sulphates)) + geom_histogram(bins=20, color=“black”, fill=“light blue”) alcohol &lt;- ggplot(data=wine, aes(x= alcohol)) + geom_histogram(bins=20, color=“black”, fill=“light blue”)</p>
