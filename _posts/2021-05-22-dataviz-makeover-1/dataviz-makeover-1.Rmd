@@ -86,12 +86,14 @@ The advantages and issues the proposed design try to overcome are listed below:
 
 ### 3.2 Data Visualization steps
 
+Below list visualization steps for Worksheet:
+
 **NO.**|**Step**              |**Action**
 -------|----------------------|--------------------------------------------
-1      |Drag **Export** and **Import** fields from "Dimensions" area to "Measures" area in the left Tables pane| ![](img/step2.1.jpg){width=50%} <br> _Fig.7 Drag Export and Import to Measures_
+1      |In Sheet1, drag **Export** and **Import** fields from "Dimensions" area to "Measures" area in the left Tables pane| ![](img/step2.1.jpg){width=50%} <br> _Fig.7 Drag Export and Import to Measures_
 2      |Drag **Country/Region** and **Period** to Columns shelf,drag **Measure Values** to Rows shelf, click on "+" on **YEAR(Period)** field then **QUARTER(Period)** filed shows up| ![](img/step2.2.jpg){width=100%} <br> _Fig.8 Columns and Rows shelf after pulling fields_
 3      |Remove **CNT(Sheet1)** from Measure Values pane| ![](img/step2.3.jpg) <br> _Fig.9 Remove CNT(Sheet1)_
-4      |In Marks Pane, change the mark type from "Automatic" to "Shape" from the dropdown list, drag **Country/Region** to Colour button, **Measure Names** to Shape button and **Import** to Tooltip button| ![](img/step2.4.jpg){width=50%} <br> _Fig.10 Change the Marks_
+4      |In Marks Pane, change the mark type from "Automatic" to "Shape" from the dropdown list, drag **Measure Names** to Shape button, **Country/Region** to Colour button and **Import** to Tooltip button| ![](img/step2.4.jpg){width=50%} <br> _Fig.10 Change the Marks_
 5      |Drag **Export** to the right side of plot area and the Dual Axis shows up on the right side, right click on the Dual Axis, check "Synchronise Axis" and uncheck "Show Header"| ![](img/step2.5.jpg){width=60%} <br> _Fig.11 Set Dual Axis_
 6      |Click on Analysis -> Create Calculated Field, name the new field as **Gap** and type in the formula as ```SUM([Import])-SUM([Export])``` then click on Apply and OK| ![](img/step2.6.jpg){width=100%} <br> _Fig.12 Create calculated field_
 7      |Select Measures Values pane in Marks pane, click on Shape button and Select Filled fro Shape Palette dropdown list, click on Assign Palette, then click on Apply and OK| ![](img/step2.7.jpg){width=100%} <br> _Fig.13 Change shape palette_
@@ -101,9 +103,16 @@ The advantages and issues the proposed design try to overcome are listed below:
 11     |In Marks -> Measure Values pane, click on Tooltip button and change the tooltip massage as right side figure shows, note that also change the font as 8| ![](img/step2.12.jpg){width=100%} <br> _Fig.17 Modify tooltip for points_
 12     |In Marks -> SUM(Export) pane, click on Tooltip button and change the tooltip massage as right side figure shows, note that also change the font as 8| ![](img/step2.13.jpg){width=100%} <br> _Fig.18 Modify tooltip for bridges_
 13     | Hide worksheet title, Change the "Standard" to "Fit Width" on the top bar| ![](img/step2.14.jpg){width=49%} ![](img/step2.15.jpg){width=49%} <br> _Fig.19_
+14     |Click the one country/Region name and hold, then drag to adjust the sort order of Columns by descending order of total export trade amount in 2019-2020, the final arrangement should be like right side figure shows| ![](img/step2.16.jpg){width=100%} <br> _Fig.20 Arrange the order of columns_
+15     |Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -> Annotate -> Mark..., set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br>  ```Maximum quarterly export amount: <SUM(Export)>``` <br> ```Maximum quarterly import amount: <SUM(Import)>``` <br> ```Minimum quarterly export amount: <SUM(Export)>``` <br> ```Minimum quarterly import amount: <SUM(Import)>``` <br> Then drag the annotations to the proper position as right side figure shows| ![](img/step2.17.jpg){width=100%} <br> _Fig.21 Create annotations_
 
-13     |Add Annotations for the 
+Below list visualization steps for Dashboard:
 
+**NO.**|**Step**              |**Action**
+-------|----------------------|--------------------------------------------
+16     |Click the New Dashboard button and drag Sheet 1 into blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select "Hide Title"| ![](img/step2.18.jpg){width=100%} <br> _Fig.22 Add Dashboard 1_
+17     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title like right side figure shows. Set the font as 14, bold and in black color| ![](img/step2.19.jpg){width=80%} <br> _Fig.23 Edit graph title_ 
+18     |From Objects pane, click on Text and drag to area just below graph title, and type in words like right side figure shows. Keep the defaul font settings| ![](img/step2.20.jpg){width=80%} <br> _Fig.24 Edit lead-in verbiage_ 
 
 # 4. Final Visualization
 
