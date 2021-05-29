@@ -119,7 +119,7 @@ Below list visualization steps for Dashboard in Tableau:
 
 ![](img/Dashboard 1.jpg) <br> _Fig.26 Snapshot of final dashboard_
 
-Full visualization is available at [**Tableau Public**](https://public.tableau.com/views/DataVizMakeover1SingaporeExportandImportTrade/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link)
+Full visualization is available at [**Tableau Public**](https://public.tableau.com/app/profile/dong.fang.regina/viz/DataVizMakeover1SingaporeExportandImportTrade/Dashboard2)
 
 # 5. Major Observations
 
