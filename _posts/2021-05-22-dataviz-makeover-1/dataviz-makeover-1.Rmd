@@ -57,8 +57,7 @@ The point of Aesthetic is to make the graph looks beautiful. Although the standa
 
 The following picture shows the initial design sketch for the visualization of above topic:
 
-![](to be updated) 
-_Fig.3 Sketch of alternative design_
+![](img/Sketch1.jpg) <br> _Fig.3 Sketch of alternative design_
 
 ### 2.2 Advantages of proposed design
 
@@ -80,16 +79,16 @@ The advantages and issues the proposed design try to overcome are listed below:
 **NO.**|**Step**         |**Action**
 -------|-----------------|-------------------------------------------------------------------------
 1      |Select the data to be imported in Tableau |The raw file downloaded contains export and import data of many countries/ regions since 1976 Jan, so the first step is select target countries/ regions' data between 2019 Jan and 2020 December, copy the selection and paste with transposing into a new Excel workbook called "data_cleaned", as shown below. The export and import data are pasted in different sheets, named "Export" and "Import" respectively. Then change the "Variables" column header as "Period", and delete "(Thousand Dollars)" besides country/ region name. The data frame should like following picture shows: <br> ![](img/step1.1.jpg){width=100%} <br> _Fig.4 Data frame after transposing_
-2      |Stack the data frame| Add a column called "Country", and stack the data frame using copy and paste, re-saved in a new Excel workbook named "data_stacked_cleaned". The column contains export trade amount was named as "Export", and the column contains import trade amount named "Import", after stacking the data should be like the following pictures shows: <br> ![](img/step2.jpg) <br> _Fig.5 Data frame after stacking_
-3      |Import data into Tableau| Launch tableau -> Connect to a file "Microsoft Excel" -> Select "data_stacked_cleaned", as there is only one sheet in the workbook, it will be automatically connected. Keep the Connection type be "Live" 
+2      |Stack the data frame| Add a column called "Country", and stack the data frame using copy and paste into new sheet called "2colm, re-saved in a new Excel workbook named "data_stacked_cleaned". The column contains export trade amount was named as "Export", and the column contains import trade amount named "Import", after stacking the data should be like the following pictures shows: <br> ![](img/step2.jpg) <br> _Fig.5 Data frame after stacking_
+3      |Import data into Tableau| Launch tableau -> Connect to a file "Microsoft Excel" -> Select "data_stacked_cleaned", drag "2colm" sheet to right side pane and drop to connect it. Keep the Connection type be "Live" 
 4      |Change data type| Period: "String" -> "Date" <br> Import: "String" -> "Number(Whole)" <br> Export: "String" -> "Number(Whole)" <br> ![](img/step3.jpg){width=70%} <br> _Fig.6 Final data type to be visualized_
 
 ### 3.2 Data Visualization steps
 
 Below list visualization steps for Worksheet in Tableau:
 
-**NO.**|**Step**                              |**Action**
--------|--------------------------------------|--------------------------------------
+**NO.**|**Step**                                         |**Action**
+-------|-------------------------------------------------|-------------------------------------------
 1      |In Sheet1, drag **Export** and **Import** fields from "Dimensions" area to "Measures" area in the left Tables pane| ![](img/step2.1.jpg){width=50%} <br> _Fig.7 Drag Export and Import to Measures_
 2      |Drag **Country/Region** and **Period** to Columns shelf,drag **Measure Values** to Rows shelf, click on "+" on **YEAR(Period)** field then **QUARTER(Period)** filed shows up| ![](img/step2.2.jpg){width=100%} <br> _Fig.8 Columns and Rows shelf after pulling fields_
 3      |Remove **CNT(Sheet1)** from Measure Values pane| ![](img/step2.3.jpg) <br> _Fig.9 Remove CNT(Sheet1)_
@@ -104,13 +103,13 @@ Below list visualization steps for Worksheet in Tableau:
 12     |In Marks -> SUM(Export) pane, click on Tooltip button and change the tooltip massage as right side figure shows, note that also change the font as 8| ![](img/step2.13.jpg){width=100%} <br> _Fig.18 Modify tooltip for bridges_
 13     | Hide worksheet title, Change the "Standard" to "Fit Width" on the top bar| ![](img/step2.14.jpg){width=49%} ![](img/step2.15.jpg){width=49%} <br> _Fig.19_
 14     |Click the one country/Region name and hold, then drag to adjust the sort order of Columns by descending order of total export trade amount in 2019-2020, the final arrangement should be like right side figure shows| ![](img/step2.16.jpg){width=100%} <br> _Fig.20 Arrange the order of columns_
-15     |Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -> Annotate -> Mark..., set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br>  ```Maximum quarterly export amount: <SUM(Export)>``` <br> ```Maximum quarterly import amount: <SUM(Import)>``` <br> ```Minimum quarterly export amount: <SUM(Export)>``` <br> ```Minimum quarterly import amount: <SUM(Import)>``` <br> Then drag the annotations to the proper position as right side figure shows| ![](img/step2.17.jpg){width=100%} <br> _Fig.21 Create annotations_
+15     |Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -> Annotate -> Mark..., set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br>  ![](img/ForAnnotation.jpg){width=100%} <br> Then drag the annotations to the proper position as right side figure shows| ![](img/step2.17.jpg){width=100%} <br> _Fig.21 Create annotations_
 
 Below list visualization steps for Dashboard in Tableau:
 
 **NO.**|**Step**                                   |**Action**
 -------|-------------------------------------------|-------------------------------------------
-16     |Click the New Dashboard button and drag Sheet 1 into blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select "Hide Title". Right click on Measure Names legend and click on "Edit Title" then change the title as "Trade Type" | ![](img/step2.18.jpg){width=100%} <br> ![](img/step2.18_2.jpg){width=100%} <br> _Fig.22 Add Dashboard 1_
+16     |Click the New Dashboard button and drag Sheet 1 into the blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select "Hide Title". Right click on Measure Names legend and click on "Edit Title" then change the title as "Trade Type" | ![](img/step2.18.jpg){width=100%} <br> ![](img/step2.18_2.jpg){width=100%} <br> _Fig.22 Add Dashboard_
 17     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title like right side figure shows. Set the font as 14, bold and in black color| ![](img/step2.19.jpg){width=80%} <br> _Fig.23 Edit graph title_ 
 18     |From Objects pane, click on Text and drag to area just below graph title, and type in lead-in verbiage like right side figure shows. Keep the defaul font settings| ![](img/step2.20.jpg){width=80%} <br> _Fig.24 Edit lead-in verbiage_
 19     |From Objects pane, click on Text and drag to the bottom of plot area, and type in data source reference like right side figure shows. Keep the defaul font settings| ![](img/step2.21.jpg){width=80%} <br> _Fig.25 Edit data source reference_

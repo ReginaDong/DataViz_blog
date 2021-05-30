@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/Calculation_sort all CNs.jpg","img/Dashboard 1.jpg","img/image01.jpg","img/image02.jpg","img/img01_origin.png","img/step1.1.jpg","img/step1.jpg","img/step2.1.jpg","img/step2.10.jpg","img/step2.11.jpg","img/step2.12.jpg","img/step2.13.jpg","img/step2.14.jpg","img/step2.15.jpg","img/step2.16.jpg","img/step2.17.jpg","img/step2.18.jpg","img/step2.18_2.jpg","img/step2.19.jpg","img/step2.2.jpg","img/step2.20.jpg","img/step2.21.jpg","img/step2.3.jpg","img/step2.4.jpg","img/step2.5.jpg","img/step2.6.jpg","img/step2.7.jpg","img/step2.8.jpg","img/step2.9.jpg","img/step2.jpg","img/step3.jpg"]}
+  {"type":"character","attributes":{},"value":["dataviz-makeover-1_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-1_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-1_files/distill-2.2.21/template.v2.js","dataviz-makeover-1_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-1_files/popper-2.6.0/popper.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-1_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.css","dataviz-makeover-1_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-1_files/webcomponents-2.0.0/webcomponents.js","img/Calculation_sort all CNs.jpg","img/Dashboard 1.jpg","img/ForAnnotation.jpg","img/image01.jpg","img/image02.jpg","img/img01_origin.png","img/Sketch1.jpg","img/step1.1.jpg","img/step1.jpg","img/step2.1.jpg","img/step2.10.jpg","img/step2.11.jpg","img/step2.12.jpg","img/step2.13.jpg","img/step2.14.jpg","img/step2.15.jpg","img/step2.16.jpg","img/step2.17.jpg","img/step2.18.jpg","img/step2.18_2.jpg","img/step2.19.jpg","img/step2.2.jpg","img/step2.20.jpg","img/step2.21.jpg","img/step2.3.jpg","img/step2.4.jpg","img/step2.5.jpg","img/step2.6.jpg","img/step2.7.jpg","img/step2.8.jpg","img/step2.9.jpg","img/step2.jpg","img/step3.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2197,7 +2197,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1 id="alternative-design">2. Alternative Design</h1>
 <h3 id="sketch">2.1 Sketch</h3>
 <p>The following picture shows the initial design sketch for the visualization of above topic:</p>
-<p><img src="to%20be%20updated" /> <em>Fig.3 Sketch of alternative design</em></p>
+<p><img src="img/Sketch1.jpg" /> <br> <em>Fig.3 Sketch of alternative design</em></p>
 <h3 id="advantages-of-proposed-design">2.2 Advantages of proposed design</h3>
 <p>The advantages and issues the proposed design try to overcome are listed below:</p>
 <table>
@@ -2270,12 +2270,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <tr class="even">
 <td>2</td>
 <td>Stack the data frame</td>
-<td>Add a column called “Country”, and stack the data frame using copy and paste, re-saved in a new Excel workbook named “data_stacked_cleaned”. The column contains export trade amount was named as “Export”, and the column contains import trade amount named “Import”, after stacking the data should be like the following pictures shows: <br> <img src="img/step2.jpg" /> <br> <em>Fig.5 Data frame after stacking</em></td>
+<td>Add a column called “Country”, and stack the data frame using copy and paste into new sheet called “2colm, re-saved in a new Excel workbook named”data_stacked_cleaned“. The column contains export trade amount was named as”Export“, and the column contains import trade amount named”Import", after stacking the data should be like the following pictures shows: <br> <img src="img/step2.jpg" /> <br> <em>Fig.5 Data frame after stacking</em></td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>Import data into Tableau</td>
-<td>Launch tableau -&gt; Connect to a file “Microsoft Excel” -&gt; Select “data_stacked_cleaned”, as there is only one sheet in the workbook, it will be automatically connected. Keep the Connection type be “Live”</td>
+<td>Launch tableau -&gt; Connect to a file “Microsoft Excel” -&gt; Select “data_stacked_cleaned”, drag “2colm” sheet to right side pane and drop to connect it. Keep the Connection type be “Live”</td>
 </tr>
 <tr class="even">
 <td>4</td>
@@ -2288,9 +2288,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Below list visualization steps for Worksheet in Tableau:</p>
 <table>
 <colgroup>
-<col style="width: 8%" />
-<col style="width: 45%" />
-<col style="width: 45%" />
+<col style="width: 7%" />
+<col style="width: 49%" />
+<col style="width: 43%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2372,7 +2372,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 <tr class="odd">
 <td>15</td>
-<td>Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -&gt; Annotate -&gt; Mark…, set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br> <code>Maximum quarterly export amount: &lt;SUM(Export)&gt;</code> <br> <code>Maximum quarterly import amount: &lt;SUM(Import)&gt;</code> <br> <code>Minimum quarterly export amount: &lt;SUM(Export)&gt;</code> <br> <code>Minimum quarterly import amount: &lt;SUM(Import)&gt;</code> <br> Then drag the annotations to the proper position as right side figure shows</td>
+<td>Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -&gt; Annotate -&gt; Mark…, set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br> <img src="img/ForAnnotation.jpg" style="width:100.0%" /> <br> Then drag the annotations to the proper position as right side figure shows</td>
 <td><img src="img/step2.17.jpg" style="width:100.0%" /> <br> <em>Fig.21 Create annotations</em></td>
 </tr>
 </tbody>
@@ -2394,8 +2394,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <tbody>
 <tr class="odd">
 <td>16</td>
-<td>Click the New Dashboard button and drag Sheet 1 into blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select “Hide Title”. Right click on Measure Names legend and click on “Edit Title” then change the title as “Trade Type”</td>
-<td><img src="img/step2.18.jpg" style="width:100.0%" /> <br> <img src="img/step2.18_2.jpg" style="width:100.0%" /> <br> <em>Fig.22 Add Dashboard 1</em></td>
+<td>Click the New Dashboard button and drag Sheet 1 into the blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select “Hide Title”. Right click on Measure Names legend and click on “Edit Title” then change the title as “Trade Type”</td>
+<td><img src="img/step2.18.jpg" style="width:100.0%" /> <br> <img src="img/step2.18_2.jpg" style="width:100.0%" /> <br> <em>Fig.22 Add Dashboard</em></td>
 </tr>
 <tr class="even">
 <td>17</td>
