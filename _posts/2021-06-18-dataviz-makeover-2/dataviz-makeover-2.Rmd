@@ -75,12 +75,36 @@ The advantages and issues the proposed design try to overcome are listed below:
 
 ### 3.1 Data preparation steps
 
-**NO.**|**Step**         |**Action**
--------|-----------------|-------------------------------------------------------------------------
-1      |Select the data to be imported in Tableau |The raw file downloaded contains export and import data of many countries/ regions since 1976 Jan, so the first step is select target countries/ regions' data between 2019 Jan and 2020 December, copy the selection and paste with transposing into a new Excel workbook called "data_cleaned", as shown below. The export and import data are pasted in different sheets, named "Export" and "Import" respectively. Then change the "Variables" column header as "Period", and delete "(Thousand Dollars)" besides country/ region name. The data frame should like following picture shows: <br> ![](img/step1.1.jpg){width=100%} <br> _Fig.4 Data frame after transposing_
-2      |Stack the data frame| Add a column called "Country", and stack the data frame using copy and paste into new sheet called "2colm, re-saved in a new Excel workbook named "data_stacked_cleaned". The column contains export trade amount was named as "Export", and the column contains import trade amount named "Import", after stacking the data should be like the following pictures shows: <br> ![](img/step2.jpg) <br> _Fig.5 Data frame after stacking_
-3      |Import data into Tableau| Launch tableau -> Connect to a file "Microsoft Excel" -> Select "data_stacked_cleaned", drag "2colm" sheet to right side pane and drop to connect it. Keep the Connection type be "Live" 
-4      |Change data type| Period: "String" -> "Date" <br> Import: "String" -> "Number(Whole)" <br> Export: "String" -> "Number(Whole)" <br> ![](img/step3.jpg){width=70%} <br> _Fig.6 Final data type to be visualized_
+**NO.**|**Step**               |**Action**
+-------|-----------------------|---------------------------------------------------------
+1      |Unzip the zipped folder downloaded |Right click on the zip package and select "Unzip" all and get the raw data workbook "outputFile"
+2      |Filter data for imports |Open the workbook called "outputFile", select worksheet "T1" and select row 6, then click on Home pane -> Sort & Filter icon -> Filter <br> ![](img/s1.2.jpg){width=100%} <br> _Fig.3 Filter the data_
+3      |Select the target ten trading partners for imports |Click on the triangle at the bottom right corner of cell A6, first uncheck "(Select All)", then check the 10 target countries/regions to filter them out <br> ![](img/s1.3.jpg){width=100%} <br> _Fig.4 Select target trading partners_
+4      |Copy out the target countries/regions with import values |After filtering, select cells from A6 to A81, press Ctrl+C on Keyboard, and paste in the A1 cell in a new workbook by pressing Ctrl+V
+5      |Select the import data between Jan 2011 to Dec 2020 |Select cells from PF6 to TU81, press Ctrl+C on Keyboard, and paste in the B1 cell in the same workbook as last step by pressing Ctrl+V, name this worksheet as "Import" <br> ![](img/s1.05.jpg){width=100%} <br> _Fig.5 The "Import" sheet after pasting_
+6      |Prepare export sheet | Click on the + button next to "Import" sheet and name the new sheet as "Export" <br> ![](img/s1.06.jpg) <br> _Fig.6_
+7      |Filter the target ten trading partners for exports |Repeat step 2 and 3 for worksheet "T2" of "outputFile"
+8      |Copy out the target countries/regions with export values |After filtering, select cells from A6 to A79, press Ctrl+C on Keyboard, and paste in the A1 cell in a "Export" sheet by pressing Ctrl+V
+9      |Select the export data between Jan 2011 to Dec 2020 |Select cells from PF6 to TU79, press Ctrl+C on Keyboard, and paste in the B1 cell in the same sheet as last step by pressing Ctrl+V, save this workbook as "data_cleaned"
+10     |Transform Million Dollars to Thousand Dollars for European Union import amount |In the "Import" sheet of "data_cleaned" workbook, type in 1000 in cell A20, copy A20 by pressing Ctrl+C, and select cells from B2 to DQ2, then click on Home pane -> Paste button -> Paste Special…, and select options as following screenshot in the pop up window. <br> ![](img/S1.10_1.jpg){width=35%} ![](img/S1.10_2.jpg){width=60%} <br> _Fig.7 Paste Special_
+11     |Transform Thousand Dollars to Dollars for import amount |Copy A20 by pressing Ctrl+C, and select cells from B2 to DQ12, then click on Home pane -> Paste button -> Paste Special…, and select options as step 10. After done this step, clear cell A20
+12     |Transform Million Dollars to Thousand Dollars for European Union export amount |Repeat step 10 for "Export" sheet
+13     |Transform Thousand Dollars to Dollars for export amount|Repeat step 11 for "Export" sheet
+14     |Open Tableau Prep Builder, and drag "data_cleaned" worksheet to the pane|![](img/s1.12.jpg){width=100%} <br> _Fig.8 Drag the data file to the pane of Tableau Prep Builder_
+15     |In the opened window, drag "Export" sheet to the workflow pane| ![](img/s1.12-2.jpg){width=100%} <br> _Fig.9 Drag "Export" sheet to the pane_
+16     |Click on "+" button next to "Export" sheet icon then click "Pivot"| ![](img/s1.13.jpg) <br> _Fig.10_
+17     |In the Settings pane below, select all fields with name consisting of "year month" and drag to the Pivoted Fields pane| ![](img/s1.13-2.jpg){width=100%} <br> _Fig.11_
+18     |In the Pivot Result Pane, click on the "Abc" sign on the up left corner of the 1st field, and select data type "Date", then do the same thing for the 2nd field and change the data type as "Number (Whole)"| ![](img/s1.14-1st column.jpg){width=45%} ![](img/s1.14-2ed column.jpg){width=45%} <br> _Fig.12 Change the data type_
+19     |Drag "Import" sheet to the workflow pane| Repeat step 17 and 18
+20     |On the workflow pane above, click and hold on "Pivot 1" icon, then drag it to the "Join" area when the mouse hover over "Pivot 2" icon |![](img/s1.15.jpg){width=80%} <br> _Fig.13 Join the two sheet_
+21     |Below the Settings pane, click the "+" button, set the applied join Clauses using Pivot1Name and Variables fields, and set join type as full by click the to circle as the right side screenshot shows |![](img/s1.15-1.jpg){width=80%} <br> _Fig.14_
+22     |In the Join Results pane, double click the name of the 2nd field and type in "Import", as the right side screenshot shows |![](img/s1.15-2.jpg){width=100%} <br> _Fig.15 Change the field name_
+23     |As the right side screenshot shows, remove two fields by right click on the field and select "Remove"| ![](img/s1.15-3-1.jpg){width=45%}  ![](img/s1.15-3-3.jpg){width=45%} <br> _Fig.16 Remove duplicate fields_
+24     |Right click on the last field and select Split Values -> Automatic Split, then remove the last column as step 23|![](img/s1.15-4_autosplit then remove the last column.jpg){width=80%} <br> _Fig.17 Auto-split the last field_
+25     |As step 22, change the 2st field name as "Date", and the 4th as "Export"| ![](img/s1.15-5.jpg){width=100%} <br> _Fig.18 The final result after revising field names_
+26     |On the workflow pane, click the "+" button next to "Join 1" sign and select Output| ![](img/s1.16-1.jpg){width=100%} <br> _Fig.19 Export the prepared data_
+27     | Edit the output parameters on the output pane as the right side screenshot shows, click Run Flow button to save the prepared data file in csv format, named as "data_stacked"| ![](img/s1.16-2.jpg){width=50%} <br> _Fig.20 Export the prepared data for visualization_
+
 
 ### 3.2 Data Visualization steps
 
