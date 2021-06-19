@@ -12,7 +12,8 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
-    toc_depth: 4
+    toc_depth: 5
+    toc_float: true
 ---
 
 
@@ -51,6 +52,7 @@ The point of Aesthetic is to make the graph looks beautiful. Although the standa
 2      |**Some icons are not necessary to for the graph.** For example the two icons next to the start point of axes. It won't provide much valuable information but will distract the audience. 
 3      |**The font color and size of the two paragraphs of text in the graph are different, which makes the graph look less concise.** Both paragraphs of text represent some kind of annotation for the graph, but expressed in different font colors and sizes. And the text at the bottom is even placed in a blue box. All these inconsistencies will make the entire graph look untidy and distract the audience.
 
+
 # 2. Alternative Design
 
 ### 2.1 Sketch
@@ -72,6 +74,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 5      |Clarity         |**The interactivity of the graph could give audiences the option to choose specific years.** Set an interactive filter to see the trade performance in a specific year, also set the animation to show the track of value changes along with year changes, so that audiences could compare the amount between years.
 6      |Clarity         |**The tooltip includes the specific amount and rank of trade for each trading partner, as well as the line chart of export and import amount during 2011 to 2020.** Audience could see the tooltip if they want to know more details about the trade performance. Besides, the line chart can give audiences an intuitive feeling of how the values of export and import trade changes over time.
 7      |Aesthetic       |**Simple and consistent color scheme for the entire graph.** The selected colors for the plot area look comfortable, and grid lines are in light gray which won't distract the audience attention. Besides, the color scheme of bubble plot is aligned with the color used in bar chart and line chart.
+
 
 # 3. Step-by-step Guide
 
@@ -105,53 +108,99 @@ The advantages and issues the proposed design try to overcome are listed below:
 24     |Right click on the last field and select Split Values -> Automatic Split, then remove the last column as step 23|![](img/s1.15-4_autosplit then remove the last column.jpg){width=80%} <br> _Fig.17 Auto-split the last field_
 25     |As step 22, change the 2st field name as "Date", and the 4th as "Export"| ![](img/s1.15-5.jpg){width=100%} <br> _Fig.18 The final result after revising field names_
 26     |On the workflow pane, click the "+" button next to "Join 1" sign and select Output| ![](img/s1.16-1.jpg){width=100%} <br> _Fig.19 Export the prepared data_
-27     | Edit the output parameters on the output pane as the right side screenshot shows, click Run Flow button to save the prepared data file in csv format, named as "data_stacked"| ![](img/s1.16-2.jpg){width=50%} <br> _Fig.20 Export the prepared data for visualization_
+27     | Edit the output parameters on the output pane as the right side screenshot shows, click Run Flow button to save the prepared data file in csv format, named as "data_stacked.csv"| ![](img/s1.16-2.jpg){width=50%} <br> _Fig.20 Export the prepared data for visualization_
 
 
 ### 3.2 Data visualization steps
 
-####3.2.1 Create bubble plot in Tableau:
+##### 3.2.1 Create bubble plot in Tableau
 
-**NO.**|**Step**                                         |**Action**
--------|-------------------------------------------------|-------------------------------------------
-1      |In Sheet1, drag **Export** and **Import** fields from "Dimensions" area to "Measures" area in the left Tables pane| ![](img/step2.1.jpg){width=50%} <br> _Fig.7 Drag Export and Import to Measures_
-2      |Drag **Country/Region** and **Period** to Columns shelf,drag **Measure Values** to Rows shelf, click on "+" on **YEAR(Period)** field then **QUARTER(Period)** filed shows up| ![](img/step2.2.jpg){width=100%} <br> _Fig.8 Columns and Rows shelf after pulling fields_
-3      |Remove **CNT(Sheet1)** from Measure Values pane| ![](img/step2.3.jpg) <br> _Fig.9 Remove CNT(Sheet1)_
-4      |In Marks Pane, change the mark type from "Automatic" to "Shape" from the dropdown list, drag **Measure Names** to Shape button, **Country/Region** to Colour button and **Import** to Tooltip button| ![](img/step2.4.jpg){width=50%} <br> _Fig.10 Change the Marks_
-5      |Drag **Export** to the right side of plot area and the Dual Axis shows up on the right side, right click on the Dual Axis, check "Synchronise Axis" and uncheck "Show Header"| ![](img/step2.5.jpg){width=60%} <br> _Fig.11 Set Dual Axis_
-6      |Click on Analysis -> Create Calculated Field, name the new field as **Gap** and type in the formula as ```SUM([Import])-SUM([Export])``` then click on Apply and OK| ![](img/step2.6.jpg){width=100%} <br> _Fig.12 Create calculated field_
-7      |Select Measures Values pane in Marks pane, click on Shape button and Select Filled fro Shape Palette dropdown list, click on Assign Palette, then click on Apply and OK| ![](img/step2.7.jpg){width=100%} <br> _Fig.13 Change shape palette_
-8      |In Marks -> SUM(Export) Pane, change the mark type from "Automatic" to "Gantt Bar" from the dropdown list, drag **Gap** to Size button. Click on Size button and drag the slide button to the left to make the Gantt Bar thinner, like right figure shows. Then click on Colour button and change the Opacity as 60%| ![](img/step2.8.jpg){width=49%}  ![](img/step2.9.jpg){width=40%} <br> _Fig.14 Draw and format gap bridge_
-9      |Right click vertical axis and select Edit Axis, change the Axis Title as "Amount (SGD)"| ![](img/step2.10.jpg){width=70%} <br> _Fig.15 Change axis title_
-10     |Right click on **AGG(Gap)** and select "Format...", then change the number format as right side figure shows, do the same formatting for **SUM(Import)** and **SUM(Export)**| ![](img/step2.11.jpg){width=80%} <br> _Fig.16 Change numbers format_
-11     |In Marks -> Measure Values pane, click on Tooltip button and change the tooltip massage as right side figure shows, note that also change the font as 8| ![](img/step2.12.jpg){width=100%} <br> _Fig.17 Modify tooltip for points_
-12     |In Marks -> SUM(Export) pane, click on Tooltip button and change the tooltip massage as right side figure shows, note that also change the font as 8| ![](img/step2.13.jpg){width=100%} <br> _Fig.18 Modify tooltip for bridges_
-13     | Hide worksheet title, Change the "Standard" to "Fit Width" on the top bar| ![](img/step2.14.jpg){width=49%} ![](img/step2.15.jpg){width=49%} <br> _Fig.19_
-14     |Click the one country/Region name and hold, then drag to adjust the sort order of Columns by descending order of total export trade amount in 2019-2020, the final arrangement should be like right side figure shows| ![](img/step2.16.jpg){width=100%} <br> _Fig.20 Arrange the order of columns_
-15     |Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -> Annotate -> Mark..., set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br>  ![](img/ForAnnotation.jpg){width=100%} <br> Then drag the annotations to the proper position as right side figure shows| ![](img/step2.17.jpg){width=100%} <br> _Fig.21 Create annotations_
+**NO.**|**Step**               |**Action**
+-------|-----------------------|---------------------------------------------------------
+1      |Launch Tableau Desktop, from the local directory where the "data_stacked.csv" is saved, drag and drop into the homepage as shown,keep defual settings | ![](img/s2.1.jpg){width=80%} <br> _Fig.21 Import data into Tableau_
+2      |Click on Sheet 1, in Data pane, drag and drop `Export` to Columns, `Import` to Rows, `Country` to Detail box in Marks pane| ![](img/s2.2-1.jpg){width=100%} ![](img/s2.2-2.jpg){width=100%} ![](img/s2.3.jpg){width=50%} <br> _Fig.22 Set the plot data_
+3      |Click Analysis -> Create Calculated Field, in the pop out window, typing the name and formula as the right side screenshot shows, then click on OK| ![](img/s2.4-1.jpg){width=30%} ![](img/s2.4-2.jpg){width=80%} <br> _Fig.23 Create the 1st calculation field_
+4      |Repeat step3 to create other calculation fields need, the name and formula for each field is shown as the screenshots| ![](img/s2.4-3.jpg){width=80%} ![](img/s2.4-4.jpg){width=80%} ![](img/s2.4-5.jpg){width=80%} ![](img/s2.4-6.jpg){width=100%} ![](img/s2.4-7.jpg){width=100%} ![](img/s2.4-8.jpg){width=100%} <br> _Fig.24 Create the rest calculation fields_
+5      |Drag and drop `Total Trade` on Size box and `Net trade` on Colour box, in Marks pane | ![](img/s2.5.jpg){width=45%} ![](img/s2.5-2.jpg){width=45%} <br> _Fig.25 Set the plot size and colour_
+6      |Click on the "Automatic" drop list in Marks pane and select Circle, then drag and drop `Country` on Label box|  ![](img/s2.6.jpg){width=30%} ![](img/s2.6-2.jpg){width=65%} <br> _Fig.26 Set the plot shape and label_
+7      |Drag and drop `Date` in Filters pane and proceed as shown by screenshots| ![](img/s2.7.jpg){width=25%} ![](img/s2.7-2.jpg){width=35%} ![](img/s2.7-3.jpg){width=38%}<br> _Fig.27 Set the filter_
+8      |Right click on `YEAR(Date)` in Filters pane and select Show Filter| ![](img/s2.7-4.jpg){width=35%}  <br> _Fig.28 Show filter_
+9      |Click the black triangle on the top right corner of filter, first select "Edit Tile...", and type in "Select a year" in the window popping up then click OK button| ![](img/s2.13-1.jpg){width=30%} ![](img/s2.13-2.jpg){width=65%}<br> _Fig.29 Change the filter name_
+10     |Repeat last step but  select "Single Value (list)"| ![](img/s2.7-5.jpg){width=30%} <br> _Fig.30 Change the filter type_
+11     |Double click on Color Legend on the right side and edit Colours in the popping up window as screenshot shows| ![](img/s2.8.jpg){width=80%} <br> _Fig.31 Change the bubble plot colour scale_
+12     |Click Colour box in Marks pane and change the opacity and border as the screenshot shows| ![](img/s2.8-2.jpg){width=50%} <br> _Fig.32 Change the colour setting details_
+13     |Click Size box in Marks pane and move the slider to the position as the screenshot shows| ![](img/s2.8-3.jpg) <br> _Fig.33 Change the bubble size_
+14     |Click Format -> Animations and turn on animations| ![](img/s2.9.jpg){width=45%} ![](img/s2.9-1.jpg){width=45%} <br> _Fig.34 Turn on animations_
+15     |Press "Ctrl" key and click on `Deficit`, `Surplus`, `Ranking of export`, `Ranking of import`, `Ranking of Total`, `Export`, `Import`, drag and drop Tooltip box on Marks pane| ![](img/s2.10.jpg){width=50%} <br> _Fig.35 Set tooltip_
+16     |Click Format -> Font... -> Fields and select `AGG(Total trade)`, click Pane tab| ![](img/s2.11.jpg){width=100%} <br> _Fig.36 Open format setting pane_
+17     |Set the number format as right side screenshot shows| ![](img/s2.11-3.jpg){width=100%} <br> _Fig.37 Set number format for one field_
+18     |Repeat step16 and select the fields one by one as shown in the screenshot, then repeat step17 to set the same format for these fields| ![](img/s2.11-2.jpg){width=80%} <br> _Fig.38 Set number format for other fields_
+19     |Right click on the "Import" axis and select Add Reference Line, and set the reference line in the window popping up, as the screenshot shows, then repeat this step for the "Export" axis| ![](img/s2.12-2.jpg){width=100%} <br> _Fig.39 Add reference line_
 
-####3.2.2 Create bar chart in Tableau:
+##### 3.2.2 Create bar chart in Tableau
+
+**NO.**|**Step**               |**Action**
+-------|-----------------------|---------------------------------------------------------
+20     |Click "New worksheet" button to add Sheet 2| ![](img/s3.01.jpg) <br> _Fig.40 Add new worksheet for bar chart_
+21     |In Sheet 2 -> Data pane, drag and drop `Net trade` to Columns, `Country` to Rows, `Net trade` to Colour box in Marks pane| ![](img/s3.02.jpg){width=65%} ![](img/s3.03.jpg){width=30%} <br> _Fig.41 Set plot fields and plot colour for the bar chart_
+22     |Double click on the Colour Legend on the right side and edit Colours in the popping up window as screenshot shows| ![](img/s3.04.jpg){width=80%} <br> _Fig.42 Change the bar chart colour scale_
+23     |Sort the sorting of `Country` by click the button shown in the screenshot| ![](img/s3.05.jpg){width=80%} <br> _Fig.43 Sort the countries/regions by descending order_
+24     |Repeat step 7 and 8 for Sheet 2 to set filter
+25     |Repeat step 16 and 17 for `Net trade` in Sheet 2 set the number format
+26     |Repeat step 19 for "Net trade" axis to add reference line
+27     |Double click "Net trade" axis and rename the axis as shown in the screenshot| ![](img/s3.06.jpg){width=80%} <br> _Fig.44 Rename the "Net trade" axis_
+28     |Drag and drop `Net trade` to Label box in Marks pane, then click Label box and click "Min/Max" as highlighted in the screenshot| ![](img/s3.07.jpg){width=45%} ![](img/s3.08.jpg){width=45%} <br> _Fig.45 Add the data label to the country/region with min and max net trade amount_
 
 
 
-####3.2.3 Create line chart in Tableau:
 
+##### 3.2.3 Create line chart in Tableau
 
+**NO.**|**Step**               |**Action**
+-------|-----------------------|---------------------------------------------------------
+29     |Repeat step 20 to add Sheet 3
+30     |In Sheet 3 -> Data pane, drag and drop `Date` to Columns, `Export` to Rows, then drag and drop `Import` to the "Export" axis as shwon in the screenshot| ![](img/s2-2.01.jpg) <br> _Fig.46 Set plot fields for the line chart_ 
+31     |Right click `YEAR(Date)` and select continuous Year| ![](img/s2-2.02.jpg){width=50%} <br> _Fig.47 Set YEAR as continuous format_
+32     |Drag and drop `Measure Values` to the position as shown in the screenshot, to add the dual axis| ![](img/s2-2.03.jpg){width=100%} <br> _Fig.48 Add the dual axis_
+33     |Right click on the dual axis and check "Synchronise Axis", then right click again and uncheck "Show Header"| ![](img/s2-2.04.jpg){width=50%} <br> _Fig.49 Hide the dual axis_
+34     |Click the second Measure Values tab in Marks pane, select "Circle" from the drop list of plot type| ![](img/s2-2.05.jpg){width=30%} <br> _Fig.50 Change the plot type_
+35     |Click the first Measure Values tab in Marks pane, drag and drop `Measures Names` to the Label box in Marks pane| ![](img/s2-2.06.jpg){width=100%} <br> _Fig.51 Set the line label_
+36     |Right click "Year of Date" axis and uncheck "Show Header"| ![](img/s2-2.07.jpg){width=60%} <br> _Fig.52 Hide the header of X axis_
+37     |Right click "Value" axis and select "Edit Axis", in the windows popping up, uncheck "Include zero" then close the window| ![](img/s2-2.08.jpg){width=60%} <br> _Fig.53 Edit Y axis_
+38     |Move the cursor to the bottom and right edge of plot area, when the cursor changes to the arrow shape, drag the cursor to adjust the size of plot area, as shown in the screenshot| ![](img/s2-2.09.jpg){width=100%} <br> _Fig.54 Adjust the line chart size_
+39     |Click Sheet 1, click Tooltip box on Marks pane. As the screenshot shows, type in texts, click "Insert" button, drag and drop fields and "Sheet 3" accordingly. Select all the text and set font size be 9, then set the font size of fields as 12 and the colour of fields as darker gray, except for setting `<AGG(Surplus)>` be blue and `<AGG(Deficit)>` be red| ![](img/s2.10-3.jpg){width=100%} <br> _Fig.55 Revise verbiage and insert the line chart in tooltip of the bubble plot_
 
-####3.2.4 Create dashboard in Tableau:
+##### 3.2.4 Create dashboard in Tableau:
+**NO.**|**Step**               |**Action**
+-------|-----------------------|---------------------------------------------------------
+40     |Click the New Dashboard button, then change the size of Dashboard as Generic Desktop (1366x768)| ![](img/s4.01.jpg) <br> _Fig.56 Add new dashboard_ <br> ![](img/s4.02.jpg){width=80%} <br> _Fig.57 Change the dashboard size_
+41     |Drag and drop Sheet 1 to the Dashboard and then drag and drop Sheet 2 to the right side, move the cursor the the middle of the two sheets and when the cursor change to the arrow shape, click and drag the cursor to adjust the size of the two sheet, as shown in the screenshot| ![](img/s4.03.jpg){width=100%} <br> _Fig.58 Add sheets and adjust the size of the two sheet_
+42     |Right click on "Sheet 1" title on the top and select "Hide Title", repeat this step for "Sheet 2" title| ![](img/s4.05.jpg) <br> _Fig.59 Hide the sheet titles_
+44     |Right click on Color legend and click on "Edit Title", select all text and type in "Net trade in bubble plot" |![](img/s4.06.jpg){width=80%} <br> _Fig.60 Edit title of the colour legend_
+45     | Click on the Legend as shown in the screenshot and click "x" to remove the legend from Dashboard1| ![](img/s4.3.jpg){width=60%} <br> _Fig.61 Remove the legend_
+46     |Right click the filter and select "Apply to Worksheets" -> "Selected Workesheets...", then check "Sheet 1" and "Sheet 2" and click OK| ![](img/s4.5-1.jpg){width=80%} ![](img/s4.5-2.jpg){width=60%} <br> _Fig.62 Apply the filter to sheet 1 and sheet 2_
+47     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title as the right side screenshot shows. Set the font size as 16, bold and in black color| ![](img/s4.07.jpg){width=80%} <br> _Fig.63 Edit graph title_ 
+48     |From Objects pane, click on Text and drag to area just below graph title, and type in lead-in verbiage as the right side screenshot shows. Keep the default font settings| ![](img/s4.08.jpg){width=80%} <br> _Fig.64 Edit lead-in verbiage_
+49     |From Objects pane, click on Text and drag to the bottom of plot area, and type in data source reference as the right side screenshot shows. Set the font size as 7| ![](img/s4.09.jpg){width=80%} <br> _Fig.65 Edit the data source reference_
+50     |Drag the edge of the objects to adjust the size as shown in the screenshot, highlighted by yellow boxes | ![](img/s4.10.jpg){width=100%} <br> _Fig.66 Change the size of objects in Dashboard1_
+51     |From Objects pane, click on Text and drag to the bottom-right corner of plot area, and type in note content the right side screenshot shows. Set the font size as 7| ![](img/s4.11.jpg){width=80%} <br> _Fig.67 Add a note_
+51     |Repeat step 38 to adjust the size of bar chart in Dashboard 1, as shown in the screenshot| ![](img/s4.04.jpg){width=100%} <br> _Fig.68 Adjust the size of bar chart_
 
-**NO.**|**Step**                                   |**Action**
--------|-------------------------------------------|-------------------------------------------
-16     |Click the New Dashboard button and drag Sheet 1 into the blank dashboard, then change the size of Dashboard as Generic Desktop (1366x768). Right click on title area on the top and select "Hide Title". Right click on Measure Names legend and click on "Edit Title" then change the title as "Trade Type" | ![](img/step2.18.jpg){width=100%} <br> ![](img/step2.18_2.jpg){width=100%} <br> _Fig.22 Add Dashboard_
-17     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title like right side figure shows. Set the font as 14, bold and in black color| ![](img/step2.19.jpg){width=80%} <br> _Fig.23 Edit graph title_ 
-18     |From Objects pane, click on Text and drag to area just below graph title, and type in lead-in verbiage like right side figure shows. Keep the defaul font settings| ![](img/step2.20.jpg){width=80%} <br> _Fig.24 Edit lead-in verbiage_
-19     |From Objects pane, click on Text and drag to the bottom of plot area, and type in data source reference like right side figure shows. Keep the defaul font settings| ![](img/step2.21.jpg){width=80%} <br> _Fig.25 Edit data source reference_
 
 # 4. Final Visualization
 
-![](img/Dashboard.jpg) <br> _Fig.26 Snapshot of final dashboard_
+The final visualization proposed is displayed as below:
 
-Full visualization is available at [**Tableau Public**](https://public.tableau.com/app/profile/dong.fang.regina/viz/DataVizMakeover1SingaporeExportandImportTrade/Dashboard2)
+![](img/Dashboard.jpg) <br> _Fig.69 Snapshot of final dashboard - Bubble plot and Bar chart_
+
+The sorting of major trade partners in bar chart will change in descending order of net trade value automatically when select a year, so can clearly compare the net trade amount between trade partners in the specific year.
+
+When hovering over cursor on the bubble, the tooltip with line chart will pop up, which indicates how export and import trade amount in the selected market change along time.
+
+![](img/Dashboard_line.jpg) <br> _Fig.70 Snapshot of final dashboard - Line chart_
+
+Full visualization is available at [**Tableau Public**](https://public.tableau.com/app/profile/dong.fang.regina/viz/DataVizMakeover2_16239465641540/Dashboard1).
+
 
 # 5. Major Observations
 
