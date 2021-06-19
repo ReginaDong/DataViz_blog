@@ -17,23 +17,6 @@
     "input_file": "dataviz-makeover-2.knit.md"
   },
   {
-    "path": "posts/welcome/",
-    "title": "Welcome to DataViz Blog",
-    "description": "Welcome to Regina's new blog, DataViz Blog. I hope you enjoy \nexploring what data visualization we play with here!",
-    "author": [
-      {
-        "name": "DONG Fang (Regina)",
-        "url": "https://www.linkedin.com/in/reginadongf/"
-      }
-    ],
-    "date": "2021-05-22",
-    "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-06-19T17:59:04+08:00",
-    "input_file": "welcome.knit.md"
-  },
-  {
     "path": "posts/2021-05-22-dataviz-makeover-1/",
     "title": "DataViz Makeover 1",
     "description": "Visual Analytics and Applications - Assignment1",
@@ -49,5 +32,22 @@
     "preview": {},
     "last_modified": "2021-06-19T18:00:19+08:00",
     "input_file": "dataviz-makeover-1.knit.md"
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to DataViz Blog",
+    "description": "Hi! Welcome to Regina's new blog, DataViz Blog. I hope you enjoy \nexploring what data visualization we play with here!",
+    "author": [
+      {
+        "name": "DONG Fang (Regina)",
+        "url": "https://www.linkedin.com/in/reginadongf/"
+      }
+    ],
+    "date": "2021-05-22",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-06-19T18:02:51+08:00",
+    "input_file": "welcome.knit.md"
   }
 ]
