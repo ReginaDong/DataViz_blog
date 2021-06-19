@@ -10,7 +10,7 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
-    toc_depth: 3
+    toc_depth: 4
 ---
 
 
@@ -106,9 +106,9 @@ The advantages and issues the proposed design try to overcome are listed below:
 27     | Edit the output parameters on the output pane as the right side screenshot shows, click Run Flow button to save the prepared data file in csv format, named as "data_stacked"| ![](img/s1.16-2.jpg){width=50%} <br> _Fig.20 Export the prepared data for visualization_
 
 
-### 3.2 Data Visualization steps
+### 3.2 Data visualization steps
 
-Below list visualization steps for Worksheet in Tableau:
+####3.2.1 Create bubble plot in Tableau:
 
 **NO.**|**Step**                                         |**Action**
 -------|-------------------------------------------------|-------------------------------------------
@@ -128,7 +128,15 @@ Below list visualization steps for Worksheet in Tableau:
 14     |Click the one country/Region name and hold, then drag to adjust the sort order of Columns by descending order of total export trade amount in 2019-2020, the final arrangement should be like right side figure shows| ![](img/step2.16.jpg){width=100%} <br> _Fig.20 Arrange the order of columns_
 15     |Add Annotations for the highest and lowest quarterly total amount of export and import points by right click on the target points -> Annotate -> Mark..., set the font of annotation as 8, and input in the Edit Annotation pane as following accordingly: <br>  ![](img/ForAnnotation.jpg){width=100%} <br> Then drag the annotations to the proper position as right side figure shows| ![](img/step2.17.jpg){width=100%} <br> _Fig.21 Create annotations_
 
-Below list visualization steps for Dashboard in Tableau:
+####3.2.2 Create bar chart in Tableau:
+
+
+
+####3.2.3 Create line chart in Tableau:
+
+
+
+####3.2.4 Create dashboard in Tableau:
 
 **NO.**|**Step**                                   |**Action**
 -------|-------------------------------------------|-------------------------------------------

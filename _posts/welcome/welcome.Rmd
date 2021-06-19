@@ -1,11 +1,11 @@
 ---
 title: "Welcome to DataViz Blog"
 description: |
-  Welcome to our new blog, DataViz Blog. We hope you enjoy 
-  reading what we have to say!
+  Welcome to Regina's new blog, DataViz Blog. I hope you enjoy 
+  reading what data visualization we play with here!
 author:
   - name: DONG Fang (Regina) 
-    url: www.linkedin.com/in/reginadongf/
+    url: https://www.linkedin.com/in/reginadongf/
     affiliation: School of Computing and Information Systems, Singapore Management University
     affiliation_url: https://scis.smu.edu.sg/
 date: 05-22-2021
