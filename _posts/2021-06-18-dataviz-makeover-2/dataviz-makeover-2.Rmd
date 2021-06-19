@@ -117,7 +117,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 
 **NO.**|**Step**               |**Action**
 -------|-----------------------|---------------------------------------------------------
-1      |Launch Tableau Desktop, from the local directory where the "data_stacked.csv" is saved, drag and drop into the homepage as shown,keep defual settings | ![](img/s2.1.jpg){width=80%} <br> _Fig.21 Import data into Tableau_
+1      |Launch Tableau Desktop, from the local directory where the "data_stacked.csv" is saved, drag and drop into the homepage as shown,keep default settings | ![](img/s2.1.jpg){width=80%} <br> _Fig.21 Import data into Tableau_
 2      |Click on Sheet 1, in Data pane, drag and drop `Export` to Columns, `Import` to Rows, `Country` to Detail box in Marks pane| ![](img/s2.2-1.jpg){width=100%} ![](img/s2.2-2.jpg){width=100%} ![](img/s2.3.jpg){width=50%} <br> _Fig.22 Set the plot data_
 3      |Click Analysis -> Create Calculated Field, in the pop out window, typing the name and formula as the right side screenshot shows, then click on OK| ![](img/s2.4-1.jpg){width=30%} ![](img/s2.4-2.jpg){width=80%} <br> _Fig.23 Create the 1st calculation field_
 4      |Repeat step3 to create other calculation fields need, the name and formula for each field is shown as the screenshots| ![](img/s2.4-3.jpg){width=80%} ![](img/s2.4-4.jpg){width=80%} ![](img/s2.4-5.jpg){width=80%} ![](img/s2.4-6.jpg){width=100%} ![](img/s2.4-7.jpg){width=100%} ![](img/s2.4-8.jpg){width=100%} <br> _Fig.24 Create the rest calculation fields_
@@ -127,7 +127,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 8      |Right click on `YEAR(Date)` in Filters pane and select Show Filter| ![](img/s2.7-4.jpg){width=35%}  <br> _Fig.28 Show filter_
 9      |Click the black triangle on the top right corner of filter, first select "Edit Tile...", and type in "Select a year" in the window popping up then click OK button| ![](img/s2.13-1.jpg){width=30%} ![](img/s2.13-2.jpg){width=65%}<br> _Fig.29 Change the filter name_
 10     |Repeat last step but  select "Single Value (list)"| ![](img/s2.7-5.jpg){width=30%} <br> _Fig.30 Change the filter type_
-11     |Double click on Color Legend on the right side and edit Colours in the popping up window as screenshot shows| ![](img/s2.8.jpg){width=80%} <br> _Fig.31 Change the bubble plot colour scale_
+11     |Double click on Color Legend on the right side and edit colours in the popping up window as screenshot shows| ![](img/s2.8.jpg){width=80%} <br> _Fig.31 Change the bubble plot colour scale_
 12     |Click Colour box in Marks pane and change the opacity and border as the screenshot shows| ![](img/s2.8-2.jpg){width=50%} <br> _Fig.32 Change the colour setting details_
 13     |Click Size box in Marks pane and move the slider to the position as the screenshot shows| ![](img/s2.8-3.jpg) <br> _Fig.33 Change the bubble size_
 14     |Click Format -> Animations and turn on animations| ![](img/s2.9.jpg){width=45%} ![](img/s2.9-1.jpg){width=45%} <br> _Fig.34 Turn on animations_
@@ -159,7 +159,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 **NO.**|**Step**               |**Action**
 -------|-----------------------|---------------------------------------------------------
 29     |Repeat step 20 to add Sheet 3
-30     |In Sheet 3 -> Data pane, drag and drop `Date` to Columns, `Export` to Rows, then drag and drop `Import` to the "Export" axis as shwon in the screenshot| ![](img/s2-2.01.jpg) <br> _Fig.46 Set plot fields for the line chart_ 
+30     |In Sheet 3 -> Data pane, drag and drop `Date` to Columns, `Export` to Rows, then drag and drop `Import` to the "Export" axis as shown in the screenshot| ![](img/s2-2.01.jpg) <br> _Fig.46 Set plot fields for the line chart_ 
 31     |Right click `YEAR(Date)` and select continuous Year| ![](img/s2-2.02.jpg){width=50%} <br> _Fig.47 Set YEAR as continuous format_
 32     |Drag and drop `Measure Values` to the position as shown in the screenshot, to add the dual axis| ![](img/s2-2.03.jpg){width=100%} <br> _Fig.48 Add the dual axis_
 33     |Right click on the dual axis and check "Synchronise Axis", then right click again and uncheck "Show Header"| ![](img/s2-2.04.jpg){width=50%} <br> _Fig.49 Hide the dual axis_
@@ -168,7 +168,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 36     |Right click "Year of Date" axis and uncheck "Show Header"| ![](img/s2-2.07.jpg){width=60%} <br> _Fig.52 Hide the header of X axis_
 37     |Right click "Value" axis and select "Edit Axis", in the windows popping up, uncheck "Include zero" then close the window| ![](img/s2-2.08.jpg){width=60%} <br> _Fig.53 Edit Y axis_
 38     |Move the cursor to the bottom and right edge of plot area, when the cursor changes to the arrow shape, drag the cursor to adjust the size of plot area, as shown in the screenshot| ![](img/s2-2.09.jpg){width=100%} <br> _Fig.54 Adjust the line chart size_
-39     |Click Sheet 1, click Tooltip box on Marks pane. As the screenshot shows, type in texts, click "Insert" button, drag and drop fields and "Sheet 3" accordingly. Select all the text and set font size be 9, then set the font size of fields as 12 and the colour of fields as darker gray, except for setting `<AGG(Surplus)>` be blue and `<AGG(Deficit)>` be red| ![](img/s2.10-3.jpg){width=100%} <br> _Fig.55 Revise verbiage and insert the line chart in tooltip of the bubble plot_
+39     |Click Sheet 1, click Tooltip box on Marks pane. As the screenshot shows, type in texts, click "Insert" button, drag and drop fields and "Sheet 3" accordingly. Select all the text and set font size be 9, then set the font size of fields as 12 and the colour of fields as darker gray, except for setting `<SUM(Export)`, `<AGG(Ranking of export)>`, `<AGG(Surplus)>` be blue and `<SUM(Import)`, `<AGG(Ranking of import)>`, `<AGG(Deficit)>` be red| ![](img/s2.10-3.jpg){width=100%} <br> _Fig.55 Revise verbiage and insert the line chart in tooltip of the bubble plot_
 
 ##### 3.2.4 Create dashboard in Tableau:
 **NO.**|**Step**               |**Action**
@@ -176,14 +176,14 @@ The advantages and issues the proposed design try to overcome are listed below:
 40     |Click the New Dashboard button, then change the size of Dashboard as Generic Desktop (1366x768)| ![](img/s4.01.jpg) <br> _Fig.56 Add new dashboard_ <br> ![](img/s4.02.jpg){width=80%} <br> _Fig.57 Change the dashboard size_
 41     |Drag and drop Sheet 1 to the Dashboard and then drag and drop Sheet 2 to the right side, move the cursor the the middle of the two sheets and when the cursor change to the arrow shape, click and drag the cursor to adjust the size of the two sheet, as shown in the screenshot| ![](img/s4.03.jpg){width=100%} <br> _Fig.58 Add sheets and adjust the size of the two sheet_
 42     |Right click on "Sheet 1" title on the top and select "Hide Title", repeat this step for "Sheet 2" title| ![](img/s4.05.jpg) <br> _Fig.59 Hide the sheet titles_
-44     |Right click on Color legend and click on "Edit Title", select all text and type in "Net trade in bubble plot" |![](img/s4.06.jpg){width=80%} <br> _Fig.60 Edit title of the colour legend_
-45     | Click on the Legend as shown in the screenshot and click "x" to remove the legend from Dashboard1| ![](img/s4.3.jpg){width=60%} <br> _Fig.61 Remove the legend_
-46     |Right click the filter and select "Apply to Worksheets" -> "Selected Workesheets...", then check "Sheet 1" and "Sheet 2" and click OK| ![](img/s4.5-1.jpg){width=80%} ![](img/s4.5-2.jpg){width=60%} <br> _Fig.62 Apply the filter to sheet 1 and sheet 2_
-47     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title as the right side screenshot shows. Set the font size as 16, bold and in black color| ![](img/s4.07.jpg){width=80%} <br> _Fig.63 Edit graph title_ 
-48     |From Objects pane, click on Text and drag to area just below graph title, and type in lead-in verbiage as the right side screenshot shows. Keep the default font settings| ![](img/s4.08.jpg){width=80%} <br> _Fig.64 Edit lead-in verbiage_
-49     |From Objects pane, click on Text and drag to the bottom of plot area, and type in data source reference as the right side screenshot shows. Set the font size as 7| ![](img/s4.09.jpg){width=80%} <br> _Fig.65 Edit the data source reference_
-50     |Drag the edge of the objects to adjust the size as shown in the screenshot, highlighted by yellow boxes | ![](img/s4.10.jpg){width=100%} <br> _Fig.66 Change the size of objects in Dashboard1_
-51     |From Objects pane, click on Text and drag to the bottom-right corner of plot area, and type in note content the right side screenshot shows. Set the font size as 7| ![](img/s4.11.jpg){width=80%} <br> _Fig.67 Add a note_
+43     |Right click on Color legend and click on "Edit Title", select all text and type in "Net trade in bubble plot" |![](img/s4.06.jpg){width=80%} <br> _Fig.60 Edit title of the colour legend_
+44     | Click on the Legend as shown in the screenshot and click "x" to remove the legend from Dashboard1| ![](img/s4.3.jpg){width=60%} <br> _Fig.61 Remove the legend_
+45     |Right click the filter and select "Apply to Worksheets" -> "Selected Worksheets...", then check "Sheet 1" and "Sheet 2" and click OK| ![](img/s4.5-1.jpg){width=80%} ![](img/s4.5-2.jpg){width=60%} <br> _Fig.62 Apply the filter to sheet 1 and sheet 2_
+46     |From Objects pane, click on Text and drag to top of the plot area, and type in graph title as the right side screenshot shows. Set the font size as 16, bold and in black color| ![](img/s4.07.jpg){width=80%} <br> _Fig.63 Edit graph title_ 
+47     |From Objects pane, click on Text and drag to area just below graph title, and type in lead-in verbiage as the right side screenshot shows. Keep the default font settings| ![](img/s4.08.jpg){width=80%} <br> _Fig.64 Edit lead-in verbiage_
+48     |From Objects pane, click on Text and drag to the bottom of plot area, and type in data source reference as the right side screenshot shows. Set the font size as 7| ![](img/s4.09.jpg){width=80%} <br> _Fig.65 Edit the data source reference_
+49     |Drag the edge of the objects to adjust the size as shown in the screenshot, highlighted by yellow boxes | ![](img/s4.10.jpg){width=100%} <br> _Fig.66 Change the size of objects in Dashboard1_
+50     |From Objects pane, click on Text and drag to the bottom-right corner of plot area, and type in note content the right side screenshot shows. Set the font size as 7| ![](img/s4.11.jpg){width=80%} <br> _Fig.67 Add a note_
 51     |Repeat step 38 to adjust the size of bar chart in Dashboard 1, as shown in the screenshot| ![](img/s4.04.jpg){width=100%} <br> _Fig.68 Adjust the size of bar chart_
 
 
@@ -206,7 +206,18 @@ Full visualization is available at [**Tableau Public**](https://public.tableau.c
 
 Below list observations for this visualization and related interpretations:
 
-**NO.**|**Observations**                              |**Interpretations**
--------|----------------------------------------------|----------------------------------------------
-1      |
+**Insight 1:** From the view of 10 years in total, Hong Kong had the highest net export trade amount, while Taiwan holding the highest net import trade amount.
+
+Although Hong Kong and Taiwan has the highest net export and import trade amount respectively, they don't have much higher total trading amount seeing the bubble size. 
+
+![](img/in1-1.jpg) 
+_Fig.71 Snapshot of ten year total trading performance_ <br>
+
+And if see the specific export and import trade amount, we can find Hong Kong has the lowest ranking of import, and quite high ranking of export, and the trade amount is quite stable with in the ten years. On the other hand, Taiwan has relatively low ranking of export.
+
+![](img/in1-2.jpg){width=46%}  ![](img/in1-3.jpg){width=46%}
+_Fig.72 The changing trend of export and import trade amount of Hong Kong and Taiwan
+
+**Insight 2:** 
+
 
