@@ -2,7 +2,7 @@
 title: "Welcome to DataViz Blog"
 description: |
   Welcome to Regina's new blog, DataViz Blog. I hope you enjoy 
-  reading what data visualization we play with here!
+  exploring what data visualization we play with here!
 author:
   - name: DONG Fang (Regina) 
     url: https://www.linkedin.com/in/reginadongf/

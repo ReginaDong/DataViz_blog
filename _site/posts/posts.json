@@ -36,7 +36,7 @@
   {
     "path": "posts/welcome/",
     "title": "Welcome to DataViz Blog",
-    "description": "Welcome to Regina's new blog, DataViz Blog. I hope you enjoy \nreading what data visualization we play with here!",
+    "description": "Welcome to Regina's new blog, DataViz Blog. I hope you enjoy \nexploring what data visualization we play with here!",
     "author": [
       {
         "name": "DONG Fang (Regina)",
@@ -47,7 +47,7 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-06-19T17:57:35+08:00",
+    "last_modified": "2021-06-19T17:59:04+08:00",
     "input_file": "welcome.knit.md"
   }
 ]
