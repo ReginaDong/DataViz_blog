@@ -206,18 +206,44 @@ Full visualization is available at [**Tableau Public**](https://public.tableau.c
 
 Below list observations for this visualization and related interpretations:
 
-**Insight 1:** From the view of 10 years in total, Hong Kong had the highest net export trade amount, while Taiwan holding the highest net import trade amount.
++ **Insight 1:** Looking at the total of the 10 years from 2011 to 2020, Singapore had the highest net export trade amount with Hong Kong, while holding the highest net import trade amount with Taiwan.
 
-Although Hong Kong and Taiwan has the highest net export and import trade amount respectively, they don't have much higher total trading amount seeing the bubble size. 
+  + Although the highest net export and import trade amount fall in to Hong Kong and Taiwan respectively, the total trading amounts are not quite high seeing the bubble size. 
 
-![](img/in1-1.jpg) 
-_Fig.71 Snapshot of ten year total trading performance_ <br>
+    ![](img/in1-1.jpg){width=100%} 
+    _Fig.71 Snapshot of the ten-year total trade performance, from 2011 to 2020_ 
 
-And if see the specific export and import trade amount, we can find Hong Kong has the lowest ranking of import, and quite high ranking of export, and the trade amount is quite stable with in the ten years. On the other hand, Taiwan has relatively low ranking of export.
+  + And if see the specific export and import trade amount of Singapore, we can find Hong Kong had the lowest ranking for import, as well as quite high ranking of export, and the trade amount was quite stable with in the ten years. On the other hand, Taiwan had relatively low ranking for export trade.
 
-![](img/in1-2.jpg){width=46%}  ![](img/in1-3.jpg){width=46%}
-_Fig.72 The changing trend of export and import trade amount of Hong Kong and Taiwan
+    ![](img/in1-2.jpg){width=46%}  ![](img/in1-3.jpg){width=46%} <br>
+    _Fig.72 The changing trend of export and import trade amount of Hong Kong and Taiwan，selecting 2020_
 
-**Insight 2:** 
++ **Insight 2:** Comparing Singapore's net trade amount in 2011 and 2020 with the major trading partners, the ranking of Malaysia and the United States (US) changed most.
 
+  + As can be seen in below screenshots, in 2011, Singapore's net export trade value with Malaysia was only lower then that with Hong Kong and Indonesia, while US is the highest net import trading market of Singapore. On the contrary, in 2020, Malaysia became the second highest net import trading market and the net value of exporting to US ranked fourth.
+
+
+    ![](img/in2-1.jpg){width=100%} 
+    ![](img/in2-2.jpg){width=100%}  
+    _Fig.73 Snapshot of trade performance in 2011 and 2020_
+
+  + If see Singapore's trade amount with Malaysia and US along time as shown in below screenshot, the most significant changes of both trading partners happened in 2020. Although the net value of exporting to Malaysia decreased obviously since 2015, the first year when importing value exceeded exporting is 2019, and the gap increased further significantly in 2020. For trading with US, the first year when exporting value exceeded importing is 2020. The large fall of exporting to Malaysia was caused by the lock down measure to mitigate impact by COVID-19. Similarly, the pandemic explosion in US in 2020 made it hard to maintain exporting business activities, which contributed to reduction of Singapore's importing from US.  
+
+    ![](img/in2-3.jpg){width=46%}  ![](img/in2-4.jpg){width=46%} <br>
+    _Fig.74 The changing trend of export and import trade amount of Malaysia and US, selecting 2020_
+
++ **Insight 3:** As of the total amount of merchandise transaction, Mainland China and Malaysia were always the top 2 largest trading partners of Singapore from 2011 to 2020. European Union (EU) had remained in third place until 2018 and was surpassed by US since 2019.
+
+  + Mainland China became the largest trading partner of Singapore since 2013, while Malaysia had been the largest one before that. This was contributed by the sharp increase of both export and import trade with Mainland China from 2013 to 2015, while trade with Malaysia did not see much rising in these years.
+
+    ![](img/in3-1.gif){width=100%}
+    _Fig.75 Dynamic changes of trade performance in major transaction markets, from 2011 to 2020_
+    
+    ![](img/in3-2.jpg)
+    _Fig.76 The changing trend of export and import trade amount of Mainland China, selecting 2020_
+
+  + The ranking of EU fell down because of the sharp decrease of both import and export trade in 2019, while Singapore's export and import trade with US kept increasing from 2016 to 2019. In 2020, affected by COVID-19, Singapore saw rising of export to EU and US, as well as dip of import from both. But that has not changed the total trade performance ranking of the two trading partners.
+
+    ![](img/in3-3.jpg)
+    _Fig.77 The changing trend of export and import trade amount of EU, selecting 2020_
 
