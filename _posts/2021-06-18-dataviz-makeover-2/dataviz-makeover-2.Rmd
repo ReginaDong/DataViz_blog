@@ -59,7 +59,7 @@ The point of Aesthetic is to make the graph looks beautiful. Although the standa
 
 The following picture shows the initial design sketch for the visualization of above topic:
 
-![](img/Sketch2.jpg) <br> _Fig.2 Sketch of alternative design_
+![](img/Sketch.jpg) <br> _Fig.2 Sketch of the alternative design_
 
 ### 2.2 Advantages of proposed design
 
@@ -170,7 +170,7 @@ The advantages and issues the proposed design try to overcome are listed below:
 38     |Move the cursor to the bottom and right edge of plot area, when the cursor changes to the arrow shape, drag the cursor to adjust the size of plot area, as shown in the screenshot| ![](img/s2-2.09.jpg){width=100%} <br> _Fig.54 Adjust the line chart size_
 39     |Click Sheet 1, click Tooltip box on Marks pane. As the screenshot shows, type in texts, click "Insert" button, drag and drop fields and "Sheet 3" accordingly. Select all the text and set font size be 9, then set the font size of fields as 12 and the colour of fields as darker gray, except for setting `<SUM(Export)`, `<AGG(Ranking of export)>`, `<AGG(Surplus)>` be blue and `<SUM(Import)`, `<AGG(Ranking of import)>`, `<AGG(Deficit)>` be red| ![](img/s2.10-3.jpg){width=100%} <br> _Fig.55 Revise verbiage and insert the line chart in tooltip of the bubble plot_
 
-##### 3.2.4 Create dashboard in Tableau:
+##### 3.2.4 Create dashboard in Tableau
 **NO.**|**Step**               |**Action**
 -------|-----------------------|---------------------------------------------------------
 40     |Click the New Dashboard button, then change the size of Dashboard as Generic Desktop (1366x768)| ![](img/s4.01.jpg) <br> _Fig.56 Add new dashboard_ <br> ![](img/s4.02.jpg){width=80%} <br> _Fig.57 Change the dashboard size_
@@ -204,16 +204,14 @@ Full visualization is available at [**Tableau Public**](https://public.tableau.c
 
 # 5. Major Observations
 
-Below list observations for this visualization and related interpretations:
-
-+ **Insight 1:** Looking at the total of the 10 years from 2011 to 2020, Singapore had the highest net export trade amount with Hong Kong, while holding the highest net import trade amount with Taiwan.
++ **Insight 1:** Looking at the total trade performance of the 10 years from 2011 to 2020, Singapore had the highest net export trade amount with Hong Kong, while holding the highest net import trade amount with Taiwan.
 
   + Although the highest net export and import trade amount fall in to Hong Kong and Taiwan respectively, the total trading amounts are not quite high seeing the bubble size. 
 
     ![](img/in1-1.jpg){width=100%} 
     _Fig.71 Snapshot of the ten-year total trade performance, from 2011 to 2020_ 
 
-  + And if see the specific export and import trade amount of Singapore, we can find Hong Kong had the lowest ranking for import, as well as quite high ranking of export, and the trade amount was quite stable with in the ten years. On the other hand, Taiwan had relatively low ranking for export trade.
+  + If see the specific export and import trade amount of Singapore, we can find Hong Kong had the lowest ranking for import, as well as quite high ranking of export, and the trade amount was quite stable with in the ten years. On the other hand, Taiwan had relatively low ranking for export trade.
 
     ![](img/in1-2.jpg){width=46%}  ![](img/in1-3.jpg){width=46%} <br>
     _Fig.72 The changing trend of export and import trade amount of Hong Kong and Taiwan，selecting 2020_
