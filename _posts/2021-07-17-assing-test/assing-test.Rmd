@@ -127,13 +127,6 @@ geo map
 ```{r}
 bgmap <- raster("data/Geospatial/MC2-tourist.tif")
 
-tm_shape(bgmap) +
-tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255)
-
 Abila_st <- st_read(dsn = "data/Geospatial",layer = "Abila")
 
 gps_sf <- st_as_sf(gps, 
