@@ -215,7 +215,7 @@ gra_2.1 <- plot_ly(data = cc, x = ~as.factor(day), y = ~location,
                    "Transaction Count: %{z}",
                    "<extra></extra>")) %>%
   add_histogram2d(colors = "Blues") %>%
-  layout(annotations = list(text = "Credit Card", showarrow = F, x =17, y=32),
+  layout(annotations = list(text = "Credit Card", showarrow = F, x =10, y=32),
          xaxis = list(tickmode = "linear"),
          yaxis = list(tickmode = "linear")
          )
@@ -227,7 +227,7 @@ gra_2.2 <- plot_ly(data = loyalty, x = ~as.factor(day), y = ~location,
                    "Transaction Count: %{z}",
                    "<extra></extra>")) %>%
   add_histogram2d(colors = "Purples") %>%
-  layout(annotations = list(text = "Loyalty Card", showarrow = F, x =17, y=32),
+  layout(annotations = list(text = "Loyalty Card", showarrow = F, x =10, y=32),
          xaxis = list(tickmode = "linear"),
          yaxis = list(tickmode = "linear", visible = T)
          )
