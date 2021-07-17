@@ -319,7 +319,7 @@ gps_path_selected <- gps_path2 %>%
 #gps_path_selected$id = as.numeric(gps_path_selected$id)
 
 tmap_mode("view")
-tm_shape(bgmap) +
+gra_3 <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
        alpha = NA,
        saturation = 1,
@@ -328,19 +328,22 @@ tm_shape(bgmap) +
   tm_shape(gps_path_selected) +
   tm_lines(col =  "id", palette = "Dark2") +
   tmap_options(max.categories = 44) +
-  tm_layout(title = "GPS Moving Route of A Specific Day")
- 
+  tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day")
+```
+
+```{r echo=FALSE}
+gra_3
 ```
 
 
-Set *hour* as filtering criteria, and differentiate the line colors by *day*, so that the geographical graph could show the movement track of all cars in specific hour of days.  
+Set *hour* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the movement track of all cars in specific hour of days.  
 
 ```{r}
 gps_hour_selected <- gps_hour %>%
   filter(hour=="7")
 
 tmap_mode("view")
-tm_shape(bgmap) +
+gra_4 <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
        alpha = NA,
        saturation = 1,
@@ -349,8 +352,11 @@ tm_shape(bgmap) +
   tm_shape(gps_hour_selected) +
   tm_lines(col = "id", palette = "Dark2") +
   tmap_options(max.categories = 44) +
-  tm_layout(title = "GPS Moving Route of A Specific Hour")
- 
+  tm_layout(title = "Graph.4 GPS Moving Route of in A Specific Hour")
+```
+
+```{r echo=FALSE}
+gra_4
 ```
 
 ## 3.3 Network visualization according to movement route
