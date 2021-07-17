@@ -156,26 +156,26 @@ gps$hour = as.factor(hour(gps$Timestamp))
 Then we do some exploration for the data and check the missing values by using the code chunks below. Only *CarID* in car-assignments.csv has 9 missing values.
 
 ```{r}
-knitr::kable(summarizeColumns(car_ass))
+knitr::kable(summarizeColumns(car_ass), caption = "EDA for Car Assigment Data", digits = 2)
 ```
 
 ```{r}
-knitr::kable(summarizeColumns(gps))
+knitr::kable(summarizeColumns(gps), caption = "EDA for GPS Tracking Data", digits = 2)
 ```
 
 ```{r}
-knitr::kable(summarizeColumns(cc))
+knitr::kable(summarizeColumns(cc), caption = "EDA for Credit Card Transaction Data", digits = 2)
 ```
 
 ```{r}
-knitr::kable(summarizeColumns(loyalty))
+knitr::kable(summarizeColumns(loyalty), caption = "EDA for Loyalty Card Transaction Data", digits = 2)
 ```
 
 The records containing missing values in car-assignment.csv are shown below. We can see these records are all company trucks not for personal use.
 
-```{r}
+```{r echo=FALSE}
 car_ass_na <- filter(car_ass, is.na(CarID))
-knitr::kable(car_ass_na, format = "html")
+knitr::kable(car_ass_na, format = "html", caption = "The Missing Values in Car Assignment Dataset")
 ```
 
 
