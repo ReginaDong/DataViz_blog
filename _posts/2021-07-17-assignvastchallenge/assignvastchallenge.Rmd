@@ -248,7 +248,7 @@ Now take the GPS tracking data into account, it's necessary to draw movement pat
 
 The first thing to do is plotting Raster Layer of the tourist map of Abila, Kronos, as the background map, and import Abila GIS data layer.
 
-```{r results='hide'}
+```{r results="hide"}
 bgmap <- raster("data/Geospatial/MC2-tourist.tif")
 
 tm_shape(bgmap) +
@@ -270,9 +270,10 @@ gps_sf <- st_as_sf(gps,
                    crs = 4326)
 ```
 
-Then combine the background map and the GPS tracking lines to generate the movement path.
+Then before combining the background map and the GPS tracking lines to generate the movement path, the spatial data need to be grouped by *id*, *day* and *hour* respectivly.
 
 ```{r}
+# Group by id and day
 gps_path <- gps_sf %>%
   group_by(id, day) %>%
   summarize(m = mean(Timestamp), 
@@ -282,13 +283,20 @@ gps_path <- gps_sf %>%
 np = npts(gps_path, by_feature = T)
 gps_path2 <- cbind(gps_path, np) %>%
   filter(np > 1) # exclude orphan coordinate records
+
+# Group by day and hour
+gps_hour <- gps_sf %>%
+  group_by(day, hour) %>%
+  summarise(m = mean(Timestamp),
+            do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
 ```
 
 
 
 ```{r}
-#d <- highlight_key(gps_path2)
-
 tmap_mode("view")
 
 m <- tm_shape(bgmap) +
