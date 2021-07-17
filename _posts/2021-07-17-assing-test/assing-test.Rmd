@@ -97,6 +97,8 @@ gps_hour <- gps_sf %>%
 
 ```{r}
 tmap_mode("view")
+gps_path_selected <- gps_path2 %>%
+  filter(id =="1")
 
 m <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
@@ -104,7 +106,7 @@ m <- tm_shape(bgmap) +
        saturation = 1,
        interpolate = TRUE,
        max.value = 255) +
-  tm_shape(gps_path2) +
+  tm_shape(gps_path_selected) +
   tm_lines(col = "day") 
   #tm_facets(by = "id")
 m
