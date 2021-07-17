@@ -5,19 +5,49 @@ description: |
 author:
   - name: DONG Fang (Regina)
     url: https://www.linkedin.com/in/reginadongf/
+    affiliation: School of Computing and Information Systems, Singapore Management University
+    affiliation_url: https://scis.smu.edu.sg/
 date: 07-17-2021
 output:
   distill::distill_article:
     self_contained: false
+    toc: True
+    toc_depth: 5
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.retina = 3,   # To make the figure looks sharper, set the retina value >=3, default is 1 
+                      echo = TRUE,      # Show code chunk
+                      eval = TRUE,      # Run the code
+                      message = FALSE,  # Don't show error massage
+                      warning = FALSE)  # Don't show warning massage
 ```
 
 Distill is a publication format for scientific and technical writing, native to the web.
 
 Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+```{r}
+packages = c('ggiraph', 'plotly','DT', 'patchwork', 
+             'raster', 'sf','tmap', 'mapview','gifski',
+             'tidyverse', 'mlr','lubridate')
+for (p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p, character.only = T)
+}
+```
+
+
+```{r}
+car_ass <- read_csv("data/car-assignments.csv")
+gps <- read_csv("data/gps.csv")
+cc <- read_csv("data/cc_data.csv", locale = locale(encoding = "windows-1252"))
+loyalty <- read_csv("data/loyalty_data.csv", locale = locale(encoding = "windows-1252"))
+```
+
 
 
