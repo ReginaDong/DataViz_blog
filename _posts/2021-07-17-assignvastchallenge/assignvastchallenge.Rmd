@@ -237,7 +237,7 @@ gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
          xaxis = list(title = "Date of Jan"),
          xaxis2 = list(title = "Date of Jan"),
          yaxis = list(title = "Location"),
-         autosize = F, width = 900, width2 = 900, height = 400
+         autosize = F, width = 800, width2 = 800, height = 400
          )
 
 gra_2
