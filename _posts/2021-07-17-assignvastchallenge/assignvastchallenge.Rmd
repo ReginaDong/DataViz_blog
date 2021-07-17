@@ -242,4 +242,123 @@ gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
 gra_2
 ```
 
+## 3.2 Geographical graph showing movement path
+
+Now take the GPS tracking data into account, it's necessary to draw movement path on the tourist map with the GPS tracking data, so that we can see where the employees have gone and gathered together during the two weeks before the disappearance.
+
+The first thing to do is plotting Raster Layer of the tourist map of Abila, Kronos, as the background map, and import Abila GIS data layer.
+
+```{r results='hide'}
+bgmap <- raster("data/Geospatial/MC2-tourist.tif")
+
+tm_shape(bgmap) +
+tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255)
+
+Abila_st <- st_read(dsn = "data/Geospatial",
+                    layer = "Abila")
+```
+
+The code chunk below is used to convert GPS spatial data into a Simple Feature (SF) data frame.
+
+```{r}
+gps_sf <- st_as_sf(gps, 
+                   coords = c("long", "lat"),
+                   crs = 4326)
+```
+
+Then combine the background map and the GPS tracking lines to generate the movement path.
+
+```{r}
+gps_path <- gps_sf %>%
+  group_by(id, day) %>%
+  summarize(m = mean(Timestamp), 
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+
+np = npts(gps_path, by_feature = T)
+gps_path2 <- cbind(gps_path, np) %>%
+  filter(np > 1) # exclude orphan coordinate records
+```
+
+
+
+```{r}
+#d <- highlight_key(gps_path2)
+
+tmap_mode("view")
+
+m <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path2) +
+  tm_lines(col = "day") 
+  #tm_facets(by = "id")
+m
+```
+
+```{r}
+gps_path_selected <- gps_path2 %>%
+  filter(day=="17")
+
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines(col = "id")
+ 
+```
+
+```{r eval=FALSE}
+#tmap_mode("view")
+
+m <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path2) +
+  tm_lines() +
+  tm_facets(along = "id")
+
+tmap_animation(m, 
+               filename = "img/days.gif",
+               delay=40)
+```
+
+
+
+
+# 4. Data Analysis and Insights 
+
+
+
+
+
+# 5. Conclusion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
