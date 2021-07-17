@@ -25,9 +25,7 @@ knitr::opts_chunk$set(fig.retina = 3,   # To make the figure looks sharper, set 
                       warning = FALSE)  # Don't show warning massage
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
-
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+Launch packages
 
 ```{r}
 packages = c('ggiraph', 'plotly','DT', 'patchwork', 
@@ -41,6 +39,7 @@ for (p in packages){
 }
 ```
 
+Import data
 
 ```{r}
 car_ass <- read_csv("data/car-assignments.csv")
@@ -63,5 +62,23 @@ gps$day = as.factor(day(gps$Timestamp))
 gps$hour = as.factor(hour(gps$Timestamp))
 ```
 
+Interactive plot
 
+```{r}
+d <- highlight_key(cc)
 
+gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
+                 hovertemplate = paste(
+                   " %{yaxis.title.text}: %{y}<br>",
+                   "%{xaxis.title.text}: %{x}<br>",
+                   "Transaction Count: %{z}",
+                   "<extra></extra>")) %>%
+  add_histogram2d(colors = "Blues") %>%
+  layout(title = "<b>Graph.1 Credit Card Transcation Frequency by Hour</b>",
+         xaxis = list(title = "Time", tickmode = "linear"),
+         yaxis = list(title="Location", tickmode = "linear")
+         )
+
+crosstalk::bscols(gra_1,
+                  crosstalk::filter_select("day", "Day", d, ~as.factor(day), multiple = F), widths = 10)
+```
