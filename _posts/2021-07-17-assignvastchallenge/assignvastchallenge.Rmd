@@ -150,4 +150,96 @@ gps$day = as.factor(day(gps$Timestamp))
 gps$hour = as.factor(hour(gps$Timestamp))
 ```
 
+### 2.2.4 Exploring and cleaning data
+
+Then we do some exploration for the data and check the missing values by using the code chunks below. Only *CarID* in car-assignments.csv has 9 missing values.
+
+```{r}
+knitr::kable(summarizeColumns(car_ass))
+```
+
+```{r}
+knitr::kable(summarizeColumns(gps))
+```
+
+```{r}
+knitr::kable(summarizeColumns(cc))
+```
+
+```{r}
+knitr::kable(summarizeColumns(loyalty))
+```
+
+The records containing missing values in car-assignment.csv are shown below. We can see these records are all company trucks not for personal use.
+
+```{r}
+car_ass_na <- filter(car_ass, is.na(CarID))
+knitr::kable(car_ass_na, format = "html")
+```
+
+
+
+# 3. Data Visualization
+
+## 3.1 Histogram showing frequecy of transactions
+
+First of all, a 2d histogram with Location by Hour for credit card transaction was built by below code chunk.
+
+```{r}
+d <- highlight_key(cc)
+
+gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
+                 hovertemplate = paste(
+                   " %{yaxis.title.text}: %{y}<br>",
+                   "%{xaxis.title.text}: %{x}<br>",
+                   "Transaction Count: %{z}",
+                   "<extra></extra>")) %>%
+  add_histogram2d(colors = "Blues") %>%
+  layout(title = "<b>Graph.1 Credit Card Transcation Frequency by Hour</b>",
+         xaxis = list(title = "Time", tickmode = "linear"),
+         yaxis = list(title="Location", tickmode = "linear")
+         )
+
+crosstalk::bscols(gra_1,
+                  crosstalk::filter_select("day", "Day", d, ~as.factor(day), multiple = F), widths = 10)
+```
+
+Then the 2d histograms with Location by Day for credit card and loyalty card transaction were created as below.
+
+```{r}
+gra_2.1 <- plot_ly(data = cc, x = ~as.factor(day), y = ~location,
+                 hovertemplate = paste(
+                   " %{yaxis.title.text}: %{y}<br>",
+                   "%{xaxis.title.text}: %{x}<br>",
+                   "Transaction Count: %{z}",
+                   "<extra></extra>")) %>%
+  add_histogram2d(colors = "Blues") %>%
+  layout(annotations = list(text = "Credit Card", showarrow = F, x =17, y=32),
+         xaxis = list(tickmode = "linear"),
+         yaxis = list(tickmode = "linear")
+         )
+
+gra_2.2 <- plot_ly(data = loyalty, x = ~as.factor(day), y = ~location,
+                 hovertemplate = paste(
+                   " Location: %{y}<br>",
+                   "Date of Jan: %{x}<br>",
+                   "Transaction Count: %{z}",
+                   "<extra></extra>")) %>%
+  add_histogram2d(colors = "Purples") %>%
+  layout(annotations = list(text = "Loyalty Card", showarrow = F, x =17, y=32),
+         xaxis = list(tickmode = "linear"),
+         yaxis = list(tickmode = "linear", visible = T)
+         )
+
+gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
+  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
+         xaxis = list(title = "Date of Jan"),
+         xaxis2 = list(title = "Date of Jan"),
+         yaxis = list(title = "Location"),
+         autosize = F, width = 900, width2 = 900, height = 400
+         )
+
+gra_2
+```
+
 
