@@ -121,3 +121,60 @@ gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
 
 gra_2
 ```
+
+geo map
+
+```{r}
+bgmap <- raster("data/Geospatial/MC2-tourist.tif")
+
+tm_shape(bgmap) +
+tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255)
+
+Abila_st <- st_read(dsn = "data/Geospatial",layer = "Abila")
+
+gps_sf <- st_as_sf(gps, 
+                   coords = c("long", "lat"),
+                   crs = 4326)
+
+# Group by id and day
+gps_path <- gps_sf %>%
+  group_by(id, day) %>%
+  summarize(m = mean(Timestamp), 
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+
+np = npts(gps_path, by_feature = T)
+gps_path2 <- cbind(gps_path, np) %>%
+  filter(np > 1) # exclude orphan coordinate records
+
+# Group by day and hour
+gps_hour <- gps_sf %>%
+  group_by(day, hour) %>%
+  summarise(m = mean(Timestamp),
+            do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+```
+
+
+```{r}
+tmap_mode("view")
+
+m <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path2) +
+  tm_lines(col = "day") 
+  #tm_facets(by = "id")
+m
+```
+
+
+
