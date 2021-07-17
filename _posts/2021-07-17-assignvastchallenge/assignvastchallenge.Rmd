@@ -202,7 +202,7 @@ gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
          )
 
 crosstalk::bscols(gra_1,
-                  crosstalk::filter_select("day", "Day", d, ~as.factor(day), multiple = F), widths = 10)
+                  crosstalk::filter_select("day", "Day", d, ~as.factor(day), multiple = T), widths = 10)
 ```
 
 Then the 2d histograms with Location by Day for credit card and loyalty card transaction were created as below.
@@ -249,18 +249,10 @@ Now take the GPS tracking data into account, it's necessary to draw movement pat
 
 The first thing to do is plotting Raster Layer of the tourist map of Abila, Kronos, as the background map, and import Abila GIS data layer.
 
-```{r results="hide"}
+```{r}
 bgmap <- raster("data/Geospatial/MC2-tourist.tif")
 
-tm_shape(bgmap) +
-tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255)
-
-Abila_st <- st_read(dsn = "data/Geospatial",
-                    layer = "Abila")
+Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
 ```
 
 The code chunk below is used to convert GPS spatial data into a Simple Feature (SF) data frame.
@@ -291,30 +283,13 @@ gps_hour <- gps_sf %>%
   summarise(m = mean(Timestamp),
             do_union = FALSE) %>%
   st_cast("LINESTRING")
-
-
 ```
 
-
-
-```{r}
-tmap_mode("view")
-
-m <- tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255) +
-  tm_shape(gps_path2) +
-  tm_lines(col = "day") 
-  #tm_facets(by = "id")
-m
-```
+Set *day* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the the movement track of all cars in specific date.  
 
 ```{r}
 gps_path_selected <- gps_path2 %>%
-  filter(day=="17")
+  filter(day=="6")
 
 tmap_mode("view")
 tm_shape(bgmap) +
