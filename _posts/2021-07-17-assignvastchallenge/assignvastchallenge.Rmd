@@ -184,7 +184,7 @@ knitr::kable(car_ass_na, format = "html", caption = "The Missing Values in Car A
 
 ## 3.1 Histogram showing frequecy of transactions
 
-First of all, a 2d histogram with Location by Hour for credit card transaction was built by below code chunk.
+First of all, a 2d histogram for credit card transaction frequency with *location* by *hour* was built by below code chunk. A slider was added to select range of days as the filtering criterion.
 
 ```{r}
 d <- highlight_key(cc)
@@ -208,7 +208,7 @@ crosstalk::bscols(gra_1,
                   widths = 10)
 ```
 
-Then the 2d histograms with Location by Day for credit card and loyalty card transaction were created as below.
+Then the 2d histograms for credit card and loyalty card transaction frequency with *location* by *day* were created as below. Added a dropdown list to select the card number as filtering criteria to show the transaction frequency of specific card owner along days.
 
 ```{r}
 d1 = highlight_key(cc)
@@ -251,7 +251,7 @@ gra_2.2 <- plot_ly(data = d2, x = ~as.factor(day), y = ~location,
 gra_2.1_c <- crosstalk::bscols(gra_2.1,
                                crosstalk::filter_select(
                                  "ccnum", 
-                                 "Last 4 Credit Card Number",
+                                 "Choose last 4 credit card Number",
                                  d1, ~last4ccnum,
                                  multiple = T),
                                widths = 10)
@@ -259,10 +259,11 @@ gra_2.1_c <- crosstalk::bscols(gra_2.1,
 gra_2.2_c <- crosstalk::bscols(gra_2.2,
                                crosstalk::filter_select(
                                  "lonum", 
-                                 "Loyalty Card Number",
+                                 "Choose loyalty card number",
                                  d2, ~loyaltynum,
                                  multiple = T),
                                widths = 10)
+
 gra_2.1_c
 gra_2.2_c
 ```
@@ -287,7 +288,7 @@ gps_sf <- st_as_sf(gps,
                    crs = 4326)
 ```
 
-Then before combining the background map and the GPS tracking lines to generate the movement path, the spatial data need to be grouped by *id*, *day* and *hour* respectivly.
+Then before combining the background map and the GPS tracking lines to generate the movement path, the spatial data need to be grouped by *id*, *day* and *hour* respectively.
 
 ```{r}
 # Group by id and day
@@ -303,7 +304,7 @@ gps_path2 <- cbind(gps_path, np) %>%
 
 # Group by day and hour
 gps_hour <- gps_sf %>%
-  group_by(day, hour) %>%
+  group_by(id, hour) %>%
   summarise(m = mean(Timestamp),
             do_union = FALSE) %>%
   st_cast("LINESTRING")
@@ -313,7 +314,9 @@ Set *day* as filtering criteria, and differentiate the line colors by *id*, so t
 
 ```{r}
 gps_path_selected <- gps_path2 %>%
-  filter(day=="6")
+  filter(day=="6") 
+
+#gps_path_selected$id = as.numeric(gps_path_selected$id)
 
 tmap_mode("view")
 tm_shape(bgmap) +
@@ -323,28 +326,34 @@ tm_shape(bgmap) +
        interpolate = TRUE,
        max.value = 255) +
   tm_shape(gps_path_selected) +
-  tm_lines(col = "id")
+  tm_lines(col =  "id", palette = "Dark2") +
+  tmap_options(max.categories = 44) +
+  tm_layout(title = "GPS Moving Route of A Specific Day")
  
 ```
 
-```{r eval=FALSE}
-#tmap_mode("view")
 
-m <- tm_shape(bgmap) +
+Set *hour* as filtering criteria, and differentiate the line colors by *day*, so that the geographical graph could show the movement track of all cars in specific hour of days.  
+
+```{r}
+gps_hour_selected <- gps_hour %>%
+  filter(hour=="7")
+
+tmap_mode("view")
+tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
        alpha = NA,
        saturation = 1,
        interpolate = TRUE,
        max.value = 255) +
-  tm_shape(gps_path2) +
-  tm_lines() +
-  tm_facets(along = "id")
-
-tmap_animation(m, 
-               filename = "img/days.gif",
-               delay=40)
+  tm_shape(gps_hour_selected) +
+  tm_lines(col = "id", palette = "Dark2") +
+  tmap_options(max.categories = 44) +
+  tm_layout(title = "GPS Moving Route of A Specific Hour")
+ 
 ```
 
+## 3.3 Network visualization according to movement route
 
 
 

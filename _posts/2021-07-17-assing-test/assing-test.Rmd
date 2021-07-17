@@ -168,5 +168,22 @@ m <- tm_shape(bgmap) +
 m
 ```
 
+Back up code chunk:
 
+```{r eval=FALSE}
+#tmap_mode("view")
 
+m <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path2) +
+  tm_lines() +
+  tm_facets(along = "id")
+
+tmap_animation(m, 
+               filename = "img/days.gif",
+               delay=40)
+```
