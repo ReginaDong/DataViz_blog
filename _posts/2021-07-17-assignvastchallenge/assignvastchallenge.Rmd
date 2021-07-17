@@ -202,45 +202,69 @@ gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
          )
 
 crosstalk::bscols(gra_1,
-                  crosstalk::filter_select("day", "Day", d, ~as.factor(day), multiple = T), widths = 10)
+                  crosstalk::filter_slider("day", "Date of Jan", 
+                                           d, ~day, step = 1, 
+                                           animate = T, ticks = F), 
+                  widths = 10)
 ```
 
 Then the 2d histograms with Location by Day for credit card and loyalty card transaction were created as below.
 
 ```{r}
-gra_2.1 <- plot_ly(data = cc, x = ~as.factor(day), y = ~location,
+d1 = highlight_key(cc)
+d2 = highlight_key(loyalty)
+
+gra_2.1 <- plot_ly(data = d1, x = ~as.factor(day), y = ~location,
                  hovertemplate = paste(
                    " %{yaxis.title.text}: %{y}<br>",
                    "%{xaxis.title.text}: %{x}<br>",
                    "Transaction Count: %{z}",
                    "<extra></extra>")) %>%
   add_histogram2d(colors = "Blues") %>%
-  layout(annotations = list(text = "Credit Card", showarrow = F, x =10, y=32),
-         xaxis = list(tickmode = "linear"),
-         yaxis = list(tickmode = "linear")
+  layout(title = "<b>Graph.2-1 Credit Card Transaction Frequency by Day</b>",
+         #annotations = list(text = "Credit Card", showarrow = F, x =10, y=32),
+         xaxis = list(title = "Date of Jan", tickmode = "linear"),
+         yaxis = list(title = "Location", tickmode = "linear")
          )
 
-gra_2.2 <- plot_ly(data = loyalty, x = ~as.factor(day), y = ~location,
+gra_2.2 <- plot_ly(data = d2, x = ~as.factor(day), y = ~location,
                  hovertemplate = paste(
                    " Location: %{y}<br>",
                    "Date of Jan: %{x}<br>",
                    "Transaction Count: %{z}",
                    "<extra></extra>")) %>%
   add_histogram2d(colors = "Purples") %>%
-  layout(annotations = list(text = "Loyalty Card", showarrow = F, x =10, y=32),
-         xaxis = list(tickmode = "linear"),
-         yaxis = list(tickmode = "linear", visible = T)
+  layout(title = "<b>Graph.2-2 Loyalty Card Transaction Frequency by Day</b>",
+         #annotations = list(text = "Loyalty Card", showarrow = F, x =10, y=32),
+         xaxis = list(title = "Date of Jan", tickmode = "linear"),
+         yaxis = list(title = "Location", tickmode = "linear", visible = T)
          )
 
-gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
-  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
-         xaxis = list(title = "Date of Jan"),
-         xaxis2 = list(title = "Date of Jan"),
-         yaxis = list(title = "Location"),
-         autosize = F, width = 800, width2 = 800, height = 400
-         )
+#gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
+#  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
+#         xaxis = list(title = "Date of Jan"),
+#         xaxis2 = list(title = "Date of Jan"),
+#         yaxis = list(title = "Location"),
+#         autosize = F, width = 800, width2 = 800, height = 400
+#         )
 
-gra_2
+gra_2.1_c <- crosstalk::bscols(gra_2.1,
+                               crosstalk::filter_select(
+                                 "ccnum", 
+                                 "Last 4 Credit Card Number",
+                                 d1, ~last4ccnum,
+                                 multiple = T),
+                               widths = 10)
+
+gra_2.2_c <- crosstalk::bscols(gra_2.2,
+                               crosstalk::filter_select(
+                                 "lonum", 
+                                 "Loyalty Card Number",
+                                 d2, ~loyaltynum,
+                                 multiple = T),
+                               widths = 10)
+gra_2.1_c
+gra_2.2_c
 ```
 
 ## 3.2 Geographical graph showing movement path
@@ -285,7 +309,7 @@ gps_hour <- gps_sf %>%
   st_cast("LINESTRING")
 ```
 
-Set *day* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the the movement track of all cars in specific date.  
+Set *day* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the movement track of all cars in specific date.  
 
 ```{r}
 gps_path_selected <- gps_path2 %>%
