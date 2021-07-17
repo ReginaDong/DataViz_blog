@@ -17,6 +17,7 @@ output:
 
 
 ```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(fig.retina = 3,   # To make the figure looks sharper, set the retina value >=3, default is 1 
                       echo = TRUE,      # Show code chunk
                       eval = TRUE,      # Run the code
