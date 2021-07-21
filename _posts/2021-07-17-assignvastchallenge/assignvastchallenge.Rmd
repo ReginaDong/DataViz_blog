@@ -74,9 +74,15 @@ loyalty_data.csv | loyalty card transaction data | Timestamp <br>	Location (name
 
 ### 2.2.1 Installing and launching R Packages 
 
-We used R studio as the tool to import, process and visualize the data. The first thing is to launch necessary R packages for next steps.
+We used R studio as the tool to import, process, visualize and analyze the data. 
 
-The code chunk below is used to install and load the packages.
+The first thing is run this line of code to clear the environment and remove existing R objects (if any).
+
+```{r}
+rm(list=ls())
+```
+
+The code chunk below is used to install and launch the packages necessary for next steps.
 
 ```{r}
 packages = c('ggiraph', 'plotly','DT', 'patchwork', 
@@ -302,7 +308,7 @@ np = npts(gps_path, by_feature = T)
 gps_path2 <- cbind(gps_path, np) %>%
   filter(np > 1) # exclude orphan coordinate records
 
-# Group by day and hour
+# Group by id and hour
 gps_hour <- gps_sf %>%
   group_by(id, hour) %>%
   summarise(m = mean(Timestamp),
@@ -310,13 +316,11 @@ gps_hour <- gps_sf %>%
   st_cast("LINESTRING")
 ```
 
-Set *day* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the movement track of all cars in specific date.  
+Set *day* as filtering criteria by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific date. Below code chunk is used to create the graph. 
 
 ```{r}
 gps_path_selected <- gps_path2 %>%
   filter(day=="6") 
-
-#gps_path_selected$id = as.numeric(gps_path_selected$id)
 
 tmap_mode("view")
 gra_3 <- tm_shape(bgmap) +
@@ -327,16 +331,13 @@ gra_3 <- tm_shape(bgmap) +
        max.value = 255) +
   tm_shape(gps_path_selected) +
   tm_lines(col =  "id", palette = "Dark2") +
-  tmap_options(max.categories = 44) +
-  tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day")
-```
+  tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day") +
+  tmap_options(max.categories = 44) 
 
-```{r echo=FALSE}
 gra_3
 ```
 
-
-Set *hour* as filtering criteria, and differentiate the line colors by *id*, so that the geographical graph could show the movement track of all cars in specific hour of days.  
+Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hour of days. Below code chunk is used to create the graph.
 
 ```{r}
 gps_hour_selected <- gps_hour %>%
@@ -353,11 +354,11 @@ gra_4 <- tm_shape(bgmap) +
   tm_lines(col = "id", palette = "Dark2") +
   tmap_options(max.categories = 44) +
   tm_layout(title = "Graph.4 GPS Moving Route of in A Specific Hour")
-```
 
-```{r echo=FALSE}
 gra_4
 ```
+
+
 
 ## 3.3 Network visualization according to movement route
 
