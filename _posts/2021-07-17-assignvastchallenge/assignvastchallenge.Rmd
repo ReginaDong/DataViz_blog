@@ -147,13 +147,16 @@ gps$id = as.character(gps$id)
 cc$last4ccnum = as.character(cc$last4ccnum)
 ```
 
-As the transaction date in credit and loyalty card data are all in January, we derive days and hours from *timestamp* and display them in different columns in cc_data.csv and loyalty_data.csv using below code chunk. The same as GPS tracking data.
+Since the transaction date in credit and loyalty card data are all in January, the date of month, weekday, hour of time can be derived from *timestamp* and displayed in different columns of cc_data.csv and loyalty_data.csv. The same as GPS tracking data. As shown in below code chunk, `day()` function is used to get the date, `wday()` to get the weekday, `hour()` to get the hour of time.
 
 ```{r}
 cc$day = day(cc$timestamp)
+cc$weekday = wday(cc$timestamp, label = T, abbr = T)
 cc$hour = hour(cc$timestamp)
 loyalty$day = day(loyalty$timestamp)
+loyalty$weekday = wday(loyalty$timestamp, label = T, abbr = T)
 gps$day = as.factor(day(gps$Timestamp))
+gps$weekday = wday(gps$Timestamp, label = T, abbr = T)
 gps$hour = as.factor(hour(gps$Timestamp))
 ```
 
@@ -195,6 +198,7 @@ First of all, a 2d histogram for credit card transaction frequency with *locatio
 ```{r}
 d <- highlight_key(cc)
 
+# Plot the 2d histogram for credit card
 gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
                  hovertemplate = paste(
                    " %{yaxis.title.text}: %{y}<br>",
@@ -207,6 +211,7 @@ gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
          yaxis = list(title="Location", tickmode = "linear")
          )
 
+# dd a slider to the graph to select the range of date
 crosstalk::bscols(gra_1,
                   crosstalk::filter_slider("day", "Date of Jan", 
                                            d, ~day, step = 1, 
@@ -220,6 +225,7 @@ Then the 2d histograms for credit card and loyalty card transaction frequency wi
 d1 = highlight_key(cc)
 d2 = highlight_key(loyalty)
 
+# Plot the 2d histogram of credit card transaction frequency
 gra_2.1 <- plot_ly(data = d1, x = ~as.factor(day), y = ~location,
                  hovertemplate = paste(
                    " %{yaxis.title.text}: %{y}<br>",
@@ -233,27 +239,21 @@ gra_2.1 <- plot_ly(data = d1, x = ~as.factor(day), y = ~location,
          yaxis = list(title = "Location", tickmode = "linear")
          )
 
+# Plot the 2d histogram of loyalty card transaction frequency
 gra_2.2 <- plot_ly(data = d2, x = ~as.factor(day), y = ~location,
                  hovertemplate = paste(
                    " Location: %{y}<br>",
                    "Date of Jan: %{x}<br>",
                    "Transaction Count: %{z}",
                    "<extra></extra>")) %>%
-  add_histogram2d(colors = "Purples") %>%
+  add_histogram2d(colors = "Greys") %>%
   layout(title = "<b>Graph.2-2 Loyalty Card Transaction Frequency by Day</b>",
          #annotations = list(text = "Loyalty Card", showarrow = F, x =10, y=32),
          xaxis = list(title = "Date of Jan", tickmode = "linear"),
          yaxis = list(title = "Location", tickmode = "linear", visible = T)
          )
 
-#gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
-#  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
-#         xaxis = list(title = "Date of Jan"),
-#         xaxis2 = list(title = "Date of Jan"),
-#         yaxis = list(title = "Location"),
-#         autosize = F, width = 800, width2 = 800, height = 400
-#         )
-
+# Add a dropdown list to the graph to filter the card number
 gra_2.1_c <- crosstalk::bscols(gra_2.1,
                                crosstalk::filter_select(
                                  "ccnum", 
@@ -261,7 +261,6 @@ gra_2.1_c <- crosstalk::bscols(gra_2.1,
                                  d1, ~last4ccnum,
                                  multiple = T),
                                widths = 10)
-
 gra_2.2_c <- crosstalk::bscols(gra_2.2,
                                crosstalk::filter_select(
                                  "lonum", 
@@ -328,9 +327,11 @@ gps_hour <- gps_sf %>%
 Set *day* as filtering criteria by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific date. Below code chunk is used to create the graph. 
 
 ```{r}
+# Filter GPS spatial data by date of Jan
 gps_path_selected <- gps_path2 %>%
   filter(day=="6") 
 
+# Plot the moving path
 tmap_mode("view")
 gra_3 <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
@@ -349,9 +350,11 @@ gra_3
 Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hour of days. Below code chunk is used to create the graph.
 
 ```{r}
+# Filter GPS spatial data by hour of time
 gps_hour_selected <- gps_hour %>%
   filter(hour=="7")
 
+# Plot the moving path
 tmap_mode("view")
 gra_4 <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
@@ -368,12 +371,70 @@ gra_4
 <p style="text-align:center;"> _Graph.4 GPS Moving Route of in A Specific Hour_ </p>
 
 
-## 3.3 Network visualization according to movement route
+## 3.3 Line chart showing average price
 
+In order to compare the money spent in different locations, a line chart showing average price spent in credit card and loyal card in weekdays and weekends were created by below code chunk.
 
+In the code chunk, first calculate the average price grouped by *weekday* and *location* using `group_by()` and `summarize()` function, then combine them in one table with `rbind()` function, which is used to plot the line chart using functions of `plotly` packages. A dropdown list is added to select the location to be filtered.
 
+```{r}
+# Calculate the average price by weekday and location, then combine the results
+mean_price <- cc %>%
+  group_by(weekday, location) %>%
+  summarize(Avg.Price = mean(price)) %>%
+  ungroup() %>%
+  mutate(card = "Credit Card") %>%
+  rbind(
+    loyalty %>%
+      group_by(weekday, location) %>%
+      summarize(Avg.Price = mean(price)) %>%
+      ungroup() %>%
+      mutate(card = "Loyalty Card")
+  )
 
+# Plot the line chart
+d <- highlight_key(mean_price)
+gra_5 <- plot_ly(data = d, x = ~weekday, y= ~Avg.Price, 
+                 color = ~card, colors = "Paired", 
+                 linetype = ~card,
+                 type = 'scatter', mode = 'lines+markers') %>%
+  layout(title = "<b>Graph.5 Average Transaction Price by Weekday</b>")
 
+# Add a dropdown list to select one location
+crosstalk::bscols(crosstalk::filter_select("loc", "Choose a location first",
+                                           d, ~location, multiple = F),
+                  gra_5,
+                  widths = 10)
+```
+
+## 3.4 Box plot for all transaction price
+
+As the line chart above can't vividly show the comparison of transaction price between locations nor the outliers among them, a box plot is created by below code chunk, where the first step is to combine *cc* and *loyalty* dataset as the plotting data source, then using `plot_ly()` function to generate the graph. A dropdown list is added to select the weekday to be filtered.
+
+```{r fig.width=22}
+# Combine cc and loyalty data
+cards <- cc %>%
+  select(-hour) %>%
+  rename(cardnum = last4ccnum) %>%
+  mutate(card = "Credit Card") %>%
+  rbind(loyalty %>%
+    rename(cardnum = loyaltynum) %>%
+      mutate(card = "Loyalty Card"))
+
+# Generate the box plot
+d <- highlight_key(cards)
+gra_6 <- plot_ly(data = d,x = ~location, y= ~price, 
+                 color = ~card, colors = "Paired",
+                 type = 'box') %>%
+  layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
+         boxmode = "group")
+
+# Add a dropdown list to filter the weekday
+crosstalk::bscols(gra_6,
+                  crosstalk::filter_select("wdy", "Choose the weekday",
+                                             d, ~weekday, multiple = T),
+                  widths = 22)
+```
 
 # 4. Data Analysis and Insights 
 
@@ -406,6 +467,15 @@ bgmap
 #Abila_st
 ```
 
+```{r eval=FALSE}
+#gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
+#  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
+#         xaxis = list(title = "Date of Jan"),
+#         xaxis2 = list(title = "Date of Jan"),
+#         yaxis = list(title = "Location"),
+#         autosize = F, width = 800, width2 = 800, height = 400
+#         )
+```
 
 tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day")
 
@@ -426,7 +496,93 @@ segment = traclus(gps_c, 36, 5)
 ```
 
 
+```{r eval=FALSE}
+# Calculate the average price by weekday and location
+cc_mean <- cc %>%
+  group_by(weekday, location) %>%
+  summarize(Avg.Price = mean(price)) %>%
+  ungroup() %>%
+  mutate(card = "Credit Card")
 
+loy_mean <- loyalty %>%
+  group_by(weekday, location) %>%
+  summarize(Avg.Price = mean(price)) %>%
+  ungroup() %>%
+  mutate(card = "Loyalty Card")
+
+# Combine the data table
+mean_price <- rbind(cc_mean, loy_mean)
+
+# Plot the line chart
+d <- highlight_key(mean_price)
+gra_5 <- plot_ly(data = d, x = ~weekday, y= ~Avg.Price, 
+                 color = ~card, colors = "Paired", 
+                 linetype = ~card,
+                 type = 'scatter', mode = 'lines+markers') %>%
+  layout(title = "<b>Graph.5 Average Transaction Price by Weekday</b>")
+
+# Add a dropdown list to select one location
+crosstalk::bscols(crosstalk::filter_select("loc", "Choose a location first",
+                                           d, ~location, multiple = F),
+                  gra_5,
+                  widths = 10)
+```
+
+```{r eval=FALSE}
+cc_mean <- cc %>%
+  group_by(weekday, location) %>%
+  summarize(Avg.Price = mean(price)) %>%
+  ungroup() %>%
+  mutate(card = "Credit Card")
+
+loy_mean <- loyalty %>%
+  group_by(weekday, location) %>%
+  summarize(Avg.Price = mean(price)) %>%
+  ungroup() %>%
+  mutate(card = "Loyalty Card")
+
+mean_price <- rbind(cc_mean, loy_mean)
+
+gra_5.1 <- mean_price %>%
+  ggplot(aes(weekday, Avg.Price, colour = card)) +
+  geom_line() +
+  geom_point(size = 1) +
+  labs(title = "<b>Graph.5 Average Transaction Price by Weekday</b>") +
+  facet_wrap(~location, ncol = 4, scales = "free_y") +
+  theme_light() + 
+  #scale_color_brewer(palette = "Dark2") +
+  scale_y_continuous(name = "Average Price")
+
+gra_5.1 <- ggplotly(gra_5.1) %>%
+  layout(autosize = F, width = 1000, height = 2000)
+
+gra_5.1
+```
+
+```{r fig.width=22, eval=FALSE}
+# Combine cc and loyalty data
+cards <- cc %>%
+  select(-hour) %>%
+  rename(cardnum = last4ccnum) %>%
+  mutate(card = "Credit Card") %>%
+  rbind(loyalty %>%
+    rename(cardnum = loyaltynum) %>%
+      mutate(card = "Loyalty Card"))
+
+# Generate the box plot
+d <- highlight_key(cards)
+gra_6 <- plot_ly(data = d,x = ~location, y= ~price, 
+                 color = ~card, colors = "Dark2",
+                 type = 'box') %>%
+  layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
+         boxmode = "group")
+
+# Add a dropdown list to filter the weekday
+crosstalk::bscols(gra_6,
+                  crosstalk::filter_select("wdy", "Choose the weekday",
+                                             d, ~weekday, multiple = T),
+                  widths = 22)
+```
 
 
 
