@@ -281,9 +281,18 @@ Now take the GPS tracking data into account, it's necessary to draw movement pat
 The first thing to do is plotting Raster Layer of the tourist map of Abila, Kronos, as the background map, and import Abila GIS data layer.
 
 ```{r}
-bgmap <- raster("data/Geospatial/MC2-tourist.tif")
-
+bgmap <- raster("data/MC2-tourist.jpg")
+bgmap
 Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
+```
+
+According to the result of bgmap, the extent of bound is (0, 2740, 0, 1535) for (xmin, xmax, ymin, ymax), while the bounding box of Abila_st is (24.82401, 24.90997, 36.04502, 36.09492) for (xmin, xmax, ymin, ymax). So it's necessary to reset the coordinate bounding of bgmap according to Abila_st, or the GPS tracks won't be matched and shown on the background map normally. Below code chunk is for setting the extreme coordinates of bgmap.
+
+```{r}
+xmin(bgmap) = 24.82401
+xmax(bgmap) = 24.90997
+ymin(bgmap) = 36.04502
+ymax(bgmap) = 36.09492
 ```
 
 The code chunk below is used to convert GPS spatial data into a Simple Feature (SF) data frame.
@@ -331,11 +340,11 @@ gra_3 <- tm_shape(bgmap) +
        max.value = 255) +
   tm_shape(gps_path_selected) +
   tm_lines(col =  "id", palette = "Dark2") +
-  tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day") +
   tmap_options(max.categories = 44) 
 
 gra_3
 ```
+<p style="text-align:center;"> _Graph.3 GPS Moving Route in A Specific Day_ </p>
 
 Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hour of days. Below code chunk is used to create the graph.
 
@@ -352,15 +361,17 @@ gra_4 <- tm_shape(bgmap) +
        max.value = 255) +
   tm_shape(gps_hour_selected) +
   tm_lines(col = "id", palette = "Dark2") +
-  tmap_options(max.categories = 44) +
-  tm_layout(title = "Graph.4 GPS Moving Route of in A Specific Hour")
+  tmap_options(max.categories = 44)
 
 gra_4
 ```
-
+<p style="text-align:center;"> _Graph.4 GPS Moving Route of in A Specific Hour_ </p>
 
 
 ## 3.3 Network visualization according to movement route
+
+
+
 
 
 
@@ -376,7 +387,43 @@ gra_4
 
 
 
+# Backups
 
+
+
+```{r eval=FALSE}
+#bgmap <- raster("data/Geospatial/MC2-tourist.tif")
+bgmap <- raster("data/MC2-tourist.jpg")
+#res(bgmap) <- c(3.16216e-05, 3.16216e-05)
+#crs(bgmap) <- "+proj=longlat +datum=WGS84"
+xmin(bgmap) = 24.82419
+xmax(bgmap) = 24.90976
+ymin(bgmap) = 36.04499
+ymax(bgmap) = 36.09543
+
+bgmap
+#Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
+#Abila_st
+```
+
+
+tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day")
+
+tm_layout(title = "Graph.4 GPS Moving Route of in A Specific Hour")
+
+```{r eval=FALSE}
+bg_jpg <- image_read("data/MC2-tourist.jpg")
+bg_tif <- image_convert(bg_jpg, "tif")
+image_info(bg_tif)
+image_info(bg_jpg)
+image_write(bg_tif, "data/MC2-tourist.tif")
+```
+
+```{r eval=FALSE}
+# Backup
+gps_c <- dplyr::select(gps, lat, long)
+segment = traclus(gps_c, 36, 5)
+```
 
 
 
