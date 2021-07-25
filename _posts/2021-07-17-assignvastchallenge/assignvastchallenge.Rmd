@@ -538,9 +538,9 @@ crosstalk::bscols(
     
     - As shown in below movement path graphs Fig.10 and Fig.11, Katherina's Cafe is quite near to GAS Tech company. That's abnormal because it makes no sense that people still go to the Cafe near their company during weekend as there are lots of cafe bars in Abila. 
   
-      ![](img/a4.2.1_d11.jpg){width=80%} <br> _Fig.10 The moving path around Katherina's Cafe on 11th Jan, Sat_
+      ![](img/a4.2.1_d11.jpg){width=100%} <br> _Fig.10 The moving path around Katherina's Cafe on 11th Jan, Sat_
  
-      ![](img/a4.2.1_d18.jpg){width=80%} <br> _Fig.11 The moving path around Katherina's Cafe on 18th Jan, Sat_
+      ![](img/a4.2.1_d18.jpg){width=100%} <br> _Fig.11 The moving path around Katherina's Cafe on 18th Jan, Sat_
     
     - And if analyze together with Graph.1 credit card transaction frequency by Hour, as shown in Fig.12 and Fig.13, these people mainly get together at the same time in these two Saturday, which is around 7PM to 8PM in particular. Hense it's more suspicious to find losts of people gather in a place near GAS Tech at the same time in Saturday. 
     
@@ -550,13 +550,13 @@ crosstalk::bscols(
 
   + Transaction in Abila Scrapyard should be normal if analyze together with movement path. As mentioned in section 4.1, Abila Scrapyard transaction price looks quite high. But if see the movement path in all date having transactions, the car had stopped by Abila Scrapyard mainly is CarID 106, which should be the company truck for business use, which prove that there did exist some kind of business between GAS Tech and Abila Scrapyard. Thus the high amounts of transaction look more reasonable.
   
-    ![](img/a4.2.2_d7_AbScrp.jpg){width=80%} <br> _Fig.14-1 The movement path around Abila Scrapyard on 7th Jan_
+    ![](img/a4.2.2_d7_AbScrp.jpg){width=100%} <br> _Fig.14-1 The movement path around Abila Scrapyard on 7th Jan_
   
-    ![](img/a4.2.2_d9_AbScrp.jpg){width=80%} <br> _Fig.14-2 The movement path around Abila Scrapyard on 9th Jan_
+    ![](img/a4.2.2_d9_AbScrp.jpg){width=100%} <br> _Fig.14-2 The movement path around Abila Scrapyard on 9th Jan_
   
-    ![](img/a4.2.2_d14_AbScrp.jpg){width=80%} <br> _Fig.14-3 The movement path around Abila Scrapyard on 14th Jan_
+    ![](img/a4.2.2_d14_AbScrp.jpg){width=100%} <br> _Fig.14-3 The movement path around Abila Scrapyard on 14th Jan_
   
-    ![](img/a4.2.2_d16_AbScrp.jpg){width=80%} <br> _Fig.14-4 The movement path around Abila Scrapyard on 16th Jan_
+    ![](img/a4.2.2_d16_AbScrp.jpg){width=100%} <br> _Fig.14-4 The movement path around Abila Scrapyard on 16th Jan_
 
 * **What discrepancies between vehicle, credit, and loyalty card data do you find?** 
 
@@ -612,11 +612,25 @@ gra_4
 
 * **Can you infer the owners of each credit card and loyalty card? What is your evidence?** 
 
+  + Set CarID = 1 and get the movement path as shown below. It's obvious that this person love Hallowed Grounds as he had been to this place in several days. But he never went to Katherina's Cafe. Besides, Ouzeri Elian, Albert's Fine Clothing and U-Pump are also places he would like to visit. According to these characters, which is conform to the consumption model of the owner of credit card 9551 and loyalty card L5777.
+  
+    <p style="text-align:center;"> ![](img/a4.3.1-2.jpg){width=100%} <br> _Fig.17 The moving path of CarID 1_ </p>
+  
+    <p style="text-align:center;"> ![](img/a4.3.1.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.1-3.jpg){width=80%} <br> _Fig.18 Transaction frequency of credit and loyalty card by day_ </p>
+  
+  + Set CarID =2 and get the moment path. The favorite place for the owner of CarID 2 are Bean There Done That,Genral Grocer and Albert's Fine Clothing. Thus the owner of credit card 6895 and loyalty card L3366 is most like the owner of CarID2, as shown in 2d histograms below.
+  
+    <p style="text-align:center;"> ![](img/a4.3.2-1.jpg){width=100%} <br> _Fig.19 The moving path of CarID 2_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.2-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.2-3.jpg){width=80%} <br> _Fig.20 Transaction frequency of credit and loyalty card by day_ </p>
+    
+  + Set CarID = 3 and and get the moment path as shown below, which looks quite similar to CarID 2.
+  
 
 ```{r echo=FALSE}
 # Filter GPS spatial data by date of Jan
 gps_path_selected2 <- gps_path2 %>%
-  filter(id == "1") 
+  filter(id == "3") 
 
 # Plot the moving path
 tmap_mode("view")
@@ -631,6 +645,24 @@ gra_3.2 <- tm_shape(bgmap) +
 
 gra_3.2
 ```
+
+```{r}
+cc_fre <- cc %>%
+  group_by(location, last4ccnum) %>%
+  summarize(fre = n()) %>%
+  ungroup
+
+loy_fre <- loyalty %>%
+  group_by(location, loyaltynum) %>%
+  summarize(fre = n()) %>%
+  ungroup
+
+DT::datatable(cc_fre, filter = c("top"), options = list(pageLength = 8))
+
+DT::datatable(loy_fre, filter = c("top"), options = list(pageLength = 8))
+
+```
+
 
 
 * **Where are there uncertainties in your method? Where are there uncertainties in the data? **
@@ -653,145 +685,6 @@ gra_3.2
 
 # 5. Conclusion
 
-
-
-
-
-# Backups
-
-
-
-```{r eval=FALSE}
-#bgmap <- raster("data/Geospatial/MC2-tourist.tif")
-bgmap <- raster("data/MC2-tourist.jpg")
-#res(bgmap) <- c(3.16216e-05, 3.16216e-05)
-#crs(bgmap) <- "+proj=longlat +datum=WGS84"
-xmin(bgmap) = 24.82419
-xmax(bgmap) = 24.90976
-ymin(bgmap) = 36.04499
-ymax(bgmap) = 36.09543
-
-bgmap
-#Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
-#Abila_st
-```
-
-```{r eval=FALSE}
-#gra_2 <- subplot(gra_2.1, gra_2.2, nrows = 1, shareY = T) %>%
-#  layout(title = "<b>Graph.2 Transaction Frequency by Day</b>",
-#         xaxis = list(title = "Date of Jan"),
-#         xaxis2 = list(title = "Date of Jan"),
-#         yaxis = list(title = "Location"),
-#         autosize = F, width = 800, width2 = 800, height = 400
-#         )
-```
-
-tm_layout(title = "Graph.3 GPS Moving Route in A Specific Day")
-
-tm_layout(title = "Graph.4 GPS Moving Route of in A Specific Hour")
-
-```{r eval=FALSE}
-bg_jpg <- image_read("data/MC2-tourist.jpg")
-bg_tif <- image_convert(bg_jpg, "tif")
-image_info(bg_tif)
-image_info(bg_jpg)
-image_write(bg_tif, "data/MC2-tourist.tif")
-```
-
-```{r eval=FALSE}
-# Backup
-gps_c <- dplyr::select(gps, lat, long)
-segment = traclus(gps_c, 36, 5)
-```
-
-
-```{r eval=FALSE}
-# Calculate the average price by weekday and location
-cc_mean <- cc %>%
-  group_by(weekday, location) %>%
-  summarize(Avg.Price = mean(price)) %>%
-  ungroup() %>%
-  mutate(card = "Credit Card")
-
-loy_mean <- loyalty %>%
-  group_by(weekday, location) %>%
-  summarize(Avg.Price = mean(price)) %>%
-  ungroup() %>%
-  mutate(card = "Loyalty Card")
-
-# Combine the data table
-mean_price <- rbind(cc_mean, loy_mean)
-
-# Plot the line chart
-d <- highlight_key(mean_price)
-gra_5 <- plot_ly(data = d, x = ~weekday, y= ~Avg.Price, 
-                 color = ~card, colors = "Paired", 
-                 linetype = ~card,
-                 type = 'scatter', mode = 'lines+markers') %>%
-  layout(title = "<b>Graph.5 Average Transaction Price by Weekday</b>")
-
-# Add a dropdown list to select one location
-crosstalk::bscols(crosstalk::filter_select("loc", "Choose a location first",
-                                           d, ~location, multiple = F),
-                  gra_5,
-                  widths = 10)
-```
-
-```{r eval=FALSE}
-cc_mean <- cc %>%
-  group_by(weekday, location) %>%
-  summarize(Avg.Price = mean(price)) %>%
-  ungroup() %>%
-  mutate(card = "Credit Card")
-
-loy_mean <- loyalty %>%
-  group_by(weekday, location) %>%
-  summarize(Avg.Price = mean(price)) %>%
-  ungroup() %>%
-  mutate(card = "Loyalty Card")
-
-mean_price <- rbind(cc_mean, loy_mean)
-
-gra_5.1 <- mean_price %>%
-  ggplot(aes(weekday, Avg.Price, colour = card)) +
-  geom_line() +
-  geom_point(size = 1) +
-  labs(title = "<b>Graph.5 Average Transaction Price by Weekday</b>") +
-  facet_wrap(~location, ncol = 4, scales = "free_y") +
-  theme_light() + 
-  #scale_color_brewer(palette = "Dark2") +
-  scale_y_continuous(name = "Average Price")
-
-gra_5.1 <- ggplotly(gra_5.1) %>%
-  layout(autosize = F, width = 1000, height = 2000)
-
-gra_5.1
-```
-
-```{r fig.width=22, eval=FALSE}
-# Combine cc and loyalty data
-cards <- cc %>%
-  select(-hour) %>%
-  rename(cardnum = last4ccnum) %>%
-  mutate(card = "Credit Card") %>%
-  rbind(loyalty %>%
-    rename(cardnum = loyaltynum) %>%
-      mutate(card = "Loyalty Card"))
-
-# Generate the box plot
-d <- highlight_key(cards)
-gra_6 <- plot_ly(data = d,x = ~location, y= ~price, 
-                 color = ~card, colors = "Dark2",
-                 type = 'box', boxmean = T) %>%
-  layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
-         boxmode = "group")
-
-# Add a dropdown list to filter the weekday
-crosstalk::bscols(gra_6,
-                  crosstalk::filter_select("wdy", "Choose the weekday",
-                                             d, ~weekday, multiple = T),
-                  widths = 22)
-```
 
 
 
