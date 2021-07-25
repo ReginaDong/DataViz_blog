@@ -273,14 +273,14 @@ gra_2.1_c <- crosstalk::bscols(crosstalk::filter_select(
                                  "ccnum", 
                                  "Choose last 4 credit card Number",
                                  d1, ~last4ccnum,
-                                 multiple = T),
+                                 multiple = F),
                                gra_2.1,
                                widths = 10)
 gra_2.2_c <- crosstalk::bscols(crosstalk::filter_select(
                                  "lonum", 
                                  "Choose loyalty card number",
                                  d2, ~loyaltynum,
-                                 multiple = T),
+                                 multiple = F),
                                gra_2.2,
                                widths = 10)
 
@@ -352,7 +352,7 @@ gps_path_selected <- gps_path2 %>%
 
 # Plot the moving path
 tmap_mode("view")
-gra_3 <- tm_shape(bgmap) +
+gra_3.1 <- tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
        alpha = NA,
        saturation = 1,
@@ -362,9 +362,31 @@ gra_3 <- tm_shape(bgmap) +
   tm_lines(col =  "id", palette = "Dark2") +
   tmap_options(max.categories = 44) 
 
-gra_3
+gra_3.1
 ```
-<p style="text-align:center;"> _Graph.3 GPS Moving Route in A Specific Day_ </p>
+<p style="text-align:center;"> _Graph.3.1 GPS Moving Route in A Specific Day_ </p>
+
+Set *id* as filtering criteria by using `filter()` function, and differentiate the line colors by *day* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of a specific car in all days. Below code chunk is used to create the graph. 
+
+```{r}
+# Filter GPS spatial data by date of Jan
+gps_path_selected2 <- gps_path2 %>%
+  filter(id == "1") 
+
+# Plot the moving path
+tmap_mode("view")
+gra_3.2 <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected2) +
+  tm_lines(col =  "day", palette = "Dark2")
+
+gra_3.2
+```
+<p style="text-align:center;"> _Graph.3.2 GPS Moving Route of A Specific CarID_ </p>
 
 Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hours of days. Below code chunk is used to create the graph.
 
@@ -388,6 +410,7 @@ gra_4 <- tm_shape(bgmap) +
 gra_4
 ```
 <p style="text-align:center;"> _Graph.4 GPS Moving Route of in Specific Hours_ </p>
+
 
 
 ## 3.3 Line chart of average price by weekday
@@ -561,7 +584,7 @@ gra_4
 
     <p style="text-align:center;"> _Fig.15 The moving path between 11PM to 2AM of the next day_ </p>
   
-  + Transactions happened during the one hour of 6AM probably aren't recorded in credit and loyalty card. As shown in below charts, Cars with CarID 16 and 17 passed by Frydos Autosupply, Guy's Gyros and  Katherina's Cafe, but no transaction record is at that time.
+  + Transactions happened during the one hour of 6AM probably aren't recorded in credit and loyalty card. As shown in below charts, Cars with CarID 16 and 17 passed by Frydos Autosupply, Guy's Gyros and Katherina's Cafe, but no transaction record is at that time.
 
 ```{r echo=FALSE}
 # Filter GPS spatial data by hour of time
@@ -582,10 +605,35 @@ gra_4 <- tm_shape(bgmap) +
 
 gra_4
 ```
+    
     <p style="text-align:center;"> _Fig.16 The moving path during 6AM of the next day_ </p>
 
 ## 4.3 Anlysis for question 3
 
+* **Can you infer the owners of each credit card and loyalty card? What is your evidence?** 
+
+
+```{r echo=FALSE}
+# Filter GPS spatial data by date of Jan
+gps_path_selected2 <- gps_path2 %>%
+  filter(id == "1") 
+
+# Plot the moving path
+tmap_mode("view")
+gra_3.2 <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected2) +
+  tm_lines(col =  "day", palette = "Dark2") 
+
+gra_3.2
+```
+
+
+* **Where are there uncertainties in your method? Where are there uncertainties in the data? **
 
 
 
