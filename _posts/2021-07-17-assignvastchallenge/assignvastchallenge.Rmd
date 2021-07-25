@@ -337,6 +337,10 @@ gps_hour <- gps_sf %>%
   summarise(m = mean(Timestamp),
             do_union = FALSE) %>%
   st_cast("LINESTRING")
+
+np = npts(gps_hour, by_feature = T)
+gps_hour2 <- cbind(gps_hour, np) %>%
+  filter(np > 1) # exclude orphan coordinate records
 ```
 
 Set *day* as filtering criteria by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific date. Below code chunk is used to create the graph. 
@@ -344,7 +348,7 @@ Set *day* as filtering criteria by using `filter()` function, and differentiate 
 ```{r}
 # Filter GPS spatial data by date of Jan
 gps_path_selected <- gps_path2 %>%
-  filter(day=="6") 
+  filter(day == "16") 
 
 # Plot the moving path
 tmap_mode("view")
@@ -362,12 +366,12 @@ gra_3
 ```
 <p style="text-align:center;"> _Graph.3 GPS Moving Route in A Specific Day_ </p>
 
-Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hour of days. Below code chunk is used to create the graph.
+Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hours of days. Below code chunk is used to create the graph.
 
 ```{r}
-# Filter GPS spatial data by hour of time
-gps_hour_selected <- gps_hour %>%
-  filter(hour=="7")
+# Filter GPS spatial data by hours of time
+gps_hour_selected <- gps_hour2 %>%
+  filter(hour %in% c(23, 0, 1, 2))
 
 # Plot the moving path
 tmap_mode("view")
@@ -383,7 +387,7 @@ gra_4 <- tm_shape(bgmap) +
 
 gra_4
 ```
-<p style="text-align:center;"> _Graph.4 GPS Moving Route of in A Specific Hour_ </p>
+<p style="text-align:center;"> _Graph.4 GPS Moving Route of in Specific Hours_ </p>
 
 
 ## 3.3 Line chart of average price by weekday
@@ -505,12 +509,96 @@ crosstalk::bscols(
 
 ## 4.2 Anlysis for question 2
 
-* Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? 
+* **Add the vehicle data to your analysis of the credit and loyalty card data in credit and loyalty card. How does your assessment of the anomalies in question 1 change based on this new data? **
+
+  + Lots of people gathered at Katherina's Cafe during Saturday.
+    
+    - As shown in below movement path graphs Fig.10 and Fig.11, Katherina's Cafe is quite near to GAS Tech company. That's abnormal because it makes no sense that people still go to the Cafe near their company during weekend as there are lots of cafe bars in Abila. 
+  
+      ![](img/a4.2.1_d11.jpg){width=80%} <br> _Fig.10 The moving path around Katherina's Cafe on 11th Jan, Sat_
+ 
+      ![](img/a4.2.1_d18.jpg){width=80%} <br> _Fig.11 The moving path around Katherina's Cafe on 18th Jan, Sat_
+    
+    - And if analyze together with Graph.1 credit card transaction frequency by Hour, as shown in Fig.12 and Fig.13, these people mainly get together at the same time in these two Saturday, which is around 7PM to 8PM in particular. Hense it's more suspicious to find losts of people gather in a place near GAS Tech at the same time in Saturday. 
+    
+      ![](img/a4.2.1-3.jpg){width=80%} <br> _Fig.12 The transaction frequency of Katherina's Cafe on 11th Jan, Sat_
+    
+      ![](img/a4.2.1-4.jpg){width=80%} <br> _Fig.13 The transaction frequency of Katherina's Cafe on 18th Jan, Sat_
+
+  + Transaction in Abila Scrapyard should be normal if analyze together with movement path. As mentioned in section 4.1, Abila Scrapyard transaction price looks quite high. But if see the movement path in all date having transactions, the car had stopped by Abila Scrapyard mainly is CarID 106, which should be the company truck for business use, which prove that there did exist some kind of business between GAS Tech and Abila Scrapyard. Thus the high amounts of transaction look more reasonable.
+  
+    ![](img/a4.2.2_d7_AbScrp.jpg){width=80%} <br> _Fig.14-1 The movement path around Abila Scrapyard on 7th Jan_
+  
+    ![](img/a4.2.2_d9_AbScrp.jpg){width=80%} <br> _Fig.14-2 The movement path around Abila Scrapyard on 9th Jan_
+  
+    ![](img/a4.2.2_d14_AbScrp.jpg){width=80%} <br> _Fig.14-3 The movement path around Abila Scrapyard on 14th Jan_
+  
+    ![](img/a4.2.2_d16_AbScrp.jpg){width=80%} <br> _Fig.14-4 The movement path around Abila Scrapyard on 16th Jan_
+
+* **What discrepancies between vehicle, credit, and loyalty card data do you find?** 
+
+  + Transactions happened between 10PM and 2AM of the next day probably aren't recorded. Seeing the figure below, it's obvious that cars with CarID 14, 16, 29 and 21 departed from Frydos Autosupply n' More. CarID 29 stopped by Brew've Been Served. CarID 28, 25 departed from the place near Frydos Autosupply and Guy's Gyros.
+  
+```{r echo=FALSE}
+# Filter GPS spatial data by hour of time
+gps_hour_selected <- gps_hour2 %>%
+  filter(hour %in% c(22, 23, 0, 1, 2))
+
+# Plot the moving path
+tmap_mode("view")
+gra_4 <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_hour_selected) +
+  tm_lines(col = "id", palette = "Dark2") +
+  tmap_options(max.categories = 44)
+
+gra_4
+```
+
+    <p style="text-align:center;"> _Fig.15 The moving path between 11PM to 2AM of the next day_ </p>
+  
+  + Transactions happened during the one hour of 6AM probably aren't recorded in credit and loyalty card. As shown in below charts, Cars with CarID 16 and 17 passed by Frydos Autosupply, Guy's Gyros and  Katherina's Cafe, but no transaction record is at that time.
+
+```{r echo=FALSE}
+# Filter GPS spatial data by hour of time
+gps_hour_selected <- gps_hour2 %>%
+  filter(hour %in% c(6))
+
+# Plot the moving path
+tmap_mode("view")
+gra_4 <- tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_hour_selected) +
+  tm_lines(col = "id", palette = "Dark2") +
+  tmap_options(max.categories = 44)
+
+gra_4
+```
+    <p style="text-align:center;"> _Fig.16 The moving path during 6AM of the next day_ </p>
+
+## 4.3 Anlysis for question 3
 
 
 
 
-* What discrepancies between vehicle, credit, and loyalty card data do you find? 
+
+## 4.4 Anlysis for question 4
+
+
+
+
+
+## 4.5 Anlysis for question 5
+
+
 
 
 
