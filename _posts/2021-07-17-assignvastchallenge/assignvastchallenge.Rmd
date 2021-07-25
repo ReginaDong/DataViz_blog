@@ -212,10 +212,12 @@ gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
          )
 
 # dd a slider to the graph to select the range of date
-crosstalk::bscols(gra_1,
+crosstalk::bscols(
                   crosstalk::filter_slider("day", "Date of Jan", 
                                            d, ~day, step = 1, 
-                                           animate = T, ticks = F), 
+                                           animate = T, ticks = F),
+                  gra_1,
+                  DT::datatable(d, filter=c("top"), class = "hover"),
                   widths = 10)
 ```
 
@@ -254,19 +256,20 @@ gra_2.2 <- plot_ly(data = d2, x = ~as.factor(day), y = ~location,
          )
 
 # Add a dropdown list to the graph to filter the card number
-gra_2.1_c <- crosstalk::bscols(gra_2.1,
-                               crosstalk::filter_select(
+gra_2.1_c <- crosstalk::bscols(crosstalk::filter_select(
                                  "ccnum", 
                                  "Choose last 4 credit card Number",
                                  d1, ~last4ccnum,
                                  multiple = T),
+                               gra_2.1,
                                widths = 10)
-gra_2.2_c <- crosstalk::bscols(gra_2.2,
-                               crosstalk::filter_select(
+gra_2.2_c <- crosstalk::bscols(crosstalk::filter_select(
                                  "lonum", 
                                  "Choose loyalty card number",
                                  d2, ~loyaltynum,
                                  multiple = T),
+                               gra_2.2,
+                               DT::datatable(d2, filter=c("top"), class = "hover"),
                                widths = 10)
 
 gra_2.1_c
@@ -425,14 +428,16 @@ cards <- cc %>%
 d <- highlight_key(cards)
 gra_6 <- plot_ly(data = d,x = ~location, y= ~price, 
                  color = ~card, colors = "Paired",
-                 type = 'box') %>%
+                 type = 'box', boxmean = T) %>%
   layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
          boxmode = "group")
 
 # Add a dropdown list to filter the weekday
-crosstalk::bscols(gra_6,
+crosstalk::bscols(
                   crosstalk::filter_select("wdy", "Choose the weekday",
                                              d, ~weekday, multiple = T),
+                  gra_6,
+                  DT::datatable(d, filter=c("top"), class = "hover"),
                   widths = 22)
 ```
 
@@ -573,7 +578,7 @@ cards <- cc %>%
 d <- highlight_key(cards)
 gra_6 <- plot_ly(data = d,x = ~location, y= ~price, 
                  color = ~card, colors = "Dark2",
-                 type = 'box') %>%
+                 type = 'box', boxmean = T) %>%
   layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
          boxmode = "group")
 
