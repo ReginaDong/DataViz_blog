@@ -98,7 +98,16 @@ for (p in packages){
 
 ### 2.2.2 Importing relevent data
 
-First of all we import the CSV file using below code chunk.
+First of all, below code chunk is used to identify the encoding type of the CSV file to make sure no garbled characters in the imported data.
+
+```{r}
+guess_encoding("data/car-assignments.csv")
+guess_encoding("data/gps.csv")
+guess_encoding("data/cc_data.csv")
+guess_encoding("data/loyalty_data.csv")
+```
+
+According to above results, "windows-1254" would be set as the encoding for cc_data.csv and loyalty_data.csv when importing the file, using `read_csv()` function in `tidyverse` package.
 
 ```{r}
 car_ass <- read_csv("data/car-assignments.csv")
@@ -107,7 +116,7 @@ cc <- read_csv("data/cc_data.csv", locale = locale(encoding = "windows-1252"))
 loyalty <- read_csv("data/loyalty_data.csv", locale = locale(encoding = "windows-1252"))
 ```
 
-### 2.2.3 Wrangling the data
+### 2.2.3 Converting data types
 
 As shown below, we need to check if the data type is proper in the imported tibble data table. It's obvious that the *Timestamp* in gps.csv, cc_data.csv and loyalty_data.csv should be in datetime format but now it's in character format. Besides, *CarID* in car-assignments.csv, *id* in gps.csv and *last4ccnum* in cc_data.csv should be converted from numerical data to categorical data.
 
@@ -135,7 +144,7 @@ glimpse(cc)
 glimpse(loyalty)
 ```
 
-We use below code chunk to covert data types.
+To achieve this, `mdy_hms()` and `mdy()` functions in `lubridate` package are used to covert the data type to datetime, and `as.character()` function is used to convert data as characters.
 
 ```{r}
 gps$Timestamp = mdy_hms(gps$Timestamp)
@@ -180,20 +189,18 @@ knitr::kable(summarizeColumns(cc), caption = "EDA for Credit Card Transaction Da
 knitr::kable(summarizeColumns(loyalty), caption = "EDA for Loyalty Card Transaction Data", digits = 2)
 ```
 
-The records containing missing values in car-assignment.csv are shown below. We can see these records are all company trucks not for personal use.
+The records containing missing values in car-assignment.csv are shown below. We can see these records are all company trucks not for personal use. As the number of missing values are not large and the missed fileds not quite important, no need to clean or exclude these records.
 
 ```{r echo=FALSE}
 car_ass_na <- filter(car_ass, is.na(CarID))
 knitr::kable(car_ass_na, format = "html", caption = "The Missing Values in Car Assignment Dataset")
 ```
 
-
-
 # 3. Data Visualization
 
 ## 3.1 Histogram showing frequecy of transactions
 
-First of all, a 2d histogram for credit card transaction frequency with *location* by *hour* was built by below code chunk. A slider was added to select range of days as the filtering criterion.
+First of all, a 2d histogram for credit card transaction frequency with *location* by *hour* was built by below code chunk. A slider is added to select range of days as the filtering criterion, and a data table is linked to the graph to show details related to the selections.
 
 ```{r}
 d <- highlight_key(cc)
@@ -211,13 +218,19 @@ gra_1 <- plot_ly(data = d, x = ~as.factor(hour), y = ~location,
          yaxis = list(title="Location", tickmode = "linear")
          )
 
-# dd a slider to the graph to select the range of date
+# Add a slider to the graph to select the range of date, and
+#  link a data table to show details
 crosstalk::bscols(
                   crosstalk::filter_slider("day", "Date of Jan", 
                                            d, ~day, step = 1, 
                                            animate = T, ticks = F),
                   gra_1,
-                  DT::datatable(d, filter=c("top"), class = "hover"),
+                  DT::datatable(d, filter=c("top"), class = "hover",
+                                options = list(pageLength = 5,
+                                               columnDefs = list(
+                                                 list(visible = FALSE,
+                                                      targets = c(5, 7)))
+                                               )),
                   widths = 10)
 ```
 
@@ -269,7 +282,6 @@ gra_2.2_c <- crosstalk::bscols(crosstalk::filter_select(
                                  d2, ~loyaltynum,
                                  multiple = T),
                                gra_2.2,
-                               DT::datatable(d2, filter=c("top"), class = "hover"),
                                widths = 10)
 
 gra_2.1_c
@@ -374,7 +386,7 @@ gra_4
 <p style="text-align:center;"> _Graph.4 GPS Moving Route of in A Specific Hour_ </p>
 
 
-## 3.3 Line chart showing average price
+## 3.3 Line chart of average price by weekday
 
 In order to compare the money spent in different locations, a line chart showing average price spent in credit card and loyal card in weekdays and weekends were created by below code chunk.
 
@@ -410,9 +422,9 @@ crosstalk::bscols(crosstalk::filter_select("loc", "Choose a location first",
                   widths = 10)
 ```
 
-## 3.4 Box plot for all transaction price
+## 3.4 Boxplot for transaction price by location
 
-As the line chart above can't vividly show the comparison of transaction price between locations nor the outliers among them, a box plot is created by below code chunk, where the first step is to combine *cc* and *loyalty* dataset as the plotting data source, then using `plot_ly()` function to generate the graph. A dropdown list is added to select the weekday to be filtered.
+As the line chart above can't vividly show the comparison of transaction price between locations nor the outliers among them, a box plot is created by below code chunk, where the first step is to combine *cc* and *loyalty* dataset as the plotting data source, then using `plot_ly()` function to generate the graph. A dropdown list is added to select the weekday to be filtered, and a data table is linked to the boxplot to show details related to the selections.
 
 ```{r fig.width=22}
 # Combine cc and loyalty data
@@ -432,17 +444,73 @@ gra_6 <- plot_ly(data = d,x = ~location, y= ~price,
   layout(title = "<b>Graph.6 Box Plot of Transaction Price by Location</b>",
          boxmode = "group")
 
-# Add a dropdown list to filter the weekday
+# Add a dropdown list to filter the weekday, and
+#  link a data table to show details
 crosstalk::bscols(
                   crosstalk::filter_select("wdy", "Choose the weekday",
                                              d, ~weekday, multiple = T),
                   gra_6,
-                  DT::datatable(d, filter=c("top"), class = "hover"),
+                  DT::datatable(d, filter=c("top"), class = "hover",
+                                options = list(pageLength = 5,
+                                               columnDefs = list(
+                                                 list(visible = FALSE,
+                                                      targets = c(5)))
+                                               )),
                   widths = 22)
 ```
 
 # 4. Data Analysis and Insights 
 
+## 4.1 Anlysis for question 1
+
+* **Using just the credit and loyalty card data, identify the most popular locations, and when they are popular.**
+
+  As can be seen in Graph.1, Graph2.1, Graph2.2, the darker the color of the cell the more frequent the place has been visited.
+  
+  If select all the recorded date and card numbers of credi card, the transaction frequency by hour and date is shown as below. It's obvious that Katerina's Cafe, Hippokampos, Hallowed Grounds, Guy's Gyros and Brew've Been Served were visited quite lots of times.
+  
+<p style="text-align:center;"> ![](img/a4.1.1.jpg){width=80%} ![](img/a4.1.2.jpg){width=80%} <br>  _Fig.2 The total transaction frequency of credit card by hour and date_ </p>
+  
+  Similarly, if see the transaction frequency of loyalty card by date as shown below, Katerina's Cafe, Hippokampos, Hallowed Grounds, Guy's Gyros and Brew've Been Served still hold the darkest color which means lots of people made purchase at these places.
+  
+<p style="text-align:center;"> ![](img/a4.1.3.jpg){width=80%} <br> _Fig.3 The total transaction frequency of loyalty card by date_ </p>
+
+* **What anomalies do you see? What corrections would you recommend to correct these anomalies?**
+  
+  Abnormal findings spotted from credit and loyalty card data includes:  
+  
+  + Kronos Mart: Visit this place at 3 AM, which is quite abnormal cause mart generally doesn't open at that time.
+  
+    <p style="text-align:center;"> ![](img/a4.1.4.jpg){width=80%} <br> _Fig.4 Transaction record in Kronos Mart at 3 AM_ </p>
+  
+  + Frydos Autosupply n' More: Extremely high transaction price recorded on 13rd Jan, Friday, which only have one credit card transaction record without loyalty record. Besides, if see the average transaction price of this place along weekday, as shown in Fig.6, the mean value of price on Mon is abnormally high.
+  
+    <p style="text-align:center;"> ![](img/a4.1.5.jpg){width=100%} <br> _Fig.5 The outlier of transaction price_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.1.6.jpg){width=80%} <br> _Fig.6 The average transaction price of Frydos Autosupply n' More_ </p>
+  
+  + Daily Dealz: Only one transaction record, happened at 6AM of 13rd Jan, found in this place, and the transaction price is quite low.
+    
+    <p style="text-align:center;"> ![](img/a4.1.7.jpg){width=80%} ![](img/a4.1.7-2.jpg){width=80%}<br> _Fig.7 The transaction record of Dail Dealz_ </p>
+
+  + Hippokampos: Visit this place at 10PM, which is the latest recording time, and don't know what kind of business is in this place.
+  
+    <p style="text-align:center;"> ![](img/a4.1.8.jpg){width=80%} <br> _Fig.8 The transaction record of Hippokampos_ </p>
+
+  + Abila Scrapyard: From the name of this place, it's a place where scrap is collected before being discarded. But the transaction price here is quite high, which is contrary to the intuition.
+  
+    <p style="text-align:center;"> ![](img/a4.1.9-2.jpg){width=80%} ![](img/a4.1.9.jpg){width=100%} <br> _Fig.9 The transaction price of credit and loyalty card in Abila Scrapyard_ </p>
+
+  As for the correction of the data, so far it's recommended to check the time of transaction recorded in Kronos Mart and Hippokampos, the abnormal price happened in Frydos Autosupply and Abila Scrapyard, as well as if there are records missing of Daily Dealz.
+
+## 4.2 Anlysis for question 2
+
+* Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? 
+
+
+
+
+* What discrepancies between vehicle, credit, and loyalty card data do you find? 
 
 
 
