@@ -612,19 +612,19 @@ gra_4
 
 * **Can you infer the owners of each credit card and loyalty card? What is your evidence?** 
 
-  + Set CarID = 1 and get the movement path as shown below. It's obvious that this person love Hallowed Grounds as he had been to this place in several days. But he never went to Katherina's Cafe. Besides, Ouzeri Elian, Albert's Fine Clothing and U-Pump are also places he would like to visit. According to these characters, which is conform to the consumption model of the owner of credit card 9551 and loyalty card L5777.
+  + Set CarID = 1 and get the moving path. It's obvious that this person love Hallowed Grounds as he had been to this place in several days. But he never went to Katherina's Cafe. Besides, Ouzeri Elian, Albert's Fine Clothing and U-Pump are also places he would like to visit. According to these characters, which is conform to the consumption model of the owner of credit card 9551 and loyalty card L5777.
   
     <p style="text-align:center;"> ![](img/a4.3.1-2.jpg){width=100%} <br> _Fig.17 The moving path of CarID 1_ </p>
   
     <p style="text-align:center;"> ![](img/a4.3.1.jpg){width=80%}  ![](img/a4.3.1-3.jpg){width=80%} <br> _Fig.18 Transaction frequency of credit and loyalty card by day_ </p>
   
-  + Set CarID =2 and get the moment path. The favorite place for the owner of CarID 2 are Bean There Done That,Genral Grocer and Albert's Fine Clothing. Thus the owner of credit card 6895 and loyalty card L3366 is most like the owner of CarID 2, as shown in 2d histograms below.
+  + Set CarID =2 and get the moving path. The favorite place for the car owner are Bean There Done That, General Grocer and places near Guy's Gyros. Besides, it looks like the car owner stopped by Albert's Fine Clothing on 16th Jan, as shown in the GPS tracking below. Thus the owner of credit card 7819 and loyalty card L5259 is most likely the owner of CarID 2, as shown in the following 2d histograms.
   
-    <p style="text-align:center;"> ![](img/a4.3.2-1.jpg){width=100%} <br> _Fig.19 The moving path of CarID 2_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.2-1.jpg){width=100%} ![](img/a4.3.2-1-2.jpg){width=100%} <br> _Fig.19 The moving path of CarID 2_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.2-2.jpg){width=80%}  ![](img/a4.3.2-3.jpg){width=80%} <br> _Fig.20 Transaction frequency of credit and loyalty card by day_ </p>
     
-  + Set CarID = 3 and and get the moment path as shown below, which looks quite similar to CarID 2. Thus the owner of credit card 1877 and loyalty card L3014, which is the most similar to credit card 6895 and loyalty card L3366, is most like the owner of CarID 3,
+  + Set CarID = 3 and and get the moving path as shown below, which looks quite similar to CarID 2. Thus the owner of credit card 1877 and loyalty card L3014, which is the most similar to credit card 6895 and loyalty card L3366, is most like the owner of CarID 3,
   
     <p style="text-align:center;"> ![](img/a4.3.3-1.jpg){width=100%} <br> _Fig.21 The moving path of CarID 3_ </p>
     
@@ -696,32 +696,41 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.14-2.jpg){width=80%} ![](img/a4.3.14-3.jpg){width=80%} <br> _Fig.44 Transaction frequency of credit and loyalty card by day_ </p>
 
-  + Set CarID = 15 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like stopping by Frank's Fuels on 8th Jan as shown in Fig.45, the owner of CarID 15 is most likely the owner of credit card 3853 and loyalty card L1485.
+  + Set CarID = 15 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car it stopped by Frank's Fuels on 8th Jan as shown in Fig.45, the owner of CarID 15 is most likely the owner of credit card 3853 and loyalty card L1485.
   
     <p style="text-align:center;"> ![](img/a4.3.15-1.jpg){width=100%} ![](img/a4.3.15-1-2.jpg){width=80%} <br>  _Fig.45 The moving path of CarID 15_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.15-2.jpg){width=80%} ![](img/a4.3.15-3.jpg){width=80%} <br> _Fig.46 Transaction frequency of credit and loyalty card by day_ </p>
     
-  + Set CarID = 16 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like stopping by Roberts and Sons twice, the owner of CarID 16 is most likely the owner of credit card 7354 and loyalty card L9254.
+  + Set CarID = 16 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like it was parked at Roberts and Sons twice, the owner of CarID 16 is most likely the owner of credit card 7354 and loyalty card L9254.
   
     <p style="text-align:center;"> ![](img/a4.3.16-1.jpg){width=100%} <br>  _Fig.47 The moving path of CarID 16_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.16-2.jpg){width=80%} ![](img/a4.3.16-3.jpg){width=80%} <br> _Fig.48 Transaction frequency of credit and loyalty card by day_ </p>
 
-  + Set CarID = 17 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like stopping by Ahaggo Museum on 17th Jan, and Ouzeri Elian on 19th Jan as shown in Fig.49, the owner of CarID 17 is most likely the owner of credit card 7384 and loyalty card L3800.
+  + Set CarID = 17 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like it stopped by Ahaggo Museum on 17th Jan, and Ouzeri Elian on 19th Jan as shown in Fig.49, the owner of CarID 17 is most likely the owner of credit card 7384 and loyalty card L3800.
   
     <p style="text-align:center;"> ![](img/a4.3.17-1.jpg){width=100%} ![](img/a4.3.17-1-2.jpg){width=60%} ![](img/a4.3.17-1-3.jpg){width=60%} <br>  _Fig.49 The moving path of CarID 17_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.17-2.jpg){width=80%} ![](img/a4.3.17-3.jpg){width=80%} <br> _Fig.50 Transaction frequency of credit and loyalty card by day_ </p>
 
+  + Set CarID = 18 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like it was parked at General Grocer on 11th Jan, as shown in the figure below, the owner of CarID 18 is most likely the owner of credit card 8129 and loyalty card L8328.
+  
+    <p style="text-align:center;"> ![](img/a4.3.18-1.jpg){width=100%} ![](img/a4.3.18-1-2.jpg){width=60%} <br>  _Fig.51 The moving path of CarID 18_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.18-2.jpg){width=80%} ![](img/a4.3.18-3.jpg){width=80%} <br> _Fig.52 Transaction frequency of credit and loyalty card by day_ </p>
 
-
+  + Set CarID = 19 and get the movement path as shown below. According to comparison with following 2d histograms, especially the car looks like it stopped by General Grocer on 19th Jan, as well as Ouzeri Elian around 6th, 7th and 18th of Jan, as shown in the figure below, the owner of CarID 19 is most likely the owner of credit card 6895 and loyalty card L3366.
+  
+    <p style="text-align:center;"> ![](img/a4.3.19-1.jpg){width=100%} ![](img/a4.3.19-1-2.jpg){width=60%} ![](img/a4.3.19-1-3.jpg){width=40%} <br>  _Fig.53 The moving path of CarID 19_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.19-2.jpg){width=80%} ![](img/a4.3.19-3.jpg){width=80%} <br> _Fig.54 Transaction frequency of credit and loyalty card by day_ </p>
 
 
 ```{r echo=FALSE}
 # Filter GPS spatial data by date of Jan
 gps_path_selected2 <- gps_path2 %>%
-  filter(id == "18") 
+  filter(id == "2") 
 
 # Plot the moving path
 tmap_mode("view")
