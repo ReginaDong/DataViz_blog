@@ -672,10 +672,36 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.10-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.10-3.jpg){width=80%} <br> _Fig.36 Transaction frequency of credit and loyalty card by day_ </p>
 
+  + Set CarID = 11 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 11 is most likely the owner of credit card 1415 and loyalty card L7783.
+  
+    <p style="text-align:center;"> ![](img/a4.3.11-1.jpg){width=100%} <br> _Fig.37 The moving path of CarID 11_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.11-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.11-3.jpg){width=80%} <br> _Fig.38 Transaction frequency of credit and loyalty card by day_ </p>
+
+  + Set CarID = 12 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 12 is most likely the owner of credit card 7792 and loyalty card L5756.
+  
+    <p style="text-align:center;"> ![](img/a4.3.12-1.jpg){width=100%} <br> _Fig.39 The moving path of CarID 12_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.12-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.12-3.jpg){width=80%} <br> _Fig.40 Transaction frequency of credit and loyalty card by day_ </p>
+
+  + Set CarID = 13 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 13 is most likely the owner of credit card 5407 and loyalty card L4034.
+  
+    <p style="text-align:center;"> ![](img/a4.3.13-1.jpg){width=100%} <br> _Fig.41 The moving path of CarID 13_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.13-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.13-3.jpg){width=80%} <br> _Fig.42 Transaction frequency of credit and loyalty card by day_ </p>
+    
+  + Set CarID = 14 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 14 is most likely the owner of credit card 9617 and loyalty card L5553.
+  
+    <p style="text-align:center;"> ![](img/a4.3.14-1.jpg){width=100%} <br> _Fig.43 The moving path of CarID 14_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.14-2.jpg){width=80%} <p style="text-align:center;"> ![](img/a4.3.14-3.jpg){width=80%} <br> _Fig.44 Transaction frequency of credit and loyalty card by day_ </p>
+
+
+
 ```{r echo=FALSE}
 # Filter GPS spatial data by date of Jan
 gps_path_selected2 <- gps_path2 %>%
-  filter(id == "10") 
+  filter(id == "15") 
 
 # Plot the moving path
 tmap_mode("view")
@@ -702,9 +728,9 @@ loy_fre <- loyalty %>%
   summarize(fre = n()) %>%
   ungroup
 
-DT::datatable(cc_fre, filter = c("top"), options = list(pageLength = 8))
+DT::datatable(cc_fre, filter = c("top"), options = list(pageLength = 7))
 
-DT::datatable(loy_fre, filter = c("top"), options = list(pageLength = 8))
+DT::datatable(loy_fre, filter = c("top"), options = list(pageLength = 7))
 
 ```
 
