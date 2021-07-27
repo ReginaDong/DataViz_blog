@@ -53,6 +53,7 @@ The challenges to be dealt with are listed below:
 
 The detailed information and all the data needed for Mini-challenge 2 is available in [VAST Challenge 2021 official website](https://vast-challenge.github.io/2021/MC2.html).
 
+
 # 2. Data Preparation
 
 ## 2.1 Data description
@@ -195,6 +196,7 @@ The records containing missing values in car-assignment.csv are shown below. We 
 car_ass_na <- filter(car_ass, is.na(CarID))
 knitr::kable(car_ass_na, format = "html", caption = "The Missing Values in Car Assignment Dataset")
 ```
+
 
 # 3. Data Visualization
 
@@ -486,6 +488,7 @@ crosstalk::bscols(
                   widths = 22)
 ```
 
+
 # 4. Data Analysis and Insights 
 
 ## 4.1 Anlysis for question 1
@@ -508,7 +511,7 @@ crosstalk::bscols(
   
   + Kronos Mart: Visit this place at 3 AM, which is quite abnormal cause mart generally doesn't open at that time.
   
-    <p style="text-align:center;"> ![](img/a4.1.4.jpg){width=80%} <br> _Fig.4 Transaction record in Kronos Mart at 3 AM_ </p>
+    <p style="text-align:center;"> ![](img/a4.1.4.jpg){width=80%} <br> _Fig.4 Credit card transaction records in Kronos Mart at 3 AM_ </p>
   
   + Frydos Autosupply n' More: Extremely high transaction price recorded on 13rd Jan, Friday, which only have one credit card transaction record without loyalty record. Besides, if see the average transaction price of this place along weekday, as shown in Fig.6, the mean value of price on Mon is abnormally high.
   
@@ -584,7 +587,7 @@ gra_4
 
     <p style="text-align:center;"> _Fig.15 The moving path between 11PM to 2AM of the next day_ </p>
   
-  + Transactions happened during the one hour of 6AM probably aren't recorded in credit and loyalty card. As shown in below charts, Cars with CarID 16 and 17 passed by Frydos Autosupply, Guy's Gyros and Katherina's Cafe, but no transaction record is at that time.
+  + Transactions happened during the one hour after 6AM probably aren't recorded in credit and loyalty card. As shown in below charts, Cars with CarID 16 and 17 passed by Frydos Autosupply, Guy's Gyros and Katherina's Cafe, but no transaction record is at that time.
 
 ```{r echo=FALSE}
 # Filter GPS spatial data by hour of time
@@ -606,7 +609,7 @@ gra_4 <- tm_shape(bgmap) +
 gra_4
 ```
     
-    <p style="text-align:center;"> _Fig.16 The moving path during 6AM of the next day_ </p>
+    <p style="text-align:center;"> _Fig.16 The moving path during the one hour after 6AM_ </p>
 
 ## 4.3 Anlysis for question 3
 
@@ -830,6 +833,8 @@ owner_match <- read_csv("data/car-card-match.csv") %>%
   select(-CarID) %>%
   rename("Credit card num" = "CC", "Loyalty card num" = "Loyalty")
 
+owner_match$`Credit card num` = as.character(owner_match$`Credit card num`)
+
 owner_match <- cbind(filter(car_ass, is.na(CarID) == F), owner_match)
 knitr::kable(owner_match, caption = "The owner of credit and loyalty cards")  
 ```
@@ -875,50 +880,36 @@ knitr::kable(owner_match, caption = "The owner of credit and loyalty cards")
 
 * **Do you see evidence of suspicious activity? **
 
-  Below are the places I think may have suspicious activity:
+  Katherina's Cafe are the places I think may have suspicious activity. As what have been spotted and analyzed, Katherina's Cafe, the place close to GASTech company, are very popular among GASTech staff. But many of them had gathered at this place on Saturday and stay till 8PM, which is abnormal. Below table lists all credit card transaction records in Katherina's Cafe after 7PM on Saturday.
   
-  + Katherina's Cafe:
+```{r echo=FALSE}
+Kather_tr <- cc %>%
+  filter(location == "Katerina’s Café",
+         weekday == "Sat",
+         hour > 18)
+
+pp_list <- c(Kather_tr$last4ccnum)
+
+knitr::kable(Kather_tr, 
+             caption = "Credit card transaction records in Katherina's Cafe after 7PM on Saturday", 
+             longtable = T,
+             align = "llccccc")
+```
+  
+  According to the transaction records picked out above, people who have gathered at Katherina's Cafe on Saturday after 7PM are listed in following table. Compare this name list with what have been found on the informal relationships between staff, it's obvious the people listed below don't have apparent formal relationships. Thus it's highly suspicious why they gathered at Katherina's Cafe at the same time on Saturday.
+  
+```{r echo=FALSE}
+Kather_pp <- owner_match %>%
+  filter(`Credit card num` %in% pp_list) 
+
+knitr::kable(Kather_pp, caption = "People with credit card transaction records in Katherina's Cafe after 7 PM on Saturday")
+```
 
 
 # 5. Conclusion
 
+According to what have been stated above, as the first step, I pointed out some abnormal transaction records and compared them with GPS tracking data. The initial abnormal records found happened in Krnos Mart, Frydos Autosupply n’ More, Daily Dealz, Hippokampos and Katherina’s Cafe.
 
+Secondly, the owners of credit and loyalty cards were identified by comparing the places having consumption and the moving path shown by GPS tracking data. I tried to observe the spots visited by each car assigned to individuals, and found the common places having transactions recorded in credit and loyalty cards in the same days. Then match the owner of cars and the owner of credit and loyalty card one by one. Then the unofficial relationships between GASTech personnel were recognized by further comparing the GPS tracking line of different cars and finding similar or overlapped moving route in same days.
 
-
-
-```{r echo=FALSE, eval=FALSE}
-# Filter GPS spatial data by date of Jan
-gps_path_selected2 <- gps_path2 %>%
-  filter(id == "15") 
-
-# Plot the moving path
-tmap_mode("view")
-gra_3.2 <- tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255) +
-  tm_shape(gps_path_selected2) +
-  tm_lines(col =  "day", palette = "Dark2") 
-
-gra_3.2
-```
-
-```{r echo=FALSE, eval=FALSE}
-cc_fre <- cc %>%
-  group_by(location, last4ccnum) %>%
-  summarize(fre = n()) %>%
-  ungroup
-
-loy_fre <- loyalty %>%
-  group_by(location, loyaltynum) %>%
-  summarize(fre = n()) %>%
-  ungroup
-
-DT::datatable(cc_fre, filter = c("top"), options = list(pageLength = 7))
-
-DT::datatable(loy_fre, filter = c("top"), options = list(pageLength = 7))
-
-```
-
+Finally, integrating all the results of analysis, Katherina's Cafe is doubt for having suspicious activity, since the people gathered here after 7PM on Saturday don't have obvious informal relationship.
