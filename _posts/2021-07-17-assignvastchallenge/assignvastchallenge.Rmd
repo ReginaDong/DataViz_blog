@@ -856,23 +856,23 @@ knitr::kable(owner_match, caption = "The owner of credit and loyalty cards")
 
   According to the analysis above, some people have highly overlapped moving path records, as listed below. Thus it's reasonable to infer these people have informal relationships.
 
-  + Brand Tempestad and Edvard Vann: These two people are the car owner of CarID 33 and 34. Seeing the moving path below, their moving path looks quite similar, and it seems they went to Ahaggo Museum together, the place near Brew've Been Served and Roberts and Sons at the same days.
+  + Brand Tempestad and Edvard Vann: These two people are the car owners of CarID 33 and 34. Seeing the moving path below, their moving path looks quite similar, and it seems they went to Ahaggo Museum together, the place near Brew've Been Served and Roberts and Sons at the same days.
     
     ![](img/a4.3.33-1.jpg){width=80%} ![](img/a4.3.34-1.jpg){width=80%} <br> _Fig.87 Moving path of CarID 33 (figure above) and 34 (figure below)_ 
   
-  + Stenig Fusil and Edvard Vann: These two people are the car owner of CarID 20 and 34. Seeing the moving path below, they have similar path in the place near Brew've Been Served and Roberts and Sons at the same days. 
+  + Stenig Fusil and Edvard Vann: These two people are the car owners of CarID 20 and 34. Seeing the moving path below, they have similar path in the place near Brew've Been Served and Roberts and Sons at the same days. 
   
     ![](img/a4.3.20-1.jpg){width=80%} ![](img/a4.3.34-1.jpg){width=80%} <br> _Fig.88 Moving path of CarID 20 (figure above) and 34 (figure below)_ 
   
-  + Lars Azada, Felix Balas, Gustav Cazar, Axel Calzas and Vira Frente: They are the car owner of CarID 2, 3, 9, 11 and 19. Seeing the figures below, they have quite similar moving path in same days passing by Bean There Done That, Albert's Fine Clothing, Jack's Magic Beans and GASTech. 
+  + Lars Azada, Felix Balas, Gustav Cazar, Axel Calzas and Vira Frente: They are the car owners of CarID 2, 3, 9, 11 and 19. Seeing the figures below, they have quite similar moving path in same days passing by Bean There Done That, Albert's Fine Clothing, Jack's Magic Beans and GASTech. 
   
     ![](img/a4.3.2-1.jpg){width=80%} ![](img/a4.3.3-1.jpg){width=80%} ![](img/a4.3.9-1.jpg){width=80%} ![](img/a4.3.11-1.jpg){width=80%} ![](img/a4.3.19-1.jpg){width=80%} <br> _Fig.89 Moving path of CarID 2, 3, 9, 11 and 19_ 
   
-  + Inga Ferro, Loreto Bodrogi and Hennie Osvaldo: These two people are the car owner of CarID 13, 15 and 21. Seeing the moving path below, their moving path are highly overlapped, especially the route which passing by the places near Katherina's Cafe, Kronos Mart, Ahaggo Museum, Jack's Magic Bean and Albert's Fine Clothing. And they visited Katherina's Cafe, Frydos Autosupply, Guy's Gyros and Brew've Been Served quite often.
+  + Inga Ferro, Loreto Bodrogi and Hennie Osvaldo: These two people are the car owners of CarID 13, 15 and 21. Seeing the moving path below, their moving path are highly overlapped, especially the route which passing by the places near Katherina's Cafe, Kronos Mart, Ahaggo Museum, Jack's Magic Bean and Albert's Fine Clothing. And they visited Katherina's Cafe, Frydos Autosupply, Guy's Gyros and Brew've Been Served quite often.
   
     ![](img/a4.3.13-1.jpg){width=80%} ![](img/a4.3.15-1.jpg){width=80%} ![](img/a4.3.21-1.jpg){width=80%} <br> _Fig.90 Moving path of CarID 13 (above), 15 (middle) and 21 (below)_ 
 
-  + Adra Nubarron, Varja Lagos and Felix Resumir: They are the car owner of CarID 22, 23 and 30. Seeing the figures below, they have quite similar moving path in same days passing by the places near Katherina's Cafe, Kronos Mart, Ouzeri Elian, Roberts And Sons, Kronos Mart, Jack's Magic Beans and Albert's Fine Clothing.
+  + Adra Nubarron, Varja Lagos and Felix Resumir: They are the car owners of CarID 22, 23 and 30. Seeing the figures below, they have quite similar moving path in same days passing by the places near Katherina's Cafe, Kronos Mart, Ouzeri Elian, Roberts And Sons, Kronos Mart, Jack's Magic Beans and Albert's Fine Clothing.
   
     ![](img/a4.3.22-1.jpg){width=80%} ![](img/a4.3.23-1.jpg){width=80%} ![](img/a4.3.30-1.jpg){width=80%} <br> _Fig.91 Moving path of CarID 22 (above), 23 (middle) and 30 (below)_ 
 
