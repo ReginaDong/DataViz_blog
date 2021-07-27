@@ -364,7 +364,7 @@ gra_3.1 <- tm_shape(bgmap) +
 
 gra_3.1
 ```
-<p style="text-align:center;"> _Graph.3.1 GPS Moving Route in A Specific Day_ </p>
+<p style="text-align:center;"> _Graph.3-1 GPS Moving Route in A Specific Day_ </p>
 
 Set *id* as filtering criteria by using `filter()` function, and differentiate the line colors by *day* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of a specific car in all days. Below code chunk is used to create the graph. 
 
@@ -386,7 +386,7 @@ gra_3.2 <- tm_shape(bgmap) +
 
 gra_3.2
 ```
-<p style="text-align:center;"> _Graph.3.2 GPS Moving Route of A Specific CarID_ </p>
+<p style="text-align:center;"> _Graph.3-2 GPS Moving Route of A Specific CarID_ </p>
 
 Set *hour* as filtering criteria  by using `filter()` function, and differentiate the line colors by *id* through setting `col` argument of `tm_lines()` function, so that the geographical graph could show the movement track of all cars in specific hours of days. Below code chunk is used to create the graph.
 
@@ -630,11 +630,11 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.3-2.jpg){width=80%}  ![](img/a4.3.3-3.jpg){width=80%} <br> _Fig.22 Transaction frequency of credit and loyalty card by day_ </p>
   
-  + Set CarID = 4 and get the movement path as shown below, similar to the above logic, compare the frequently visited spots shown in path and the consumption mode displayed by 2d histograms of credit card, and found the most similar pair of CarID owner and credit card owner, then according to the credit card find the loyalty card with the most similar transaction frequency shown by 2d histogram. Thus the owner of CarID 4 is most likely the owner of credit card 7688 and loyalty card L4164.
+  + Set CarID = 4 and get the movement path as shown below, and it's obvious that the car was parked at Desafio Golf Course on 12th and 19th of Jan. similar to the above logic, compare the frequently visited spots shown in path and the consumption mode displayed by 2d histograms of credit card, and found the most similar pair of CarID owner and credit card owner, then according to the credit card find the loyalty card with the most similar transaction frequency shown by 2d histogram. Thus the owner of CarID 4 is most likely the owner of credit card 7688 and loyalty card L4164.
   
-    <p style="text-align:center;"> ![](img/a4.3.4-1.jpg){width=100%} <br> _Fig.23 The moving path of CarID 4_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.4-1.jpg){width=100%} ![](img/a4.3.4-1-2.jpg){width=100%} <br> _Fig.23 The moving path of CarID 4_ </p>
     
-    <p style="text-align:center;"> ![](img/a4.3.4-2.jpg){width=80%}  ![](img/a4.3.4-3.jpg){width=80%} <br> _Fig.24 Transaction frequency of credit and loyalty card by day_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.4-2.jpg){width=80%}  ![](img/a4.3.4-3.jpg){width=80%} <br> _Fig.24 Tr++ansaction frequency of credit and loyalty card by day_ </p>
     
   + Set CarID = 5 and get the movement path as shown below. It looks like the car stopped by Kronos Mart on 14th of Jan. Then according to comparison with following 2d histograms, the owner of CarID 5 is most likely the owner of credit card 6899 and loyalty card L6267.
   
@@ -804,13 +804,29 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.32-2.jpg){width=80%} ![](img/a4.3.32-3.jpg){width=80%} <br> _Fig.80 Transaction frequency of credit and loyalty card by day_ </p>
 
+  + Set CarID = 33 and get the movement path as shown below. It's obvious that the car was parked at Ahaggo Museum on 11th Jan, as well as Chostus Hotel on 8th, 10th, 14th and 17th of Jan. According to comparison with following 2d histograms, the owner of CarID 33 is most likely the owner of credit card 9683 and loyalty card L7291.
+  
+    <p style="text-align:center;"> ![](img/a4.3.33-1.jpg){width=100%} ![](img/a4.3.33-1-2.jpg){width=60%} ![](img/a4.3.33-1-3.jpg){width=60%} <br>  _Fig.81 The moving path of CarID 33_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.33-2.jpg){width=80%} ![](img/a4.3.33-3.jpg){width=80%} <br> _Fig.82 Transaction frequency of credit and loyalty card by day_ </p>
 
+  + Set CarID = 34 and get the movement path as shown below. It's obvious that the car was parked at Ahaggo Museum on 11th Jan. According to comparison with following 2d histograms, the owner of CarID 34 is most likely the owner of credit card 4795 and loyalty card L8566.
+  
+    <p style="text-align:center;"> ![](img/a4.3.34-1.jpg){width=100%} ![](img/a4.3.34-1-2.jpg){width=60%} <br>  _Fig.83 The moving path of CarID 34_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.34-2.jpg){width=80%} ![](img/a4.3.34-3.jpg){width=80%} <br> _Fig.84 Transaction frequency of credit and loyalty card by day_ </p>
+    
+  + Set CarID = 35 and get the movement path as shown below. It's obvious that the car was parked at Desafio Golf Course on 12th and 19th of Jan. According to comparison with following 2d histograms, the owner of CarID 35 is most likely the owner of credit card 2463 and loyalty card L6886.
+  
+    <p style="text-align:center;"> ![](img/a4.3.35-1.jpg){width=100%} ![](img/a4.3.35-1-2.jpg){width=60%} <br>  _Fig.85 The moving path of CarID 34_ </p>
+    
+    <p style="text-align:center;"> ![](img/a4.3.35-2.jpg){width=80%} ![](img/a4.3.35-3.jpg){width=80%} <br> _Fig.86 Transaction frequency of credit and loyalty card by day_ </p>    
 
 
 ```{r echo=FALSE, eval=FALSE}
 # Filter GPS spatial data by date of Jan
 gps_path_selected2 <- gps_path2 %>%
-  filter(id == "33") 
+  filter(id == "4") 
 
 # Plot the moving path
 tmap_mode("view")
