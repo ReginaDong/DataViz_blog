@@ -750,9 +750,9 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.23-2.jpg){width=80%} ![](img/a4.3.23-3.jpg){width=80%} <br> _Fig.62 Transaction frequency of credit and loyalty card by day_ </p>
 
-  + Set CarID = 24 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 24 is most likely the owner of credit card 9683 and loyalty card L7291.
+  + Set CarID = 24 and get the movement path as shown below. It looks like the car was parted at Roberts and Sons on 14th Jan. According to comparison with following 2d histograms, the owner of CarID 24 is most likely the owner of credit card 9405 and loyalty card L3259.
   
-    <p style="text-align:center;"> ![](img/a4.3.24-1.jpg){width=100%}  <br>  _Fig.63 The moving path of CarID 24_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.24-1.jpg){width=100%} ![](img/a4.3.24-1-2.jpg){width=60%} <br>  _Fig.63 The moving path of CarID 24_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.24-2.jpg){width=80%} ![](img/a4.3.24-3.jpg){width=80%} <br> _Fig.64 Transaction frequency of credit and loyalty card by day_ </p>
 
@@ -774,7 +774,7 @@ gra_4
     
     <p style="text-align:center;"> ![](img/a4.3.27-2.jpg){width=80%} ![](img/a4.3.27-3.jpg){width=80%} <br> _Fig.70 Transaction frequency of credit and loyalty card by day_ </p>
 
-  + Set CarID = 28 and get the movement path as shown below. According to comparison with following 2d histograms, the owner of CarID 28 is most likely the owner of credit card 2463 and loyalty card L6886.
+  + Set CarID = 28 and get the movement path as shown below.There is noise and positioning deviation in the GPS tracking data, and it looks like the car was parked at Ahggo Museum and Frydos Autosupply on 19th and 6th of Jan respectively. According to comparison with following 2d histograms, the owner of CarID 28 is most likely the owner of credit card 9241 and loyalty card L3288.
   
     <p style="text-align:center;"> ![](img/a4.3.28-1.jpg){width=100%} <br>  _Fig.71 The moving path of CarID 28_ </p>
     
@@ -823,10 +823,51 @@ gra_4
     <p style="text-align:center;"> ![](img/a4.3.35-2.jpg){width=80%} ![](img/a4.3.35-3.jpg){width=80%} <br> _Fig.86 Transaction frequency of credit and loyalty card by day_ </p>    
 
 
+As conclusion, the matching result between owner of assigned car and cards is shown below:
+
+```{r echo=FALSE}
+owner_match <- read_csv("data/car-card-match.csv") %>%
+  select(-CarID) %>%
+  rename("Credit card num" = "CC", "Loyalty card num" = "Loyalty")
+
+owner_match <- cbind(filter(car_ass, is.na(CarID) == F), owner_match)
+knitr::kable(owner_match, caption = "The owner of credit and loyalty cards")  
+```
+
+
+* **Where are there uncertainties in your method? Where are there uncertainties in the data? **
+
+  + I was finding the owner of Cards by match the GPS tracking data and transaction records. However the place of consumption recorded by credit and loyalty card and the spots that cars had passed by can't be matched in precision. Because the place where the car stopped may not necessarily have consumption, and people may go out in other vehicles, not necessarily in the assigned cars.
+  
+  + GPS positioning may be inaccurate, as I already found obviously noise data and excursion of positioning in the moving path of CarID 5. So not sure if other GPS tracking data also have inaccurate positioning issues.
+
+  + Some places have transaction records are not labeled in the map, such as  Shoppers' Delight, Octavio's Office Supplies, Kalami Kafenion, Hippokampos and Abila Zacharo, some of which even have lots of consumption records.And what these places are used for is also uncertain.
+  
+  + The number of credit car and loyalty card is much more then the number of cars assigned to individuals, thus not sure if there are some members of staff hold multiple cards.
+
+## 4.4 Anlysis for question 4
+
+* **Given the data sources provided, identify potential informal or unofficial relationships among GASTech personnel. Provide evidence for these relationships.**
+
+According to the analysis above, some people have highly overlapped moving path records.
+
+## 4.5 Anlysis for question 5
+
+
+
+
+
+
+# 5. Conclusion
+
+
+
+
+
 ```{r echo=FALSE, eval=FALSE}
 # Filter GPS spatial data by date of Jan
 gps_path_selected2 <- gps_path2 %>%
-  filter(id == "4") 
+  filter(id == "101") 
 
 # Plot the moving path
 tmap_mode("view")
@@ -858,32 +899,4 @@ DT::datatable(cc_fre, filter = c("top"), options = list(pageLength = 7))
 DT::datatable(loy_fre, filter = c("top"), options = list(pageLength = 7))
 
 ```
-
-
-
-* **Where are there uncertainties in your method? Where are there uncertainties in the data? **
-
-
-
-
-## 4.4 Anlysis for question 4
-
-
-
-
-
-## 4.5 Anlysis for question 5
-
-
-
-
-
-
-# 5. Conclusion
-
-
-
-
-
-
 
