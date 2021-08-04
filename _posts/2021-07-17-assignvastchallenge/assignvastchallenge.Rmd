@@ -637,7 +637,7 @@ gra_4
   
     <p style="text-align:center;"> ![](img/a4.3.4-1.jpg){width=100%} ![](img/a4.3.4-1-2.jpg){width=100%} <br> _Fig.23 The moving path of CarID 4_ </p>
     
-    <p style="text-align:center;"> ![](img/a4.3.4-2.jpg){width=80%}  ![](img/a4.3.4-3.jpg){width=80%} <br> _Fig.24 Tr++ansaction frequency of credit and loyalty card by day_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.4-2.jpg){width=80%}  ![](img/a4.3.4-3.jpg){width=80%} <br> _Fig.24 Transaction frequency of credit and loyalty card by day_ </p>
     
   + Set CarID = 5 and get the movement path as shown below. It looks like the car stopped by Kronos Mart on 14th of Jan. Then according to comparison with following 2d histograms, the owner of CarID 5 is most likely the owner of credit card 6899 and loyalty card L6267.
   
@@ -821,7 +821,7 @@ gra_4
     
   + Set CarID = 35 and get the movement path as shown below. It's obvious that the car was parked at Desafio Golf Course on 12th and 19th of Jan. According to comparison with following 2d histograms, the owner of CarID 35 is most likely the owner of credit card 2463 and loyalty card L6886.
   
-    <p style="text-align:center;"> ![](img/a4.3.35-1.jpg){width=100%} ![](img/a4.3.35-1-2.jpg){width=60%} <br>  _Fig.85 The moving path of CarID 34_ </p>
+    <p style="text-align:center;"> ![](img/a4.3.35-1.jpg){width=100%} ![](img/a4.3.35-1-2.jpg){width=60%} <br>  _Fig.85 The moving path of CarID 35_ </p>
     
     <p style="text-align:center;"> ![](img/a4.3.35-2.jpg){width=80%} ![](img/a4.3.35-3.jpg){width=80%} <br> _Fig.86 Transaction frequency of credit and loyalty card by day_ </p>    
 
